@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#030305] text-white selection:bg-[#CCFF00] selection:text-black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>NEER — Fluid Intelligence. Living Brands.</title>
+  <meta name="description" content="NEER architects living brands, flagship digital platforms, autonomous AI systems, and classical Astro-Branding advisory built to flow ahead of change." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  
+  <!-- Typography: Unbounded, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#030305',
+            void: '#060609',
+            charcoal: '#0C0C10',
+            surface: '#121218',
+            'surface-light': '#1A1A22',
+            border: 'rgba(255, 255, 255, 0.08)',
+            'border-light': 'rgba(255, 255, 255, 0.16)',
+            lime: '#CCFF00',
+            'lime-glow': 'rgba(204, 255, 0, 0.35)',
+            mist: '#8E8E9A',
+            ash: '#575764',
+          },
+          fontFamily: {
+            display: ['Unbounded', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          letterSpacing: {
+            tighter: '-0.04em',
+            tight: '-0.02em',
+            wide: '0.04em',
+            widest: '0.14em',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       UNBOXED FLUID SPATIAL SYSTEM
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #030305;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* Custom Minimal Scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030305;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1A1A22;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #CCFF00;
+    }
+
+    /* Button & Link Press Dynamics */
+    button, a {
+      transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+    button:active, a:active {
+      transform: scale(0.97) !important;
+    }
+
+    /* Spotlight Card Shader */
+    .spotlight-card {
+      position: relative;
+      background: rgba(12, 12, 16, 0.75);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .spotlight-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(204, 255, 0, 0.35);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 25px -5px rgba(204, 255, 0, 0.12);
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(450px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(204, 255, 0, 0.15), transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Kinetic Fluid Cursor Follower */
+    #cursor-dot, #cursor-ring {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    #cursor-dot {
+      width: 5px;
+      height: 5px;
+      background-color: #CCFF00;
+      border-radius: 50%;
+    }
+    #cursor-ring {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(204, 255, 0, 0.4);
+      border-radius: 50%;
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+    body:hover #cursor-ring.active-hover {
+      width: 64px;
+      height: 64px;
+      border-color: #CCFF00;
+      background: rgba(204, 255, 0, 0.08);
+    }
+    @media (pointer: coarse) {
+      #cursor-dot, #cursor-ring { display: none !important; }
+    }
+
+    /* Spatial Viewport Architectural HUD Frame */
+    .hud-line {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.07);
+    }
+    .hud-line-h {
+      left: 0;
+      right: 0;
+      height: 1px;
+    }
+    .hud-line-v {
+      top: 0;
+      bottom: 0;
+      width: 1px;
+    }
+
+    /* The Living Wave Filter */
+    .wave-fluid-surface {
+      filter: url(#liquid-wave-filter);
+      will-change: filter, transform;
+    }
+
+    /* Keyframe Animations */
+    @keyframes slow-orbit {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes slow-orbit-rev {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes wave-swell {
+      0%, 100% { transform: scale(1.01) translateY(0); }
+      50% { transform: scale(1.04) translateY(-8px); }
+    }
+    @keyframes pulse-signal {
+      0%, 100% { opacity: 0.3; transform: scaleX(0.95); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+    .animate-slow-orbit {
+      animation: slow-orbit 48s linear infinite;
+    }
+    .animate-slow-orbit-rev {
+      animation: slow-orbit-rev 36s linear infinite;
+    }
+    .animate-wave-swell {
+      animation: wave-swell 12s ease-in-out infinite;
+    }
+    .animate-pulse-signal {
+      animation: pulse-signal 2.4s ease-in-out infinite;
+    }
+
+    /* Fluid Typography Strokes */
+    .text-stroke-subtle {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
+      color: transparent;
+    }
+    .text-stroke-lime {
+      -webkit-text-stroke: 1px rgba(204, 255, 0, 0.45);
+      color: transparent;
+    }
+
+    /* Unboxed Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation: none !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .wave-fluid-surface { filter: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  
+    .font-display {
+      font-family: 'Unbounded', sans-serif !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.02em;
+    }
+      .font-display, h1, h2, h3 { font-family: 'Unbounded', sans-serif; font-weight: 500 !important; }
+  </style>
+</head>
+
+<body class="bg-obsidian text-white relative selection:bg-lime selection:text-obsidian overflow-x-hidden">
+
+  <!-- =========================================================================
+       GLOBAL SVG FILTERS FOR PHYSICAL FLUID WAVE SHADER
+       ========================================================================= -->
+  <svg style="position: absolute; width: 1px; height: 1px; left: -9999px; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <filter id="liquid-wave-filter" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence id="wave-turbulence-node" type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" result="noise" seed="3" />
+        <feDisplacementMap id="wave-disp-node" in="SourceGraphic" in2="noise" scale="26" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Kinetic Cursor Follower -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Ambient Fluid Glow Spheres -->
+  <div class="fixed top-0 left-1/3 w-[800px] h-[800px] bg-lime/4 rounded-full blur-[180px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-1/3 right-0 w-[700px] h-[700px] bg-lime/4 rounded-full blur-[180px] pointer-events-none -z-10"></div>
+
+  <!-- =========================================================================
+       00. ARCHITECTURAL VIEWPORT HUD & TOP NAVIGATION
+       ========================================================================= -->
+  <header id="smart-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl bg-obsidian/80 border-b border-white/5">
+    <div class="w-full px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+      
+      <!-- Logo Lockup -->
+      <a href="#top" class="flex items-center gap-3.5 group" aria-label="NEER Home">
+        <div class="relative w-7 h-7 rounded-full border border-white/20 flex items-center justify-center bg-charcoal group-hover:border-lime transition-colors">
+          <span class="w-2 h-2 rounded-full bg-lime"></span>
+          <span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="font-display font-medium text-2xl tracking-tighter text-white group-hover:text-lime transition-colors">NEER</span>
+          <span class="hidden sm:inline font-mono text-[10px] tracking-widest text-ash uppercase">Currents Endure</span>
+        </div>
+      </a>
+
+      <!-- Primary Main Navigation Bar (Interconnected across all 4 pages + Home) -->
+      <nav class="hidden md:flex items-center gap-1 xl:gap-2 font-mono text-xs tracking-wider" aria-label="Primary Navigation">
+        <a href="Homepage Concpet.html" class="px-3.5 py-1.5 rounded-full text-white bg-white/10 border border-white/20 transition-all flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+          <span>HOME</span>
+        </a>
+        <a href="astro-branding.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-lime hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime/40 group-hover:bg-lime transition-colors"></span>
+          <span>ASTRO-BRANDING</span>
+        </a>
+        <a href="ai-systems.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-lime hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime/40 group-hover:bg-lime transition-colors"></span>
+          <span>AI SYSTEMS</span>
+        </a>
+        <a href="capabilities.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white transition-colors"></span>
+          <span>CAPABILITIES</span>
+        </a>
+        <a href="philosophy.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-white transition-colors"></span>
+          <span>PHILOSOPHY</span>
+        </a>
+        <a href="#work" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all">
+          <span>WORK</span>
+        </a>
+      </nav>
+
+      <!-- Navigation & Action -->
+      <div class="flex items-center gap-3 sm:gap-5">
+        <a href="#diagnostic" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 text-white hover:bg-lime hover:text-obsidian border border-white/10 font-display font-medium text-xs tracking-wider transition-all shadow-md">
+          <span>INITIATE SPRINT</span>
+          <span class="font-mono text-sm">→</span>
+        </a>
+
+        <!-- Master Hamburger Menu Trigger (Active across Desktop & Mobile) -->
+        <button id="menu-toggle" aria-label="Toggle Main Navigation Menu" class="flex items-center gap-3 bg-lime text-obsidian px-5 py-2.5 sm:py-3 rounded-full font-display font-medium text-xs tracking-wider hover:scale-105 transition-transform shadow-xl shadow-lime/20 cursor-pointer">
+          <span id="menu-label">MENU</span>
+          <span class="w-6 h-6 rounded-full bg-obsidian text-lime flex flex-col items-center justify-center gap-1">
+            <span id="bar-1" class="w-3.5 h-0.5 bg-lime rounded-full transition-transform duration-300"></span>
+            <span id="bar-2" class="w-3.5 h-0.5 bg-lime rounded-full transition-transform duration-300"></span>
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MASTER MAIN NAVIGATION OVERLAY (UNBOXED ARCHITECTURAL CONTINUUM)
+       Full-Screen Mega Navigation with All Service Pillars, Index & Coordinates
+       ========================================================================= -->
+  <div id="hamburger-overlay" class="fixed inset-0 z-40 bg-obsidian/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto pt-28 pb-16 px-6 sm:px-10 lg:px-16" role="dialog" aria-modal="true" aria-label="Main Navigation">
+    <div class="w-full max-w-7xl mx-auto space-y-10">
+      
+      <!-- Top Telemetry Bar inside Menu -->
+      <div class="flex items-center justify-between pb-6 border-b border-white/10 font-mono text-xs text-mist">
+        <span class="inline-flex items-center gap-2 text-lime uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+          // NEER ARCHITECTURAL NAVIGATION INDEX
+        </span>
+        <span class="text-ash tracking-widest hidden sm:inline">[PRESS ESC OR CLICK ANY DESTINATION TO EXIT]</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+        <!-- Priority Service Pillars (Left 8 Cols) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- PRIORITY PILLAR 01: ASTRO-BRANDING -->
+            <div class="p-8 border border-lime/30 bg-white/[0.02] hover:border-lime/60 transition-colors space-y-4 group">
+              <div class="flex items-center justify-between">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime/15 text-lime font-mono text-[11px] tracking-wider">
+                  ✦ PRIORITY PILLAR 01
+                </span>
+                <a href="astro-branding.html" class="menu-link w-9 h-9 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian flex items-center justify-center text-white transition-colors">→</a>
+              </div>
+              <div>
+                <a href="astro-branding.html" class="menu-link block font-display text-2xl font-medium text-white group-hover:text-lime transition-colors">Astro-Branding</a>
+                <p class="text-xs text-mist mt-2 leading-relaxed">Powered by Reva Astro — Classical Vedic textual insight translated into modern commercial strategy.</p>
+              </div>
+              <div class="flex flex-wrap gap-2 pt-2">
+                <a href="astro-branding.html#premise" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">01. Light, Not Superstition</a>
+                <a href="astro-branding.html#diagnostic-engine" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">02. 4 Analytical Inputs</a>
+                <a href="astro-branding.html#matrix" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">03. Reconciliation Matrix</a>
+                <a href="astro-branding.html#deliverables" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">04. Tangible Deliverables</a>
+                <a href="astro-branding.html#consultation" class="menu-link px-3.5 py-1.5 rounded-full bg-lime/15 text-lime text-xs font-semibold hover:bg-lime hover:text-obsidian transition-colors">Schedule Consultation →</a>
+              </div>
+            </div>
+
+            <!-- PRIORITY PILLAR 02: AI SYSTEMS -->
+            <div class="p-8 border border-lime/30 bg-white/[0.02] hover:border-lime/60 transition-colors space-y-4 group">
+              <div class="flex items-center justify-between">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime/15 text-lime font-mono text-[11px] tracking-wider">
+                  <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span> PRIORITY PILLAR 02
+                </span>
+                <a href="ai-systems.html" class="menu-link w-9 h-9 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian flex items-center justify-center text-white transition-colors">→</a>
+              </div>
+              <div>
+                <a href="ai-systems.html" class="menu-link block font-display text-2xl font-medium text-white group-hover:text-lime transition-colors">Engineered AI Systems</a>
+                <p class="text-xs text-mist mt-2 leading-relaxed">Deterministic multi-agent reasoning, private vector RAG cores, and zero-leakage enterprise workflows.</p>
+              </div>
+              <div class="flex flex-wrap gap-2 pt-2">
+                <a href="ai-systems.html#architectures" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">01. Workflow Automation</a>
+                <a href="ai-systems.html#architectures" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">02. Autonomous Agents</a>
+                <a href="ai-systems.html#blueprints" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">03. Enterprise Blueprints</a>
+                <a href="ai-systems.html#security" class="menu-link px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">04. Security Guarantees</a>
+                <a href="ai-systems.html#audit-form" class="menu-link px-3.5 py-1.5 rounded-full bg-lime/15 text-lime text-xs font-semibold hover:bg-lime hover:text-obsidian transition-colors">Launch AI Blueprint →</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CORE PILLAR 03: CAPABILITIES -->
+          <div class="p-8 border border-white/20 bg-white/[0.02] hover:border-white/40 transition-colors space-y-4 group">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-white font-mono text-[11px] tracking-wider">
+                ◆ CORE PILLAR 03 · EXECUTION ENGINE
+              </span>
+              <a href="capabilities.html" class="menu-link w-9 h-9 rounded-full bg-white/5 hover:bg-white hover:text-obsidian flex items-center justify-center text-white transition-colors">→</a>
+            </div>
+            <div>
+              <a href="capabilities.html" class="menu-link block font-display text-2xl font-medium text-white group-hover:text-lime transition-colors">
+                Capabilities — Cinema to Code
+              </a>
+              <p class="text-xs text-mist mt-1 leading-relaxed">
+                One essence. Every form the market demands. 4 specialized studios sitting at one table: Brand &amp; Packaging, Web/Apps/E-Commerce, Cinema/CGI/VFX, and Growth Systems.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <a href="capabilities.html#engine-brand" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">01. Brand &amp; Packaging</a>
+              <a href="capabilities.html#engine-web" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">02. Web, Apps &amp; Commerce</a>
+              <a href="capabilities.html#engine-film" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">03. Cinema, CGI &amp; VFX</a>
+              <a href="capabilities.html#engine-growth" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">04. Growth Systems</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Secondary Index & Studio Coordinates (Right 4 Cols) -->
+        <div class="lg:col-span-4 flex flex-col justify-between gap-6">
+          
+          <div class="p-8 border border-white/10 bg-white/[0.02] flex flex-col gap-3">
+            <span class="font-mono text-xs text-lime uppercase tracking-widest mb-1">// NAVIGATION INDEX</span>
+            <a href="#work" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-medium text-base transition-all group">
+              <span>Work &amp; Selected Proof</span><span class="font-mono group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a href="philosophy.html" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-medium text-base transition-all group">
+              <span>Philosophy &amp; The Water Thesis</span><span class="font-mono group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a href="philosophy.html#evolution" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-medium text-base transition-all group">
+              <span>Evolution Narrative (Dashavatara)</span><span class="font-mono group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a href="#testimonials" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-medium text-base transition-all group">
+              <span>Verified Client Evidence</span><span class="font-mono group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a href="#diagnostic" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-lime text-obsidian font-display font-medium text-base transition-all mt-2 shadow-lg shadow-lime/20 group">
+              <span>Initiate Transformation Sprint</span><span class="font-mono group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+
+          <div class="p-8 border border-white/10 bg-white/[0.02] space-y-3">
+            <span class="font-mono text-xs text-lime uppercase tracking-widest block">// AHMEDABAD STUDIOS</span>
+            <p class="font-mono text-sm text-white font-bold">
+              <a href="https://wa.me/919998499944" target="_blank" rel="noopener" class="hover:underline text-lime">+91 999 84 999 44</a>
+            </p>
+            <p class="font-mono text-xs text-mist">
+              <a href="mailto:connect@neermedia.com" class="hover:underline">connect@neermedia.com</a>
+            </p>
+            <p class="text-xs text-mist/70 leading-relaxed pt-2 border-t border-white/10 font-mono">
+              704, 7th Floor, Colonnade, Iskon Cross Road, Ahmedabad – 380015 <br />
+              <span class="text-ash">Branch Studio: Sumel 7, Ahmedabad</span>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       01. HERO — BOUNDLESS SPATIAL CANVAS (UNBOXED 100VW)
+       ========================================================================= -->
+  <section id="top" class="relative min-h-screen w-full flex items-center pt-28 pb-20 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    
+    <!-- Viewport Micro-Grid Guidelines -->
+    <div class="hud-line hud-line-h top-28"></div>
+    <div class="hud-line hud-line-h bottom-16"></div>
+
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+
+      <!-- Left 7 Columns: Kinetic Display Typography -->
+      <div class="lg:col-span-7 space-y-8 reveal">
+        
+        <div class="inline-flex items-center gap-2.5 font-mono text-xs text-mist">
+          <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+          <span class="tracking-widest uppercase">// ARCHITECTURAL BRAND &amp; AI SYSTEMS</span>
+        </div>
+
+        <!-- Monumental Scale Display Headline (No Container Enclosure) -->
+        <h1 class="font-display font-medium text-[12vw] sm:text-[9vw] lg:text-[7.2vw] leading-[0.92] tracking-tighter text-white">
+          Monuments <br />
+          <span class="text-stroke-subtle">Fracture.</span> <br />
+          <span class="text-lime">Currents Endure.</span>
+        </h1>
+
+        <!-- Chiselled Single Sentence (No Paragraph Bloat) -->
+        <p class="text-base sm:text-xl text-mist leading-relaxed max-w-xl font-normal">
+          Static brands crack when terrain shifts. NEER architects living identities, digital flagships, and autonomous AI systems engineered to flow ahead of change.
+        </p>
+
+        <!-- Kinetic Action Line -->
+        <div class="flex flex-wrap items-center gap-5 pt-2">
+          <a href="#diagnostic" class="inline-flex items-center gap-3 bg-lime text-obsidian font-display font-medium px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-xl shadow-lime/20 text-xs sm:text-sm tracking-wider">
+            <span>ARCHITECT YOUR CURRENT</span>
+            <span class="font-mono text-sm">→</span>
+          </a>
+          <a href="#work" class="inline-flex items-center gap-2 font-mono text-xs text-mist hover:text-white transition-colors">
+            <span>EXPLORE PROOF</span>
+            <span class="text-white/30">[46+ FILMS · 2K+ SHIPS]</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <!-- Practice Pillars Direct Interconnection -->
+        <div class="pt-4 flex flex-wrap items-center gap-2.5 font-mono text-xs">
+          <span class="text-ash tracking-widest uppercase text-[11px] mr-1">// CORE PRACTICES:</span>
+          <a href="astro-branding.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] hover:bg-lime/15 text-mist hover:text-lime border border-white/10 hover:border-lime/40 transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+            <span>01. Astro-Branding (× Reva Astro) →</span>
+          </a>
+          <a href="ai-systems.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] hover:bg-lime/15 text-mist hover:text-lime border border-white/10 hover:border-lime/40 transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+            <span>02. Engineered AI Systems →</span>
+          </a>
+          <a href="capabilities.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/15 text-mist hover:text-white border border-white/10 hover:border-white/30 transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+            <span>03. Full-Stack Capabilities →</span>
+          </a>
+          <a href="philosophy.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/15 text-mist hover:text-white border border-white/10 hover:border-white/30 transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+            <span>04. Studio Philosophy (Water Thesis) →</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right 5 Columns: The Hydro-Kinetic Sphere Monolith -->
+      <div class="lg:col-span-5 flex justify-center items-center relative reveal">
+        
+        <!-- Boundless Orbital Stage -->
+        <div class="relative w-72 h-72 sm:w-96 sm:h-96 xl:w-[460px] xl:h-[460px] flex items-center justify-center">
+          
+          <!-- Outer Astrolabe Coordinate Ring -->
+          <div class="absolute inset-0 rounded-full border border-dashed border-white/15 animate-slow-orbit pointer-events-none"></div>
+          <div class="absolute inset-8 rounded-full border border-dotted border-lime/25 animate-slow-orbit-rev pointer-events-none"></div>
+
+          <!-- Pinned Compass Telemetry -->
+          <span class="absolute top-1 left-1/2 -translate-x-1/2 font-mono text-[9px] text-ash tracking-widest">● 00° N</span>
+          <span class="absolute bottom-1 left-1/2 -translate-x-1/2 font-mono text-[9px] text-ash tracking-widest">● 180° S</span>
+          <span class="absolute left-1 top-1/2 -translate-y-1/2 font-mono text-[9px] text-ash tracking-widest">● 270° W</span>
+          <span class="absolute right-1 top-1/2 -translate-y-1/2 font-mono text-[9px] text-ash tracking-widest">● 090° E</span>
+
+          <!-- Central Spherical Asset (watermarked_img_8652899205299541425.jpg) -->
+          <div class="relative w-56 h-56 sm:w-80 sm:h-80 xl:w-[380px] xl:h-[380px] rounded-full overflow-hidden border border-white/20 shadow-2xl group cursor-pointer">
+            
+            <img 
+              id="hero-sphere-img"
+              src="images/watermarked_img_8652899205299541425.jpg"
+              alt="NEER Hydro-Kinetic Liquid Sphere"
+              class="w-full h-full object-cover rounded-full transition-transform duration-700 group-hover:scale-105"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_8652899205299541425.jpg.png';}"
+            />
+
+            <!-- Interactive Sine-Wave Caustic Light Canvas -->
+            <canvas id="caustic-canvas" width="400" height="400" class="absolute inset-0 w-full h-full rounded-full mix-blend-screen pointer-events-auto"></canvas>
+
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-lime/30 font-mono text-[10px] text-lime tracking-widest uppercase pointer-events-none whitespace-nowrap shadow-xl">
+              ● HYDRO-KINETIC MONOLITH
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Scroll Downward Cue -->
+    <div class="absolute bottom-4 left-6 sm:left-10 lg:left-16 flex items-center gap-3 font-mono text-[10px] text-ash tracking-widest uppercase pointer-events-none">
+      <span class="w-2 h-2 rounded-full bg-lime animate-ping"></span>
+      <span>01 // WATER HORIZON CONTINUUM</span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================================
+       02. THE LIVING OCEANIC WAVE HORIZON (FULL-BLEED 100VW DIVIDER)
+       Asset: watermarked_img_15093798613234770069.jpg
+       NO BOXES · NO CONTAINERS · FULL 100VW LIQUID THRESHOLD
+       ========================================================================= -->
+  <section id="wave-transition" class="relative w-full h-[65vh] sm:h-[80vh] lg:h-[90vh] overflow-hidden bg-obsidian select-none">
+    
+    <!-- Atmospheric Edge Dissolvers -->
+    <div class="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-obsidian via-obsidian/70 to-transparent z-20 pointer-events-none"></div>
+    <div class="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-obsidian via-obsidian/85 to-transparent z-20 pointer-events-none"></div>
+
+    <!-- Full-Bleed Living Wave Image with Real-Time SVG Displacement -->
+    <div id="wave-stage" class="absolute inset-0 w-full h-full overflow-hidden">
+      
+      <img 
+        id="wave-asset-img"
+        src="images/watermarked_img_15093798613234770069.jpg"
+        alt="NEER Oceanic Surge Wave"
+        class="wave-fluid-surface w-full h-full object-cover object-center animate-wave-swell opacity-90 transition-opacity"
+        onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_15093798613234770069.jpg.png';}"
+      />
+
+      <!-- Dark Fluid Horizon Gradient Shadows -->
+      <div class="absolute inset-0 bg-gradient-to-r from-obsidian/80 via-transparent to-obsidian/80 pointer-events-none"></div>
+
+      <!-- Interactive Canvas Overlay: Cursor Liquid Ripples -->
+      <canvas id="wave-ripple-canvas" class="absolute inset-0 w-full h-full pointer-events-auto cursor-crosshair z-10"></canvas>
+
+      <!-- Spatial Unboxed Typography Floating Over the Wave -->
+      <div class="absolute inset-0 flex flex-col justify-between p-6 sm:p-12 lg:p-20 z-20 pointer-events-none">
+        
+        <div class="flex items-center justify-between font-mono text-xs text-mist">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 text-lime">
+            <span class="w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+            SURFACE TENSION // KINETIC FLUID REEL
+          </span>
+          <span class="hidden sm:inline tracking-widest text-ash">[TOUCH / DRAG OVER WAVE TO DISPLACE LIQUID]</span>
+        </div>
+
+        <!-- The Masterbook Dictum Cut into the Water Horizon -->
+        <div class="max-w-4xl space-y-4">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// THE WATER THESIS</span>
+          <h2 class="font-display font-medium text-[8vw] sm:text-[6.5vw] lg:text-[5vw] text-white tracking-tighter leading-[0.96]">
+            Change state without <br />
+            <span class="text-lime">losing essence.</span>
+          </h2>
+        </div>
+
+        <div class="flex items-center justify-between font-mono text-xs text-ash border-t border-white/10 pt-4">
+          <span>VELOCITY // 46+ FEATURE FILMS FINISHED</span>
+          <span>THRESHOLD 01 ── 06</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================================
+       03. THE WATER THESIS & TELEMETRY MANIFESTO (UNBOXED SPREAD)
+       ========================================================================= -->
+  <section id="water-thesis" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-t border-white/5">
+    
+    <div class="w-full space-y-20">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        
+        <!-- Left 5 Cols: Sanskrit Origin & Behind-The-Scenes Visual -->
+        <div class="lg:col-span-5 space-y-8 reveal">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 01 · THE PRIMORDIAL FORCE</span>
+          
+          <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Everything Begins as Water.
+          </h2>
+
+          <p class="text-mist text-base sm:text-lg leading-relaxed max-w-lg">
+            Before a market has a monument, it has a subterranean current. In Sanskrit, we call this primordial intelligence <strong class="text-white font-medium">Neer</strong>. Water transitions effortlessly across phase states—solid crystal, adaptive liquid, expansive vapor—without ever losing its molecular identity.
+          </p>
+
+          <!-- Edge-to-Edge Heritage Film Shoot Visual (Unboxed Architectural Frame) -->
+          <div class="relative h-64 sm:h-80 w-full overflow-hidden border-t border-b border-white/10 group">
+            <img 
+              src="https://neermedia.com/wp-content/uploads/2024/11/neer_media_fil_shoot_behind_the_scene.webp"
+              alt="NEER Studio Cinema Camera Heritage"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
+              onerror="this.parentElement.style.background='#111116'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent flex items-end p-6">
+              <span class="font-mono text-xs text-lime bg-obsidian/85 px-4 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+                CINEMA CRAFT TO ENTERPRISE INTELLIGENCE · SINCE 2011
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: The 3 Phase States of Enterprise (Unboxed Minimal Rules) -->
+        <div class="lg:col-span-7 flex flex-col divide-y divide-white/10 reveal">
+          
+          <div class="py-8 space-y-3 group">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span>STATE 01 // SOLID</span>
+              <span class="text-white/40">ORIGIN</span>
+            </div>
+            <h3 class="font-display font-medium text-3xl text-white group-hover:text-lime transition-colors">
+              Aqueous Origin &amp; Strategy
+            </h3>
+            <p class="text-mist text-base leading-relaxed max-w-2xl">
+              Extracting founder truth from market noise. We uncover your unyielding core—crystallizing corporate positioning, category definition, and commercial naming systems.
+            </p>
+          </div>
+
+          <div class="py-8 space-y-3 group">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span>STATE 02 // LIQUID</span>
+              <span class="text-white/40">IDENTITY</span>
+            </div>
+            <h3 class="font-display font-medium text-3xl text-white group-hover:text-lime transition-colors">
+              Cinematic Brand &amp; Digital Flagships
+            </h3>
+            <p class="text-mist text-base leading-relaxed max-w-2xl">
+              Water takes the exact form of the container. We shape your brand into tokenized design systems, custom WebGL digital platforms, packaging architectures, and cinema commercial films.
+            </p>
+          </div>
+
+          <div class="py-8 space-y-3 group">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span>STATE 03 // VAPOR</span>
+              <span class="text-white/40">VELOCITY</span>
+            </div>
+            <h3 class="font-display font-medium text-3xl text-white group-hover:text-lime transition-colors">
+              Autonomous AI Systems &amp; Scale
+            </h3>
+            <p class="text-mist text-base leading-relaxed max-w-2xl">
+              Wiring enterprise operations with deterministic intelligence—multi-agent reasoning, private vector RAG knowledge cores, and cross-system ERP pipelines that scale without friction.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       04. THE TRINITY OF TRANSFORMATION (UNBOXED ASYMMETRIC SPREAD)
+       ========================================================================= -->
+  <section id="trinity" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-void relative border-t border-white/5">
+    
+    <div class="w-full space-y-16">
+      
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal">
+        <div class="space-y-4 max-w-3xl">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 02 · UNIFIED CONTINUUM</span>
+          <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Three Practices. One Continuum.
+          </h2>
+        </div>
+        <p class="font-mono text-xs text-mist max-w-md leading-relaxed">
+          Fragmented vendors fracture companies. When strategy, creative craft, and engineered intelligence are architected together, momentum never stalls at the handoff.
+        </p>
+      </div>
+
+      <!-- 3 Full-Width Columns with Exposed Architectural Borders (NO CARDS) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/10 pt-8 border-t border-b border-white/10 reveal">
+        
+        <!-- Practice I: Astro-Branding -->
+        <div class="py-10 lg:py-4 lg:pr-10 space-y-6 group">
+          <div class="flex items-center justify-between font-mono text-xs text-lime">
+            <span class="w-9 h-9 rounded-full bg-lime/15 flex items-center justify-center font-bold">✦ I</span>
+            <span>EXECUTIVE ADVISORY</span>
+          </div>
+
+          <h3 class="font-display font-medium text-3xl text-white group-hover:text-lime transition-colors">
+            Astro-Branding
+          </h3>
+          <p class="font-mono text-xs text-lime">POWERED BY REVA ASTRO</p>
+
+          <p class="text-mist text-sm leading-relaxed">
+            Classical light for commercial decisions. Bridging ancient Vedic Jyotisha with executive leadership to evaluate founder-venture alignment, phonetic naming, spatial harmony, and launch windows.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs text-white/90">
+            <span class="px-3 py-1 bg-surface rounded-full">Lagna Alignment</span>
+            <span class="px-3 py-1 bg-surface rounded-full">Phonetic Naming</span>
+            <span class="px-3 py-1 bg-surface rounded-full">Spatial Vastu</span>
+            <span class="px-3 py-1 bg-surface rounded-full">Muhurta Windows</span>
+          </div>
+
+          <div class="pt-4 flex flex-wrap items-center gap-3 font-mono text-xs">
+            <a href="astro-branding.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime text-obsidian font-bold hover:scale-105 transition-all">
+              <span>Open Astro-Branding Page</span>
+              <span>→</span>
+            </a>
+            <a href="#astro-branding" class="text-mist hover:text-lime hover:underline">
+              In-Page Preview ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- Practice II: Engineered AI Systems -->
+        <div class="py-10 lg:py-4 lg:px-10 space-y-6 group">
+          <div class="flex items-center justify-between font-mono text-xs text-lime">
+            <span class="w-9 h-9 rounded-full bg-lime/15 flex items-center justify-center font-bold">● II</span>
+            <span>OPERATIONAL AUTONOMY</span>
+          </div>
+
+          <h3 class="font-display font-medium text-3xl text-white group-hover:text-lime transition-colors">
+            Engineered AI
+          </h3>
+          <p class="font-mono text-xs text-lime">AUTONOMY OVER NOVELTY</p>
+
+          <p class="text-mist text-sm leading-relaxed">
+            Moving enterprises from superficial chatbots to deterministic workflow autonomy. Custom multi-agent reasoning pipelines, private RAG knowledge cores, and live ERP sync that eliminate human drag.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs text-white/90">
+            <span class="px-3 py-1 bg-surface rounded-full">Autonomous Concierges</span>
+            <span class="px-3 py-1 bg-surface rounded-full">Private RAG Cores</span>
+            <span class="px-3 py-1 bg-surface rounded-full">ERP Webhook Pipelines</span>
+            <span class="px-3 py-1 bg-surface rounded-full">LangGraph Reasoning</span>
+          </div>
+
+          <div class="pt-4 flex flex-wrap items-center gap-3 font-mono text-xs">
+            <a href="ai-systems.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime text-obsidian font-bold hover:scale-105 transition-all">
+              <span>Open AI Systems Page</span>
+              <span>→</span>
+            </a>
+            <a href="#ai-systems" class="text-mist hover:text-lime hover:underline">
+              In-Page Preview ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- Practice III: Brand & Flagship Digital -->
+        <div class="py-10 lg:py-4 lg:pl-10 space-y-6 group">
+          <div class="flex items-center justify-between font-mono text-xs text-white">
+            <span class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center font-bold">III</span>
+            <span class="text-ash">CINEMA TO CODE</span>
+          </div>
+
+          <h3 class="font-display font-medium text-3xl text-white group-hover:text-lime transition-colors">
+            Brand &amp; Flagship
+          </h3>
+          <p class="font-mono text-xs text-ash">CATEGORY DEFINING CRAFT</p>
+
+          <p class="text-mist text-sm leading-relaxed">
+            Rooted in 15 years finishing 46+ feature films, we direct, shoot, and engineer category-defining brand identities, tokenized design systems, custom WebGL flagships, and retail packaging architectures.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs text-white/90">
+            <span class="px-3 py-1 bg-surface rounded-full">Category Positioning</span>
+            <span class="px-3 py-1 bg-surface rounded-full">Design Tokens</span>
+            <span class="px-3 py-1 bg-surface rounded-full">WebGL Platforms</span>
+            <span class="px-3 py-1 bg-surface rounded-full">Commercial Film &amp; VFX</span>
+          </div>
+
+          <div class="pt-4 flex flex-wrap items-center gap-3 font-mono text-xs">
+            <a href="philosophy.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-obsidian font-bold hover:scale-105 transition-all">
+              <span>Read Studio Philosophy</span>
+              <span>→</span>
+            </a>
+            <a href="#work" class="text-mist hover:text-white hover:underline">
+              Explore Selected Work ↓
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       05. SELECTED PROOF — ASYMMETRIC FULL-BLEED SHOWCASE
+       ========================================================================= -->
+  <section id="work" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-t border-white/5">
+    
+    <div class="w-full space-y-24">
+
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal">
+        <div class="space-y-4 max-w-2xl">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 03 · SELECTED PROOF</span>
+          <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight">
+            Strategy Is Theory Until It Ships.
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 font-mono text-xs text-mist">
+          <img src="https://neermedia.com/wp-content/uploads/2024/12/axis-logo-neer-media-client.webp" alt="AXIS" class="h-5 opacity-70 hover:opacity-100 transition-opacity" onerror="this.style.display='none'" />
+          <img src="https://neermedia.com/wp-content/uploads/2024/12/your-dsa-logo-neer-media-client.webp" alt="YourDSA" class="h-5 opacity-70 hover:opacity-100 transition-opacity" onerror="this.style.display='none'" />
+          <img src="https://neermedia.com/wp-content/uploads/2024/12/soil-story-logo-neer-media-client.webp" alt="Soil Story" class="h-5 opacity-70 hover:opacity-100 transition-opacity" onerror="this.style.display='none'" />
+          <span class="text-ash">eZetus · Courtyard · 46+ Films</span>
+        </div>
+      </div>
+
+      <!-- Project 01: AXIS Solution (Monumental Split) -->
+      <article class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal group border-b border-white/10 pb-16">
+        <div class="lg:col-span-8 relative h-80 sm:h-[480px] w-full overflow-hidden bg-void border border-white/5">
+          <img 
+            src="images/watermarked_img_2387394198825788672.jpg"
+            alt="AXIS Solution Enterprise Identity"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_2387394198825788672.jpg.png';}"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-transparent to-transparent"></div>
+          <span class="absolute top-6 left-6 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[10px] text-lime">
+            01 // ENTERPRISE ARCHITECTURE
+          </span>
+        </div>
+
+        <div class="lg:col-span-4 space-y-5">
+          <div class="flex flex-wrap gap-2 font-mono text-xs text-mist">
+            <span>Brand Strategy</span> · <span>Visual System</span> · <span>Corporate Guidelines</span>
+          </div>
+          <h3 class="font-display font-medium text-3xl sm:text-4xl text-white group-hover:text-lime transition-colors">
+            AXIS Solution
+          </h3>
+          <p class="text-mist text-base leading-relaxed">
+            Stripping away legacy noise to engineer a razor-sharp geometric mark and modular identity guidelines deployed across industrial enterprise infrastructure.
+          </p>
+          <a href="https://neermedia.com/logo-showcase/axis/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-xs text-lime hover:underline pt-2">
+            <span>Examine Case Study</span><span>↗</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 02: YourDSA (Inverted Split) -->
+      <article class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal group border-b border-white/10 pb-16">
+        <div class="lg:col-span-4 space-y-5 order-2 lg:order-1">
+          <div class="flex flex-wrap gap-2 font-mono text-xs text-mist">
+            <span>Identity Design</span> · <span>Product UI/UX</span> · <span>Web Architecture</span>
+          </div>
+          <h3 class="font-display font-medium text-3xl sm:text-4xl text-white group-hover:text-lime transition-colors">
+            YourDSA
+          </h3>
+          <p class="text-mist text-base leading-relaxed">
+            In an opaque loan distribution market, we turned institutional trust into frictionless digital action—building the brand from first principles and engineering a high-velocity partner portal.
+          </p>
+          <a href="https://neermedia.com/logo-showcase/yourdsa/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-xs text-lime hover:underline pt-2">
+            <span>Examine Case Study</span><span>↗</span>
+          </a>
+        </div>
+
+        <div class="lg:col-span-8 relative h-80 sm:h-[480px] w-full overflow-hidden bg-void border border-white/5 order-1 lg:order-2">
+          <img 
+            src="images/watermarked_img_2550245308471080795.jpg"
+            alt="YourDSA Fintech Platform UI"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_2550245308471080795.jpg.png';}"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-transparent to-transparent"></div>
+          <span class="absolute top-6 left-6 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[10px] text-lime">
+            02 // FINTECH PLATFORM
+          </span>
+        </div>
+      </article>
+
+      <!-- Project 03 & 04 (Two Column Fluid Showcase) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        
+        <!-- Soil Story -->
+        <article class="space-y-6 reveal group">
+          <div class="relative h-72 sm:h-96 w-full overflow-hidden bg-void border border-white/5">
+            <img 
+              src="images/watermarked_img_1424694392454476817.jpg"
+              alt="Soil Story Packaging Architecture"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_1424694392454476817.jpg.png';}"
+            />
+            <span class="absolute top-6 left-6 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[10px] text-lime">
+              03 // CONSUMER PACKAGING
+            </span>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-display font-medium text-2xl sm:text-3xl text-white group-hover:text-lime transition-colors">
+              Soil Story — Modern Packaging Architecture
+            </h3>
+            <p class="text-mist text-sm leading-relaxed">
+              Rejecting craft clichés to build an earth-first, modern typographic and packaging architecture commanding immediate retail shelf authority.
+            </p>
+            <a href="https://neermedia.com/logo-showcase/soil-story/" target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-mono text-xs text-lime hover:underline pt-2">
+              <span>Case Analysis</span><span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Production Reel & Modal Trigger -->
+        <article class="space-y-6 reveal group">
+          <div class="relative h-72 sm:h-96 w-full overflow-hidden bg-void border border-white/5 flex items-center justify-center">
+            <img 
+              src="images/watermarked_img_15093798613234770069.jpg"
+              alt="Commercial Film & VFX Production Reel"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_15093798613234770069.jpg.png';}"
+            />
+            <div class="absolute inset-0 bg-obsidian/45 backdrop-blur-[2px] flex items-center justify-center">
+              <button id="open-film-modal" class="w-16 h-16 rounded-full bg-lime text-obsidian flex items-center justify-center text-xl font-bold shadow-xl shadow-lime/30 group-hover:scale-110 transition-transform cursor-pointer" aria-label="Play Film Reel">
+                ▶
+              </button>
+            </div>
+            <span class="absolute top-6 left-6 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[10px] text-lime">
+              04 // 46+ FEATURE FILMS HERITAGE
+            </span>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-display font-medium text-2xl sm:text-3xl text-white group-hover:text-lime transition-colors">
+              Commercial Film &amp; Visual Reel
+            </h3>
+            <p class="text-mist text-sm leading-relaxed">
+              Finishing 46+ feature films across 15 years. Directing, shooting, and grading high-impact commercial visual campaigns.
+            </p>
+            <button id="open-film-modal-2" class="inline-flex items-center gap-1 font-mono text-xs text-lime hover:underline pt-2 cursor-pointer">
+              <span>Launch 4K Reel Player</span><span>↗</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       06. ENGINEERED AUTONOMY — RADICALLY REVAMPED TELEMETRY INSTRUMENT
+       NO ESSAYS · NO PARAGRAPHS · PURE INTERACTIVE PIPELINE
+       ========================================================================= -->
+  <section id="ai-systems" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-void relative border-t border-white/5">
+    
+    <div class="w-full space-y-16 reveal">
+
+      <!-- Chiselled Header (Zero Filler) -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="space-y-3">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 04 · ENGINEERED AUTONOMY</span>
+          <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight leading-none">
+            Stop Prompting. <br />
+            <span class="text-lime">Engineer Autonomous Operations.</span>
+          </h2>
+        </div>
+        <p class="font-mono text-xs text-mist max-w-sm">
+          No prompt experiments. Deterministic multi-agent pipelines wired directly into your enterprise ERP and CRM.
+        </p>
+      </div>
+
+      <!-- Mode Selector Toggles -->
+      <div class="flex flex-wrap gap-3" role="tablist">
+        <button data-ai-tab="0" class="ai-tab-btn px-6 py-3 rounded-full font-mono text-xs tracking-wider bg-lime text-obsidian font-bold transition-all">
+          01 // REVENUE CONCIERGE [&lt;8s RESPONSE]
+        </button>
+        <button data-ai-tab="1" class="ai-tab-btn px-6 py-3 rounded-full font-mono text-xs tracking-wider bg-surface text-mist hover:text-white border border-white/10 hover:border-lime/40 transition-all">
+          02 // PRIVATE RAG CORE [ZERO LEAKAGE]
+        </button>
+        <button data-ai-tab="2" class="ai-tab-btn px-6 py-3 rounded-full font-mono text-xs tracking-wider bg-surface text-mist hover:text-white border border-white/10 hover:border-lime/40 transition-all">
+          03 // BACK-OFFICE PIPELINE [DETERMINISTIC]
+        </button>
+      </div>
+
+      <!-- The Unboxed Telemetry Pipeline Instrument -->
+      <div class="space-y-10 pt-4">
+        
+        <!-- Live Signal Telemetry Metrics HUD -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-t border-b border-white/10 font-mono text-xs">
+          <div>
+            <span class="text-ash block uppercase text-[10px]">PIPELINE MODE</span>
+            <span id="ai-mode-label" class="text-lime font-bold text-sm mt-1 block">REVENUE CONCIERGE</span>
+          </div>
+          <div>
+            <span class="text-ash block uppercase text-[10px]">EXECUTION LATENCY</span>
+            <span id="ai-metric-speed" class="text-white font-bold text-sm mt-1 block">&lt; 8.2 SECONDS</span>
+          </div>
+          <div>
+            <span class="text-ash block uppercase text-[10px]">DATA GOVERNANCE</span>
+            <span id="ai-metric-privacy" class="text-white font-bold text-sm mt-1 block">100% PRIVATE VECTOR CORE</span>
+          </div>
+          <div>
+            <span class="text-ash block uppercase text-[10px]">AUTONOMOUS OUTCOME</span>
+            <span id="ai-metric-outcome" class="text-lime font-bold text-sm mt-1 block">CALENDAR DISCOVERY BOOKED</span>
+          </div>
+        </div>
+
+        <!-- Visual Signal Flow Node Track (Edge-to-Edge Continuous Architectural Grid) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-y border-white/10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+          
+          <div class="py-8 px-6 space-y-3 group hover:bg-white/[0.02] transition-colors relative">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span class="font-bold">// NODE 01</span>
+              <span class="text-white/40 uppercase tracking-widest text-[10px]">TRIGGER</span>
+            </div>
+            <h4 id="node-1" class="font-display font-medium text-xl text-white group-hover:text-lime transition-colors">WhatsApp &amp; Webhook</h4>
+            <p id="node-1-sub" class="font-mono text-xs text-mist">Real-time webhook ingestion</p>
+            <div class="pt-3 flex items-center gap-2 font-mono text-[10px] text-ash">
+              <span class="w-1.5 h-1.5 rounded-full bg-lime animate-pulse"></span>
+              <span>ZERO LATENCY INGEST</span>
+            </div>
+          </div>
+
+          <div class="py-8 px-6 space-y-3 group hover:bg-white/[0.02] transition-colors relative">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span class="font-bold">// NODE 02</span>
+              <span class="text-white/40 uppercase tracking-widest text-[10px]">INTELLIGENCE</span>
+            </div>
+            <h4 id="node-2" class="font-display font-medium text-xl text-white group-hover:text-lime transition-colors">Multilingual RAG Core</h4>
+            <p id="node-2-sub" class="font-mono text-xs text-mist">Catalog vector retrieval</p>
+            <div class="pt-3 flex items-center gap-2 font-mono text-[10px] text-ash">
+              <span class="w-1.5 h-1.5 rounded-full bg-lime animate-pulse"></span>
+              <span>VECTOR EMBEDDINGS</span>
+            </div>
+          </div>
+
+          <div class="py-8 px-6 space-y-3 group hover:bg-white/[0.02] transition-colors relative">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span class="font-bold">// NODE 03</span>
+              <span class="text-white/40 uppercase tracking-widest text-[10px]">GUARDRAIL</span>
+            </div>
+            <h4 id="node-3" class="font-display font-medium text-xl text-white group-hover:text-lime transition-colors">Policy &amp; Pricing Rules</h4>
+            <p id="node-3-sub" class="font-mono text-xs text-mist">Deterministic exception check</p>
+            <div class="pt-3 flex items-center gap-2 font-mono text-[10px] text-ash">
+              <span class="w-1.5 h-1.5 rounded-full bg-lime animate-pulse"></span>
+              <span>BUSINESS LOGIC</span>
+            </div>
+          </div>
+
+          <div class="py-8 px-6 space-y-3 group hover:bg-white/[0.02] transition-colors relative bg-lime/[0.02]">
+            <div class="flex items-center justify-between font-mono text-xs text-lime">
+              <span class="font-bold">// NODE 04</span>
+              <span class="text-lime uppercase tracking-widest text-[10px]">OUTPUT</span>
+            </div>
+            <h4 id="node-4" class="font-display font-medium text-xl text-white group-hover:text-lime transition-colors">Instant CRM &amp; Booking</h4>
+            <p id="node-4-sub" class="font-mono text-xs text-lime">Zero manual data entry</p>
+            <div class="pt-3 flex items-center gap-2 font-mono text-[10px] text-lime">
+              <span class="w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+              <span>AUTONOMOUS EXECUTION</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Stack Bar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-ash pt-4">
+          <span>COMPATIBLE STACK // LangGraph · Private Vector RAG · OpenAI · Anthropic · SAP · Zoho · HubSpot · Next.js</span>
+          <a href="#diagnostic" class="text-lime hover:underline">
+            Initiate Pipeline Mapping →
+          </a>
+        </div>
+
+        <!-- Direct Link to Dedicated AI Systems Page -->
+        <div class="p-6 border border-lime/30 bg-lime/[0.03] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs mt-6">
+          <div class="space-y-1 text-center sm:text-left">
+            <span class="text-lime font-bold uppercase tracking-wider block">// FULL SYSTEM SPECIFICATION AVAILABLE</span>
+            <span class="text-mist">Surgical examination of 4 architectural frameworks, 2 case-study blueprints, and 5-stage sprint methodology.</span>
+          </div>
+          <a href="ai-systems.html" class="px-6 py-3 rounded-full bg-lime text-obsidian font-display font-medium text-xs tracking-wider hover:scale-105 transition-all shadow-lg shadow-lime/20 whitespace-nowrap">
+            OPEN DEDICATED AI SYSTEMS PAGE →
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       07. ASTRO-BRANDING — CELESTIAL ASTROLABE QUADRANT (REVA ASTRO)
+       Asset: watermarked_img_947063668010237173.jpg
+       ========================================================================= -->
+  <section id="astro-branding" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-t border-white/5 overflow-hidden">
+    
+    <div class="w-full space-y-20 relative z-10 reveal">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 05 · EXECUTIVE TIMING ADVISORY</span>
+          
+          <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Classical Light for <br />
+            <span class="text-lime">Commercial Decisions.</span>
+          </h2>
+
+          <p class="text-mist text-base sm:text-lg leading-relaxed max-w-xl">
+            Powered by sister practice <a href="https://revaastro.com/" target="_blank" rel="noopener" class="text-lime underline font-medium">Reva Astro</a>—founded by <strong class="text-white">Neeraj Rai</strong>, commentator on the <em>Bhagavad Gita</em> and author of <em>Bhairav Kaivalyam</em>—NEER bridges classical Vedic <em>Jyotisha</em> with modern venture strategy.
+          </p>
+
+          <p class="text-mist text-sm sm:text-base leading-relaxed max-w-xl">
+            In Sanskrit, <em>Jyotisha</em> means the science of light—a mirror for clarity, never superstition. History proves no astrological tweak can save a business with broken unit economics. Instead, we evaluate founder temperament (<em>Lagna</em>), planetary strength (<em>Shadbala</em>), and strategic windows (<em>Muhurta</em>) in plain commercial language.
+          </p>
+        </div>
+
+        <!-- Astrolabe Centerpiece (watermarked_img_947063668010237173.jpg) -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full p-2 bg-charcoal border border-lime/35 shadow-2xl flex items-center justify-center group">
+            
+            <div class="absolute inset-1 rounded-full border border-dashed border-lime/40 animate-slow-orbit pointer-events-none"></div>
+
+            <img 
+              src="images/Sample-1.png"
+              alt="NEER x Reva Astro Circular Optical Astrolabe"
+              class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-700"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/Sample-1.png.png';}"
+            />
+
+            <div class="absolute bottom-5 px-4 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-lime/40 font-mono text-[10px] text-lime tracking-widest uppercase">
+              ✦ JYOTISHA · SCIENCE OF LIGHT
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 4 Pillars (Unboxed Horizontal Divide) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/10 pt-8 border-t border-b border-white/10">
+        
+        <div class="py-6 sm:py-0 sm:px-6 first:pl-0 space-y-2">
+          <span class="font-mono text-xs text-lime block font-bold">01 // LAGNA</span>
+          <h4 class="font-display font-medium text-lg text-white">Leadership Alignment</h4>
+          <p class="text-xs text-mist leading-relaxed">
+            Aligning venture archetype, corporate positioning, and governance with leadership temperament.
+          </p>
+        </div>
+
+        <div class="py-6 sm:py-0 sm:px-6 space-y-2">
+          <span class="font-mono text-xs text-lime block font-bold">02 // NAMAKARANA</span>
+          <h4 class="font-display font-medium text-lg text-white">Phonetic Naming</h4>
+          <p class="text-xs text-mist leading-relaxed">
+            Synthesizing classical root syllables with global linguistic phonetics and trademark availability.
+          </p>
+        </div>
+
+        <div class="py-6 sm:py-0 sm:px-6 space-y-2">
+          <span class="font-mono text-xs text-lime block font-bold">03 // SWARUPA</span>
+          <h4 class="font-display font-medium text-lg text-white">Spatial Vastu Harmony</h4>
+          <p class="text-xs text-mist leading-relaxed">
+            Translating directional principles into WCAG color palettes, geometric ratios, and studio spaces.
+          </p>
+        </div>
+
+        <div class="py-6 sm:py-0 sm:px-6 last:pr-0 space-y-2">
+          <span class="font-mono text-xs text-lime block font-bold">04 // MUHURTA</span>
+          <h4 class="font-display font-medium text-lg text-white">Launch Windows</h4>
+          <p class="text-xs text-mist leading-relaxed">
+            Synchronizing Go-To-Market launches, capital rounds, and PR campaigns with high-harmony windows.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap items-center gap-6 font-mono text-xs">
+        <a href="#diagnostic" class="text-lime hover:underline">
+          Inquire About Astro-Branding →
+        </a>
+        <a href="https://revaastro.com/" target="_blank" rel="noopener" class="text-mist hover:text-white">
+          Visit Reva Astro (revaastro.com) ↗
+        </a>
+      </div>
+
+      <!-- Direct Link to Dedicated Astro-Branding Page -->
+      <div class="p-6 border border-lime/30 bg-lime/[0.03] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs mt-6">
+        <div class="space-y-1 text-center sm:text-left">
+          <span class="text-lime font-bold uppercase tracking-wider block">// COMPLETE METHODOLOGY &amp; PROOF SPECIFICATION</span>
+          <span class="text-mist">Explore the 4-node diagnostic engine, Industry vs Cosmic matrix, deliverables, and enterprise proof.</span>
+        </div>
+        <a href="astro-branding.html" class="px-6 py-3 rounded-full bg-lime text-obsidian font-display font-medium text-xs tracking-wider hover:scale-105 transition-all shadow-lg shadow-lime/20 whitespace-nowrap">
+          OPEN DEDICATED ASTRO-BRANDING PAGE →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       08. THE LAW OF EVOLUTION — DASHAVATARA CONTINUUM
+       Asset: watermarked_img_7092434348086662237.jpg
+       ========================================================================= -->
+  <section id="evolution" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-void relative border-t border-white/5">
+    
+    <div class="w-full space-y-16 reveal">
+
+      <div class="space-y-4 max-w-3xl">
+        <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 06 · DASHAVATARA PHILOSOPHY</span>
+        <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+          Survival Belongs to the System <br />
+          <span class="text-lime">That Changes Form.</span>
+        </h2>
+      </div>
+
+      <!-- Panoramic 5-Sphere Visual Asset (watermarked_img_7092434348086662237.jpg) -->
+      <div class="relative w-full h-64 sm:h-96 overflow-hidden border-y border-white/10 group shadow-2xl">
+        <img 
+          src="images/Sample-2.png"
+          alt="Five Progressive Circular States of Enterprise Evolution"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/Sample-2.png.png';}"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono text-xs text-white">
+          <span class="px-3.5 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 text-lime">
+            FIVE PROGRESSIVE STATES OF ORGANIZATIONAL MORPHOGENESIS
+          </span>
+          <span class="hidden sm:inline text-ash">CONTINUUM // 01 ── 05</span>
+        </div>
+      </div>
+
+      <!-- Linear Unboxed 5-Stage Continuum -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 pt-4">
+        
+        <div class="space-y-1">
+          <span class="font-mono text-xs text-lime font-bold">STATE I</span>
+          <h4 class="font-display font-medium text-white text-base">Aqueous Origin</h4>
+          <p class="text-xs text-mist">Distilling founder truth amid early market noise.</p>
+        </div>
+
+        <div class="space-y-1">
+          <span class="font-mono text-xs text-lime font-bold">STATE II</span>
+          <h4 class="font-display font-medium text-white text-base">Amphibious Spine</h4>
+          <p class="text-xs text-mist">Load-bearing positioning, naming, and identity.</p>
+        </div>
+
+        <div class="space-y-1">
+          <span class="font-mono text-xs text-lime font-bold">STATE III</span>
+          <h4 class="font-display font-medium text-white text-base">Precision Tools</h4>
+          <p class="text-xs text-mist">Severing manual drag with custom pipelines.</p>
+        </div>
+
+        <div class="space-y-1">
+          <span class="font-mono text-xs text-lime font-bold">STATE IV</span>
+          <h4 class="font-display font-medium text-white text-base">Institutional Order</h4>
+          <p class="text-xs text-mist">Design tokens, private RAG cores, and governance.</p>
+        </div>
+
+        <div class="space-y-1">
+          <span class="font-mono text-xs text-lime font-bold">STATE V</span>
+          <h4 class="font-display font-medium text-white text-base">Autonomous Horizon</h4>
+          <p class="text-xs text-lime">Multi-agent orchestration and paradigm renewal.</p>
+        </div>
+
+      </div>
+
+      <!-- Direct Link to Dedicated Philosophy Page -->
+      <div class="p-6 border border-white/10 bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs mt-6">
+        <div class="space-y-1 text-center sm:text-left">
+          <span class="text-white font-bold uppercase tracking-wider block">// THE WATER THESIS &amp; 15-YEAR EVOLUTION CONTINUUM</span>
+          <span class="text-mist">Read the full philosophical doctrine: The Monolith &amp; Current, 3 Epochs of Transformation, and Studio Bases.</span>
+        </div>
+        <a href="philosophy.html" class="px-6 py-3 rounded-full bg-white text-obsidian font-display font-medium text-xs tracking-wider hover:scale-105 transition-all shadow-lg shadow-white/10 whitespace-nowrap">
+          OPEN DEDICATED PHILOSOPHY PAGE →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       09. EXECUTIVE VOICES & TESTIMONIAL DISPATCHES
+       ========================================================================= -->
+  <section id="testimonials" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-t border-white/5">
+    
+    <div class="w-full space-y-16 reveal">
+
+      <div class="space-y-3 max-w-2xl">
+        <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 07 · VERIFIED EVIDENCE</span>
+        <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight">
+          Measured by What Endures.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Video Reel Dispatch Trigger -->
+        <div class="lg:col-span-5 relative h-72 sm:h-96 overflow-hidden bg-void border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+          <img 
+            src="images/watermarked_img_15093798613234770069.jpg"
+            alt="Client Dispatch Reel Backdrop"
+            class="absolute inset-0 w-full h-full object-cover opacity-25"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_15093798613234770069.jpg.png';}"
+          />
+          <button id="video-reel-trigger" class="relative z-10 w-16 h-16 rounded-full bg-lime text-obsidian flex items-center justify-center text-xl font-bold hover:scale-110 transition-transform shadow-xl shadow-lime/30 mb-4 cursor-pointer" aria-label="Play Client Dispatch">
+            ▶
+          </button>
+          <span class="relative z-10 font-display font-medium text-white text-lg">Executive Video Dispatches</span>
+          <span id="video-status-text" class="relative z-10 font-mono text-xs text-mist mt-1">[Click to Preview Verified Founder Reel]</span>
+        </div>
+
+        <!-- Verified Quotes -->
+        <div class="lg:col-span-7 flex flex-col divide-y divide-white/10">
+          
+          <div class="py-8 space-y-3">
+            <span class="font-mono text-xs text-lime">ENTERPRISE IDENTITY SYSTEM · ★★★★★</span>
+            <p class="text-white text-lg sm:text-xl italic leading-relaxed">
+              “Before NEER, our divisions looked like four different companies competing against each other. NEER architected a razor-sharp identity system that unified our presence and directly accelerated our enterprise contract velocity.”
+            </p>
+            <span class="font-mono text-xs text-ash block">Managing Director · Industrial Enterprise Client</span>
+          </div>
+
+          <div class="py-8 space-y-3">
+            <span class="font-mono text-xs text-lime">AUTONOMOUS WORKFLOW TRIAGE · ★★★★★</span>
+            <p class="text-white text-lg sm:text-xl italic leading-relaxed">
+              “Our sales reps used to waste 3 hours every day manually logging WhatsApp inquiries into CRM. The AI concierge NEER engineered qualifies leads in 8 seconds and syncs every record. It paid for itself within two weeks.”
+            </p>
+            <span class="font-mono text-xs text-ash block">Chief Operating Officer · National Service Network</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       10. CODIFIED PERSPECTIVES (FIELD NOTES JOURNAL)
+       ========================================================================= -->
+  <section id="perspectives" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-void relative border-t border-white/5">
+    
+    <div class="w-full space-y-16 reveal">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+        <div class="space-y-3">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 08 · CODIFIED PERSPECTIVES</span>
+          <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight">
+            Field Notes on Brand &amp; Time.
+          </h2>
+        </div>
+        <p class="font-mono text-xs text-ash">FROM THE NEER MASTERBOOK</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 pt-8 border-t border-b border-white/10">
+        
+        <article class="py-8 md:py-0 md:pr-8 space-y-3 group">
+          <span class="font-mono text-[11px] text-lime">[ BRAND TOKENS ] · 6 MIN</span>
+          <h3 class="font-display font-medium text-2xl text-white group-hover:text-lime transition-colors">
+            Why Static Brand Manuals Fail in Living Digital Products
+          </h3>
+          <p class="text-xs text-mist leading-relaxed">
+            How tokenized design systems allow an identity to flex across mobile, desktop, and physical space without fracturing.
+          </p>
+          <a href="#diagnostic" class="font-mono text-xs text-lime inline-flex items-center gap-1 group-hover:underline pt-2">
+            <span>Read Note</span><span>→</span>
+          </a>
+        </article>
+
+        <article class="py-8 md:py-0 md:px-8 space-y-3 group">
+          <span class="font-mono text-[11px] text-lime">[ WORKFLOW ARCHITECTURE ] · 8 MIN</span>
+          <h3 class="font-display font-medium text-2xl text-white group-hover:text-lime transition-colors">
+            Moving from Chatbots to Deterministic Multi-Agent Pipelines
+          </h3>
+          <p class="text-xs text-mist leading-relaxed">
+            An engineering blueprint for wiring LangGraph reasoning and private vector RAG knowledge cores into legacy ERPs.
+          </p>
+          <a href="#diagnostic" class="font-mono text-xs text-lime inline-flex items-center gap-1 group-hover:underline pt-2">
+            <span>Read Note</span><span>→</span>
+          </a>
+        </article>
+
+        <article class="py-8 md:py-0 md:pl-8 space-y-3 group">
+          <span class="font-mono text-[11px] text-lime">[ TEMPORAL STRATEGY ] · 7 MIN</span>
+          <h3 class="font-display font-medium text-2xl text-white group-hover:text-lime transition-colors">
+            The Architecture of Timing: Separating Myth from Methodology
+          </h3>
+          <p class="text-xs text-mist leading-relaxed">
+            Why structured temporal analysis and empirical Go-To-Market planning belong at the same strategic table.
+          </p>
+          <a href="#diagnostic" class="font-mono text-xs text-lime inline-flex items-center gap-1 group-hover:underline pt-2">
+            <span>Read Note</span><span>→</span>
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       11. INITIATE SPRINT — INTERACTIVE SPRINT CONFIGURATOR (UNBOXED)
+       ========================================================================= -->
+  <section id="diagnostic" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-t border-white/5">
+    
+    <div class="max-w-5xl mx-auto space-y-12 reveal">
+      
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 09 · INITIATE TRANSFORMATION</span>
+        <h2 class="font-display font-medium text-4xl sm:text-6xl text-white tracking-tight leading-none">
+          Do Not Build a Monument. <br />
+          <span class="text-lime">Architect a Current.</span>
+        </h2>
+        <p class="text-mist text-base max-w-xl">
+          Select where your enterprise stands. Configure your priority disciplines to generate an immediate 6–8 week architecture sprint.
+        </p>
+      </div>
+
+      <form id="diagnostic-form" class="space-y-10 pt-4">
+        
+        <!-- Step 1: Stage of Evolution -->
+        <div class="space-y-3">
+          <label class="block font-mono text-xs text-ash uppercase tracking-wider">
+            1. WHERE IS YOUR ENTERPRISE IN ITS EVOLUTION?
+          </label>
+          <div class="flex flex-wrap gap-2.5" id="stage-pills">
+            <button type="button" data-stage="Genesis & New Venture Launch" class="stage-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-lime text-obsidian transition-all">
+              Genesis &amp; New Venture Launch
+            </button>
+            <button type="button" data-stage="Brand & Digital Repositioning" class="stage-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all">
+              Brand &amp; Digital Repositioning
+            </button>
+            <button type="button" data-stage="Operational AI & Workflow Scaling" class="stage-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all">
+              Operational AI &amp; Workflow Scaling
+            </button>
+            <button type="button" data-stage="Full 360° Enterprise Transformation" class="stage-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all">
+              Full 360° Enterprise Transformation
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Capabilities Needed -->
+        <div class="space-y-3">
+          <label class="block font-mono text-xs text-ash uppercase tracking-wider">
+            2. WHICH DISCIPLINES DOES THIS MOMENT REQUIRE?
+          </label>
+          <div class="flex flex-wrap gap-2.5" id="cap-pills">
+            <button type="button" data-cap="Astro-Branding (× Reva Astro)" class="cap-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-lime text-obsidian transition-all">
+              ✦ Astro-Branding (× Reva Astro)
+            </button>
+            <button type="button" data-cap="Engineered AI & Automation" class="cap-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-lime text-obsidian transition-all">
+              ● Engineered AI &amp; Automation
+            </button>
+            <button type="button" data-cap="Brand Strategy & Identity" class="cap-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all">
+              Brand Strategy &amp; Identity
+            </button>
+            <button type="button" data-cap="Flagship Web & Commerce" class="cap-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all">
+              Flagship Web &amp; Commerce
+            </button>
+            <button type="button" data-cap="Commercial Film & CGI" class="cap-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all">
+              Commercial Film &amp; CGI
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Contact Details -->
+        <div class="space-y-3">
+          <label class="block font-mono text-xs text-ash uppercase tracking-wider">
+            3. WHERE SHOULD WE DELIVER YOUR SPRINT ARCHITECTURE?
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="text" id="diag-name" required placeholder="Full Name *" class="w-full px-6 py-4 rounded-full bg-surface border border-white/10 text-white placeholder-ash text-sm focus:border-lime focus:outline-none font-mono" />
+            <input type="email" id="diag-email" required placeholder="Work Email *" class="w-full px-6 py-4 rounded-full bg-surface border border-white/10 text-white placeholder-ash text-sm focus:border-lime focus:outline-none font-mono" />
+            <input type="text" id="diag-company" placeholder="Company &amp; URL" class="w-full px-6 py-4 rounded-full bg-surface border border-white/10 text-white placeholder-ash text-sm focus:border-lime focus:outline-none font-mono" />
+            <input type="tel" id="diag-phone" required placeholder="Direct Phone / WhatsApp *" class="w-full px-6 py-4 rounded-full bg-surface border border-white/10 text-white placeholder-ash text-sm focus:border-lime focus:outline-none font-mono" />
+          </div>
+        </div>
+
+        <!-- Action -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-4 border-t border-white/10">
+          <button type="submit" class="inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full bg-lime text-obsidian font-display font-medium text-xs tracking-wider hover:scale-105 transition-transform shadow-xl shadow-lime/20 cursor-pointer">
+            <span>GENERATE SPRINT ARCHITECTURE</span>
+            <span class="font-mono text-sm">→</span>
+          </button>
+          <p class="font-mono text-xs text-mist">
+            DIRECT EXECUTIVE CONTACT: <a href="https://wa.me/919998499944" target="_blank" rel="noopener" class="text-lime underline">+91 999 84 999 44</a>
+          </p>
+        </div>
+
+      </form>
+
+      <!-- Live Generated Sprint Result -->
+      <div id="pathway-output" class="hidden p-8 border-l-2 border-lime bg-white/[0.02] space-y-4">
+        <div class="flex items-center justify-between font-mono text-xs">
+          <span class="px-3 py-1 rounded-full bg-lime/20 text-lime">✓ SPRINT ARCHITECTED</span>
+          <span class="text-ash">ESTIMATED SPRINT: 6–8 WEEKS</span>
+        </div>
+        <h4 id="pathway-heading" class="font-display font-medium text-2xl text-white"></h4>
+        <p id="pathway-summary" class="text-sm text-mist leading-relaxed font-mono"></p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       12. ARCHITECTURAL FOOTER
+       ========================================================================= -->
+  <footer class="py-20 px-6 sm:px-10 lg:px-16 bg-void border-t border-white/10">
+    <div class="w-full space-y-16">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-lime"></span>
+            <span class="font-display font-medium text-3xl tracking-tighter text-white">NEER</span>
+          </div>
+          <p class="font-display font-medium text-lime text-base">Fluid Intelligence. Living Brands.</p>
+          <p class="text-xs text-mist leading-relaxed max-w-sm font-mono">
+            An architectural brand strategy, digital platform, engineered AI, and classical Astro-Branding advisory firm. Founded in 2011.
+          </p>
+        </div>
+
+        <div class="lg:col-span-3 space-y-3 font-mono text-xs">
+          <span class="text-white uppercase tracking-wider block font-bold">// PRACTICES</span>
+          <a href="astro-branding.html" class="block text-mist hover:text-lime transition-colors">✦ Astro-Branding (× Reva Astro)</a>
+          <a href="ai-systems.html" class="block text-mist hover:text-lime transition-colors">● Engineered AI Workflows</a>
+          <a href="capabilities.html" class="block text-mist hover:text-white transition-colors">◆ Capabilities (Cinema to Code)</a>
+          <a href="philosophy.html" class="block text-mist hover:text-white transition-colors">Studio Philosophy</a>
+          <a href="#trinity" class="block text-mist hover:text-white transition-colors">Brand Strategy &amp; Identity</a>
+          <a href="#trinity" class="block text-mist hover:text-white transition-colors">Flagship Web &amp; Commerce</a>
+          <a href="#work" class="block text-mist hover:text-white transition-colors">Commercial Film &amp; VFX</a>
+        </div>
+
+        <div class="lg:col-span-4 space-y-3 font-mono text-xs text-mist">
+          <span class="text-white uppercase tracking-wider block font-bold">// AHMEDABAD STUDIOS</span>
+          <p class="leading-relaxed">
+            <strong class="text-white">Strategy &amp; Client Studio:</strong><br />
+            704, 7th Floor, Colonnade, Iskon Cross Road, Ahmedabad – 380015
+          </p>
+          <p class="leading-relaxed">
+            <strong class="text-white">Production &amp; Research Lab:</strong><br />
+            D-310, Sumel Business Park 7, NH8, Rakhial, Ahmedabad – 380023
+          </p>
+          <p class="text-lime pt-1">+91 999 84 999 44 · connect@neermedia.com</p>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5 font-mono text-xs text-ash">
+        <span>© 2026 NEER Media. All rights reserved.</span>
+        <span>Sister Practice: <a href="https://revaastro.com/" target="_blank" rel="noopener" class="text-lime hover:underline">Reva Astro (revaastro.com)</a></span>
+        <a href="#top" class="px-4 py-1.5 rounded-full bg-surface text-mist hover:text-lime transition-colors">Back to Top ↑</a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- =========================================================================
+       VIDEO REEL PREVIEW DIALOG MODAL
+       ========================================================================= -->
+  <dialog id="film-dialog" class="backdrop:bg-obsidian/90 p-0 rounded-2xl bg-charcoal border border-white/10 text-white max-w-2xl w-[92vw] shadow-2xl">
+    <div class="p-6 sm:p-8 space-y-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-lime animate-ping"></span>
+          <span class="font-display font-medium text-lg text-white">NEER Production Reel</span>
+        </div>
+        <button id="close-film-modal" class="px-3 py-1 rounded-full bg-surface text-mist hover:text-white font-mono text-xs cursor-pointer">
+          [ESC / CLOSE ✕]
+        </button>
+      </div>
+
+      <div class="relative aspect-video rounded-xl overflow-hidden bg-void border border-white/10 flex items-center justify-center">
+        <img 
+          src="images/watermarked_img_15093798613234770069.jpg"
+          alt="Cinematic Reel Dispatch"
+          class="w-full h-full object-cover opacity-60"
+          onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_15093798613234770069.jpg.png';}"
+        />
+        <div class="absolute inset-0 bg-obsidian/40 flex flex-col items-center justify-center p-6 text-center space-y-3">
+          <span class="w-14 h-14 rounded-full bg-lime text-obsidian flex items-center justify-center text-xl font-bold shadow-lg shadow-lime/30">▶</span>
+          <p class="font-display font-medium text-base text-white">46+ Feature Films to Global Brand Campaigns</p>
+          <span class="font-mono text-xs text-lime">[4K Master Mode Available upon Brief Review]</span>
+        </div>
+      </div>
+
+      <p class="font-mono text-xs text-mist leading-relaxed">
+        Featuring color science, high-speed cinematography, and 3D visual campaigns finished for national enterprise leaders since 2011.
+      </p>
+    </div>
+  </dialog>
+
+
+  <!-- =========================================================================
+       CLIENT-SIDE SCRIPT: FLUID ENGINE & INTERACTION
+       ========================================================================= -->
+  <script>
+    (function() {
+      // 1. Kinetic Cursor Follower Engine
+      const cursorDot = document.getElementById('cursor-dot');
+      const cursorRing = document.getElementById('cursor-ring');
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (cursorDot) {
+          cursorDot.style.left = mouseX + 'px';
+          cursorDot.style.top = mouseY + 'px';
+        }
+      });
+
+      function renderCursor() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        if (cursorRing) {
+          cursorRing.style.left = ringX + 'px';
+          cursorRing.style.top = ringY + 'px';
+        }
+        requestAnimationFrame(renderCursor);
+      }
+      renderCursor();
+
+      document.querySelectorAll('a, button, input, .cursor-pointer').forEach(el => {
+        el.addEventListener('mouseenter', () => cursorRing && cursorRing.classList.add('active-hover'));
+        el.addEventListener('mouseleave', () => cursorRing && cursorRing.classList.remove('active-hover'));
+      });
+
+      // 2. Animated Fluid Wave Displacement Shader (Continuous Wave Ripple)
+      const waveTurb = document.getElementById('wave-turbulence-node');
+      const waveDisp = document.getElementById('wave-disp-node');
+      const waveStage = document.getElementById('wave-stage');
+      let waveTime = 0;
+      let targetDispScale = 26;
+      let currentDispScale = 26;
+
+      function animateWaveFluid() {
+        waveTime += 0.007;
+        if (waveTurb) {
+          const fx = 0.011 + Math.sin(waveTime) * 0.003;
+          const fy = 0.019 + Math.cos(waveTime * 0.8) * 0.004;
+          waveTurb.setAttribute('baseFrequency', `${fx.toFixed(5)} ${fy.toFixed(5)}`);
+        }
+        if (waveDisp) {
+          currentDispScale += (targetDispScale - currentDispScale) * 0.08;
+          waveDisp.setAttribute('scale', currentDispScale.toFixed(2));
+        }
+        requestAnimationFrame(animateWaveFluid);
+      }
+      animateWaveFluid();
+
+      if (waveStage) {
+        waveStage.addEventListener('mousemove', () => { targetDispScale = 45; });
+        waveStage.addEventListener('mouseleave', () => { targetDispScale = 26; });
+      }
+
+      // 3. Interactive Wave Ripple Canvas (Pointer Waves across water surface)
+      const rippleCanvas = document.getElementById('wave-ripple-canvas');
+      if (rippleCanvas) {
+        const rCtx = rippleCanvas.getContext('2d');
+        let ripples = [];
+
+        function resizeRippleCanvas() {
+          rippleCanvas.width = rippleCanvas.offsetWidth;
+          rippleCanvas.height = rippleCanvas.offsetHeight;
+        }
+        resizeRippleCanvas();
+        window.addEventListener('resize', resizeRippleCanvas);
+
+        rippleCanvas.addEventListener('mousemove', (e) => {
+          const rect = rippleCanvas.getBoundingClientRect();
+          if (ripples.length < 15) {
+            ripples.push({
+              x: e.clientX - rect.left,
+              y: e.clientY - rect.top,
+              radius: 4,
+              maxRadius: 80 + Math.random() * 50,
+              opacity: 0.7
+            });
+          }
+        });
+
+        function drawRipples() {
+          rCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+          for (let i = ripples.length - 1; i >= 0; i--) {
+            const rip = ripples[i];
+            rCtx.beginPath();
+            rCtx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
+            rCtx.strokeStyle = `rgba(204, 255, 0, ${rip.opacity * 0.5})`;
+            rCtx.lineWidth = 1.6;
+            rCtx.stroke();
+
+            rip.radius += 2.0;
+            rip.opacity *= 0.95;
+
+            if (rip.radius > rip.maxRadius || rip.opacity < 0.02) {
+              ripples.splice(i, 1);
+            }
+          }
+          requestAnimationFrame(drawRipples);
+        }
+        drawRipples();
+      }
+
+      // 4. Hero Spherical Caustic Light Canvas
+      const causticCanvas = document.getElementById('caustic-canvas');
+      if (causticCanvas) {
+        const cCtx = causticCanvas.getContext('2d');
+        let cPhase = 0;
+        let cOffset = { x: 0, y: 0 };
+
+        causticCanvas.addEventListener('mousemove', (e) => {
+          const rect = causticCanvas.getBoundingClientRect();
+          cOffset.x = ((e.clientX - rect.left) / rect.width - 0.5) * 40;
+          cOffset.y = ((e.clientY - rect.top) / rect.height - 0.5) * 40;
+        });
+
+        function drawCausticRings() {
+          cCtx.clearRect(0, 0, 400, 400);
+          const cx = 200 + cOffset.x * 0.4;
+          const cy = 200 + cOffset.y * 0.4;
+
+          for (let r = 0; r < 4; r++) {
+            cCtx.beginPath();
+            const baseRad = 65 + r * 26;
+            for (let a = 0; a <= Math.PI * 2; a += 0.08) {
+              const wave = Math.sin(a * (3 + r) + cPhase + r) * 7 + Math.cos(a * 2 - cPhase) * 5;
+              const rad = baseRad + wave;
+              const x = cx + Math.cos(a) * rad;
+              const y = cy + Math.sin(a) * rad;
+              if (a === 0) cCtx.moveTo(x, y);
+              else cCtx.lineTo(x, y);
+            }
+            cCtx.closePath();
+            cCtx.strokeStyle = r % 2 === 0 ? 'rgba(204, 255, 0, 0.45)' : 'rgba(255, 255, 255, 0.18)';
+            cCtx.lineWidth = 1.3;
+            cCtx.stroke();
+          }
+          cPhase += 0.026;
+          requestAnimationFrame(drawCausticRings);
+        }
+        drawCausticRings();
+      }
+
+      // 4b. Spotlight Card Mouse Shader Effect
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // 5. Scroll Reveal Intersection Observer
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.08 });
+      reveals.forEach(r => revealObs.observe(r));
+
+      // 6. Smart Header Hide/Show (Suspended when Main Navigation is Open)
+      const smartHeader = document.getElementById('smart-header');
+      let lastScroll = window.scrollY;
+      let isMenuOpen = false;
+
+      window.addEventListener('scroll', () => {
+        if (isMenuOpen) return;
+        const curScroll = window.scrollY;
+        if (curScroll > lastScroll && curScroll > 80) {
+          smartHeader.style.transform = 'translateY(-100%)';
+        } else {
+          smartHeader.style.transform = 'translateY(0)';
+        }
+        lastScroll = curScroll;
+      }, { passive: true });
+
+      // 7. Master Hamburger Menu & Architectural Navigation Overlay
+      const menuToggle = document.getElementById('menu-toggle');
+      const hamburgerOverlay = document.getElementById('hamburger-overlay');
+      const menuLabel = document.getElementById('menu-label');
+      const bar1 = document.getElementById('bar-1');
+      const bar2 = document.getElementById('bar-2');
+
+      function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+          hamburgerOverlay.classList.remove('opacity-0', 'pointer-events-none');
+          hamburgerOverlay.classList.add('opacity-100', 'pointer-events-auto');
+          if (menuLabel) menuLabel.textContent = 'CLOSE';
+          if (bar1) bar1.style.transform = 'translateY(3px) rotate(45deg)';
+          if (bar2) bar2.style.transform = 'translateY(-3px) rotate(-45deg)';
+          document.body.style.overflow = 'hidden';
+        } else {
+          hamburgerOverlay.classList.add('opacity-0', 'pointer-events-none');
+          hamburgerOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+          if (menuLabel) menuLabel.textContent = 'MENU';
+          if (bar1) bar1.style.transform = 'none';
+          if (bar2) bar2.style.transform = 'none';
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+
+      document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (isMenuOpen) toggleMenu();
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMenuOpen) {
+          toggleMenu();
+        }
+      });
+
+      // 8. AI Pipeline Telemetry Instrument (Radically Revamped - Zero Paragraphs)
+      const aiModes = [
+        {
+          label: 'REVENUE CONCIERGE',
+          speed: '< 8.2 SECONDS',
+          privacy: '100% PRIVATE VECTOR CORE',
+          outcome: 'CALENDAR DISCOVERY BOOKED',
+          n1: 'WhatsApp & Webhook', n1Sub: 'Real-time webhook ingestion',
+          n2: 'Multilingual RAG Core', n2Sub: 'Catalog vector retrieval',
+          n3: 'Policy & Pricing Rules', n3Sub: 'Deterministic exception check',
+          n4: 'Instant CRM & Booking', n4Sub: 'Zero manual data entry'
+        },
+        {
+          label: 'ENTERPRISE KNOWLEDGE CORE',
+          speed: '< 1.4 SECONDS',
+          privacy: 'ZERO PUBLIC DATA LEAKAGE',
+          outcome: 'CITATION-VERIFIED REPORT',
+          n1: 'ERP / Drive Connector', n1Sub: 'Internal document sync',
+          n2: 'Encrypted Vector Index', n2Sub: 'Private institutional memory',
+          n3: 'Role-Permission Guard', n3Sub: 'Zero cross-dept leakage',
+          n4: 'Executive Copilot Output', n4Sub: 'Auditable citation answer'
+        },
+        {
+          label: 'BACK-OFFICE ORCHESTRATION',
+          speed: '< 12.0 SECONDS',
+          privacy: 'AIR-GAPPED AUDIT LEDGER',
+          outcome: 'AUTOMATED ERP SYNC',
+          n1: 'Invoice & Email Hook', n1Sub: 'Document OCR ingestion',
+          n2: 'Rule Extraction Agent', n2Sub: 'PO & tax validation',
+          n3: 'Human Exception Check', n3Sub: 'One-click signoff alert',
+          n4: 'Automated Ledger Post', n4Sub: 'Real-time dashboard update'
+        }
+      ];
+
+      document.querySelectorAll('.ai-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-ai-tab'), 10);
+          const m = aiModes[idx];
+
+          document.querySelectorAll('.ai-tab-btn').forEach(b => {
+            b.className = 'ai-tab-btn px-6 py-3 rounded-full font-mono text-xs tracking-wider bg-surface text-mist hover:text-white border border-white/10 hover:border-lime/40 transition-all';
+          });
+          btn.className = 'ai-tab-btn px-6 py-3 rounded-full font-mono text-xs tracking-wider bg-lime text-obsidian font-bold transition-all';
+
+          document.getElementById('ai-mode-label').textContent = m.label;
+          document.getElementById('ai-metric-speed').textContent = m.speed;
+          document.getElementById('ai-metric-privacy').textContent = m.privacy;
+          document.getElementById('ai-metric-outcome').textContent = m.outcome;
+
+          document.getElementById('node-1').textContent = m.n1;
+          document.getElementById('node-1-sub').textContent = m.n1Sub;
+          document.getElementById('node-2').textContent = m.n2;
+          document.getElementById('node-2-sub').textContent = m.n2Sub;
+          document.getElementById('node-3').textContent = m.n3;
+          document.getElementById('node-3-sub').textContent = m.n3Sub;
+          document.getElementById('node-4').textContent = m.n4;
+          document.getElementById('node-4-sub').textContent = m.n4Sub;
+        });
+      });
+
+      // 9. Video Reel Modal Controller
+      const filmDialog = document.getElementById('film-dialog');
+      const openBtn1 = document.getElementById('open-film-modal');
+      const openBtn2 = document.getElementById('open-film-modal-2');
+      const triggerBtn = document.getElementById('video-reel-trigger');
+      const closeBtn = document.getElementById('close-film-modal');
+
+      function openModal() {
+        if (filmDialog) filmDialog.showModal();
+      }
+      if (openBtn1) openBtn1.addEventListener('click', openModal);
+      if (openBtn2) openBtn2.addEventListener('click', openModal);
+      if (triggerBtn) triggerBtn.addEventListener('click', () => {
+        const stat = document.getElementById('video-status-text');
+        stat.textContent = '▶ Playing Verified Founder Dispatch (Preview Mode)';
+        stat.classList.replace('text-mist', 'text-lime');
+        openModal();
+      });
+      if (closeBtn) closeBtn.addEventListener('click', () => filmDialog.close());
+
+      // 10. URL Section Jump Helper
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetSec = urlParams.get('section');
+      if (targetSec) {
+        const el = document.getElementById(targetSec);
+        if (el) {
+          el.scrollIntoView({ behavior: 'instant' });
+          document.querySelectorAll('.reveal').forEach(r => r.classList.add('is-visible'));
+        }
+      }
+
+      // 11. Interactive 3-Step Transformation Diagnostic Form
+      let selectedStage = 'Genesis & New Venture Launch';
+      document.querySelectorAll('.stage-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          selectedStage = pill.getAttribute('data-stage');
+          document.querySelectorAll('.stage-pill').forEach(p => {
+            p.className = 'stage-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-surface text-white border border-white/10 hover:border-lime transition-all';
+          });
+          pill.className = 'stage-pill px-5 py-3 rounded-full font-mono text-xs font-medium bg-lime text-obsidian transition-all';
+        });
+      });
+
+      document.querySelectorAll('.cap-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          pill.classList.toggle('bg-lime');
+          pill.classList.toggle('text-obsidian');
+          pill.classList.toggle('bg-surface');
+          pill.classList.toggle('text-white');
+        });
+      });
+
+      const diagForm = document.getElementById('diagnostic-form');
+      if (diagForm) {
+        diagForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('diag-name').value;
+          const activeCaps = Array.from(document.querySelectorAll('.cap-pill.bg-lime')).map(el => el.getAttribute('data-cap'));
+          const outBox = document.getElementById('pathway-output');
+          
+          document.getElementById('pathway-heading').textContent =
+            `Strategic Transformation Sprint for ${name}: ${selectedStage}`;
+          document.getElementById('pathway-summary').textContent =
+            `Priority Disciplines Locked: ${activeCaps.length ? activeCaps.join(' · ') : 'Full 360° Current'}. Our strategy and engineering leads in Ahmedabad have logged your brief and will initiate confidential scheduling via WhatsApp/Email within 4 business hours.`;
+          
+          outBox.classList.remove('hidden');
+          outBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

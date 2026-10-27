@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Video testimonials – scroll concept</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+<style>
+:root{--ink:#000;--paper:#fff;--lime:#c8f31d;--ash:#b4b4b4;--top:max(20px,env(safe-area-inset-top,0px));--bot:max(20px,env(safe-area-inset-bottom,0px));--ch:480px;--cw:270px;--gap:24px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper)}
+body{font-family:'Outfit','Segoe UI',system-ui,sans-serif;color:#000}
+#track{height:900svh;position:relative}
+.stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:var(--paper)}
+.layer{position:absolute;inset:0}
+.note{position:absolute;left:6vw;bottom:var(--bot);z-index:5;font-size:.8rem;color:#888;pointer-events:none}
+
+/* intro (white, continues from AI Solutions) */
+.intro{padding:calc(var(--top) + 9vh) 6vw 0}
+.intro h2{margin:0;max-width:13em;font-weight:500;font-size:clamp(2.2rem,6.2vw,5rem);line-height:1.04;letter-spacing:-.02em}
+.intro p{margin:1.2rem 0 0;max-width:30ch;font-weight:300;font-size:clamp(1.05rem,2vw,1.4rem);color:#555}
+#pth{pointer-events:none;width:100%;height:100%}
+#pth path{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;stroke-dasharray:1 2;stroke-dashoffset:1}
+
+/* dark testimonial layer, grows out of the lime dot */
+.dark{background:var(--ink);color:#fff;clip-path:circle(0 at 50% 50%)}
+.row{position:absolute;left:0;top:calc(var(--top) + 5vh);display:flex;will-change:transform}
+.card{all:unset;box-sizing:border-box;flex:none;position:relative;overflow:hidden;cursor:pointer;width:var(--cw);height:var(--ch);margin-right:var(--gap);border-radius:22px;border:1px solid #2b2b2b;background:linear-gradient(165deg,#1d1d1d,#080808);will-change:transform,opacity}
+.card:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
+.card b{position:absolute;right:-6%;top:-4%;font-weight:600;font-size:calc(var(--ch)*.62);line-height:1;color:#151515}
+.tm{position:absolute;left:16px;top:16px;font-size:.85rem;color:var(--ash)}
+.play{position:absolute;left:50%;top:44%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--lime)}
+.play::after{content:'';position:absolute;left:27px;top:20px;border-left:20px solid #000;border-top:14px solid transparent;border-bottom:14px solid transparent}
+.who{position:absolute;left:16px;right:16px;bottom:62px;font-size:1rem;line-height:1.3}
+.who span{display:block;color:var(--ash);font-weight:300;font-size:.9rem}
+.wf{position:absolute;left:16px;right:16px;bottom:18px;height:30px;display:flex;align-items:center;gap:3px}
+.wf i{flex:1;border-radius:2px;background:#444}
+.caps{position:absolute;left:50%;width:min(92vw,680px);transform:translateX(-50%);top:calc(var(--top) + 5vh + var(--ch) + 3.2vh);height:30vh}
+.q{position:absolute;inset:0;text-align:center;opacity:0}
+.q p{margin:0;font-weight:400;font-size:clamp(1.1rem,2.3vw,1.7rem);line-height:1.25}
+.q em{display:block;margin-top:.9rem;font-style:normal;color:var(--lime);font-size:1rem}
+.end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6vw;opacity:0;visibility:hidden}
+.end h2{margin:0 0 2rem;font-weight:500;font-size:clamp(2.2rem,6.5vw,5.2rem);line-height:1;letter-spacing:-.02em}
+.btn{font:500 1.05rem/1 'Outfit',sans-serif;padding:1.05rem 2rem;border-radius:999px;cursor:pointer;border:2px solid var(--lime);background:var(--lime);color:#000;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+dialog{border:0;padding:0;background:#000;color:#fff;border-radius:18px;width:min(92vw,420px)}
+dialog::backdrop{background:rgba(0,0,0,.8)}
+#dbox{aspect-ratio:9/16;max-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:var(--ash);font-weight:300}
+#dbox video{width:100%;height:100%;object-fit:cover}
+.x{position:absolute;right:10px;top:10px;z-index:2;padding:.5rem 1rem;border-radius:99px;border:1px solid #666;background:#000;color:#fff;font:inherit;cursor:pointer}
+</style>
+</head>
+<body>
+<main id="track">
+ <div class="stage" id="stage">
+  <section class="layer intro" id="intro">
+   <h2>Hear it from the people we built for.</h2>
+   <p>Real clients. Real results. In their own words.</p>
+  </section>
+  <svg class="layer" id="pth" aria-hidden="true"><path id="pp" pathLength="1"/><circle id="pd" r="11" fill="#c8f31d" opacity="0"/></svg>
+
+  <section class="layer dark" id="dark">
+   <div class="row" id="row"></div>
+   <div class="caps" id="caps"></div>
+   <div class="end" id="end"><h2>Your story could be next.</h2><button type="button" class="btn">Contact us</button></div>
+  </section>
+  <div class="note">Concept · sample content, replace with real videos and quotes</div>
+ </div>
+</main>
+<dialog id="dlg"><button type="button" class="x" id="dx">Close</button><div id="dbox"></div></dialog>
+
+<script>
+(function(){
+  /* ---- SAMPLE CONTENT: replace quote, who, role, result, and add src:"your-video.mp4" ---- */
+  var T=[
+   {q:"We used to chase updates all day. Now the system tells us first, and our team just reviews.",who:"Client name",role:"Operations head, courier company",res:"70% fewer follow-up calls",dur:48,src:""},
+   {q:"They did not hand us a template. They built the tool around how we actually work.",who:"Client name",role:"Founder, retail brand",res:"Live in 6 weeks",dur:36,src:""},
+   {q:"Our old software stayed. The AI layer on top saves us hours every single day.",who:"Client name",role:"Director, healthcare group",res:"12 hours saved every week",dur:52,src:""},
+   {q:"Repeated work now runs by itself. I check the results and move on to growth.",who:"Client name",role:"Owner, service business",res:"2x more bookings handled",dur:41,src:""}
+  ];
+  var $=function(i){return document.getElementById(i)};
+  var track=$('track'),stage=$('stage'),row=$('row'),caps=$('caps'),dark=$('dark'),end=$('end'),pp=$('pp'),pd=$('pd'),dlg=$('dlg'),dbox=$('dbox');
+  var STEPS=9,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp=function(x){return Math.min(1,Math.max(0,x))},seg=function(s,a,b){return clamp((s-a)/(b-a))};
+  var ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2};
+  var mmss=function(n){n=Math.floor(n);return Math.floor(n/60)+':'+('0'+n%60).slice(-2)};
+
+  /* build cards + quotes */
+  var cards=[],bars=[],plays=[],tms=[],qs=[];
+  T.forEach(function(t,i){
+    var c=document.createElement('button');c.type='button';c.className='card';c.setAttribute('aria-label','Play video: '+t.role);
+    var h='<b>'+t.who.charAt(0)+'</b><span class="tm"></span><span class="play"></span><div class="who">'+t.who+'<span>'+t.role+'</span></div><div class="wf">';
+    for(var j=0;j<28;j++){h+='<i style="height:'+(25+70*Math.abs(Math.sin(j*1.7+i*2.3)))+'%"></i>'}
+    c.innerHTML=h+'</div>';row.appendChild(c);cards.push(c);
+    bars.push(c.querySelectorAll('.wf i'));plays.push(c.querySelector('.play'));tms.push(c.querySelector('.tm'));
+    c.addEventListener('click',function(){
+      dbox.innerHTML=t.src?'<video src="'+t.src+'" controls autoplay playsinline></video>':'Video placeholder.<br>Add a file name in the src field of this testimonial.';
+      dlg.showModal();
+    });
+    var q=document.createElement('div');q.className='q';q.innerHTML='<p>“'+t.q+'”</p><em>'+t.res+'</em>';caps.appendChild(q);qs.push(q);
+  });
+  $('dx').onclick=function(){dlg.close()};
+  dlg.addEventListener('close',function(){dbox.innerHTML=''});
+
+  var vw,vh,cw,ch,gap,cur=0,target=0;
+  function layout(){
+    var ih=window.innerHeight||800;
+    if(!track.offsetHeight||track.offsetHeight<ih*2||stage.clientHeight<50){track.style.height=(ih*STEPS)+'px';stage.style.height=ih+'px'}
+    vw=innerWidth;vh=stage.clientHeight||ih;
+    ch=vw<760?vh*.5:Math.min(vh*.6,600);cw=ch*.5625;gap=vw<760?16:24;
+    var st=stage.style;st.setProperty('--ch',ch+'px');st.setProperty('--cw',cw+'px');st.setProperty('--gap',gap+'px');
+    pp.setAttribute('d','M-20 '+vh*.82+' C '+vw*.28+' '+vh*.82+' '+vw*.3+' '+vh*.34+' '+vw*.5+' '+(vh*.05+Math.min(vh*.05,40)+ch/2+(window.innerHeight>0?0:0)));
+  }
+  var ppLen;
+  function render(s){
+    /* 1 · lime line draws and its dot travels to the centre */
+    var lg=ease(seg(s,.3,1.7));pp.style.strokeDashoffset=1-lg;pp.style.opacity=lg>.001?1:0;
+    if(!ppLen)ppLen=pp.getTotalLength();
+    var pt=pp.getPointAtLength(Math.max(lg,.001)*ppLen);pd.setAttribute('cx',pt.x);pd.setAttribute('cy',pt.y);pd.setAttribute('opacity',lg>.001?1:0);
+    /* 2 · black grows out of the dot */
+    var b=ease(seg(s,1.8,2.6));
+    if(b>0){var cx=pt.x,cy=pt.y,mx=Math.hypot(Math.max(cx,vw-cx),Math.max(cy,vh-cy))*1.03;dark.style.clipPath='circle('+b*mx+'px at '+cx+'px '+cy+'px)'}
+    else dark.style.clipPath='circle(0px at 50% 50%)';
+    /* 3 · carousel: scroll moves the row, centred card "plays" */
+    var ro=seg(s,2.5,3)*(1-seg(s,6.9,7.4)),idx=seg(s,3,6.9)*(T.length-1);
+    row.style.opacity=ro;caps.style.opacity=ro;row.style.visibility=ro>.01?'visible':'hidden';
+    row.style.transform='translate('+(vw/2-cw/2-idx*(cw+gap))+'px,'+((1-ro)*40)+'px)';
+    for(var i=0;i<T.length;i++){
+      var d=Math.abs(i-idx),m=Math.min(d,1),lp=seg(idx,i-.3,i+.3);
+      cards[i].style.transform='scale('+(1-.16*m)+')';cards[i].style.opacity=1-.6*m;
+      plays[i].style.opacity=clamp(1-seg(lp,.04,.14)+seg(lp,.9,.99));
+      tms[i].textContent=mmss(lp*T[i].dur)+' / '+mmss(T[i].dur);
+      for(var j=0;j<bars[i].length;j++)bars[i][j].style.background=(j/bars[i].length<lp&&lp>.04&&lp<.99)?'#c8f31d':'#444';
+      var qo=clamp(1-d*2.2);qs[i].style.opacity=qo*ro;qs[i].style.transform='translateY('+((1-qo)*16)+'px)';
+    }
+    /* 4 · closing line */
+    var eo=seg(s,7.2,7.8);end.style.opacity=eo;end.style.visibility=eo>.02?'visible':'hidden';end.style.transform='translateY('+((1-eo)*20)+'px)';
+  }
+  function read(){var y=window.pageYOffset||document.documentElement.scrollTop||0,u=(track.offsetHeight/STEPS)||window.innerHeight||800;target=y/u;if(!isFinite(target))target=0}
+  function loop(){if(!isFinite(cur))cur=0;var df=target-cur;cur=(reduce||Math.abs(df)<.0004)?target:cur+df*.14;render(cur);requestAnimationFrame(loop)}
+  addEventListener('scroll',read,{passive:true});
+  addEventListener('resize',function(){ppLen=0;layout();read()});
+  layout();read();cur=target;loop();
+})();
+</script>
+</body>
+</html>

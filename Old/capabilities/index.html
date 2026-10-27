@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#050505] text-white selection:bg-[#CCFF00] selection:text-black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Capabilities: Cinema to Code, Brand Strategy, AI &amp; Digital Flagships | NEER</title>
+  <meta name="description" content="Explore NEER's full-stack execution engine: Brand Strategy &amp; Packaging, High-Performance Web Architecture, Commercial Cinema &amp; CGI, and Autonomous AI Systems." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  
+  <!-- Typography: Unbounded (Medium 500 only), Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#050505',
+            void: '#070709',
+            charcoal: '#0E0E12',
+            surface: '#14141A',
+            'surface-light': '#1C1C24',
+            border: 'rgba(255, 255, 255, 0.08)',
+            'border-light': 'rgba(255, 255, 255, 0.16)',
+            lime: '#CCFF00',
+            'lime-glow': 'rgba(204, 255, 0, 0.35)',
+            mist: '#A1A1AA',
+            ash: '#666670',
+          },
+          fontFamily: {
+            display: ['Unbounded', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          letterSpacing: {
+            tighter: '-0.04em',
+            tight: '-0.02em',
+            wide: '0.04em',
+            widest: '0.14em',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #050505;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Force Unbounded to strictly 500 Medium */
+    .font-display, h1, h2, h3, h4 {
+      font-family: 'Unbounded', sans-serif !important;
+      font-weight: 500 !important;
+    }
+
+    /* Kinetic Custom Cursor */
+    #cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 6px; height: 6px;
+      background: #CCFF00;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+    }
+    #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 38px; height: 38px;
+      border: 1px solid rgba(204, 255, 0, 0.45);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+
+    /* Interactive Specimen Vessel */
+    .specimen-vessel {
+      position: relative;
+      background: linear-gradient(145deg, rgba(20, 20, 26, 0.85) 0%, rgba(10, 10, 14, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      border-radius: 28px;
+      transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .specimen-vessel:hover {
+      border-color: rgba(204, 255, 0, 0.35);
+    }
+
+    /* Scroll Reveal System */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-obsidian text-white relative selection:bg-lime selection:text-obsidian overflow-x-hidden">
+
+  <!-- Kinetic Cursor Follower -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Ambient Fluid Canvas (Liquid Lime Caustics) -->
+  <canvas id="ambient-water-canvas" class="fixed inset-0 pointer-events-none -z-10 opacity-30"></canvas>
+
+  <!-- Ambient Obsidian Atmosphere Spheres -->
+  <div class="fixed top-0 right-1/4 w-[800px] h-[800px] bg-lime/[0.025] rounded-full blur-[200px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-1/4 left-0 w-[700px] h-[700px] bg-lime/[0.02] rounded-full blur-[180px] pointer-events-none -z-10"></div>
+
+  <!-- =========================================================================
+       00. ARCHITECTURAL HUD & TOP NAVIGATION
+       ========================================================================= -->
+  <header id="smart-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl bg-obsidian/85 border-b border-white/5">
+    <div class="w-full px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+      
+      <!-- Monolithic Master Brand Mark -->
+      <a href="../Homepage Concpet.html" class="flex items-center gap-3.5 group" aria-label="NEER Home">
+        <div class="relative w-7 h-7 rounded-full border border-white/20 flex items-center justify-center bg-charcoal group-hover:border-lime transition-colors">
+          <span class="w-2 h-2 rounded-full bg-lime"></span>
+          <span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="font-display text-2xl tracking-tighter text-white group-hover:text-lime transition-colors">NEER</span>
+          <span class="hidden sm:inline font-mono text-[10px] tracking-widest text-ash uppercase">Currents Endure</span>
+        </div>
+      </a>
+
+      <!-- Primary Main Navigation Bar -->
+      <nav class="hidden md:flex items-center gap-1 xl:gap-2 font-mono text-xs tracking-wider" aria-label="Primary Navigation">
+        <a href="../Homepage Concpet.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all">
+          <span>HOME</span>
+        </a>
+        <a href="../astro-branding.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-lime hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime/40 group-hover:bg-lime transition-colors"></span>
+          <span>ASTRO-BRANDING</span>
+        </a>
+        <a href="../ai-systems.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-lime hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime/40 group-hover:bg-lime transition-colors"></span>
+          <span>AI SYSTEMS</span>
+        </a>
+        <a href="index.html" class="px-3.5 py-1.5 rounded-full text-lime bg-lime/15 border border-lime/30 transition-all flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime animate-pulse"></span>
+          <span>CAPABILITIES</span>
+        </a>
+        <a href="../philosophy.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-white transition-colors"></span>
+          <span>PHILOSOPHY</span>
+        </a>
+      </nav>
+
+      <!-- Telemetry CTA & Drawer Trigger -->
+      <div class="flex items-center gap-4">
+        <a href="#configurator" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/20 bg-white/5 text-white hover:bg-lime hover:text-obsidian hover:border-lime transition-all font-mono text-xs tracking-wider font-semibold">
+          <span>CONFIGURE SCOPE</span>
+          <span class="font-mono text-xs">→</span>
+        </a>
+
+        <button id="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle Navigation Menu" class="flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-white/5 border border-white/10 hover:border-lime transition-colors font-mono text-xs">
+          <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+          <span id="menu-label">INDEX</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MASTER MAIN NAVIGATION OVERLAY
+       ========================================================================= -->
+  <div id="nav-overlay" class="fixed inset-0 z-40 bg-obsidian/95 backdrop-blur-2xl transition-all duration-500 opacity-0 pointer-events-none flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+    <div class="w-full flex items-center justify-between border-b border-white/10 pb-6 pt-16">
+      <div class="font-mono text-xs text-ash tracking-widest uppercase">
+        // NEER ENTERPRISE MAP · INTERCONNECTED ARCHITECTURE
+      </div>
+      <button id="nav-close-btn" class="font-mono text-xs text-mist hover:text-lime transition-colors">
+        [CLOSE ✕]
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-10 overflow-y-auto">
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-ash block">// 00 · PRIMARY SURFACE</span>
+        <a href="../Homepage Concpet.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">The Homepage</a>
+        <p class="text-xs text-mist leading-relaxed">The flagship experience: The Hydro-Kinetic Monolith, Trinity Synthesis, and Enterprise Evolution.</p>
+      </div>
+
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-lime block">// 01 · DIAGNOSTIC PRACTICE</span>
+        <a href="../astro-branding.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">Astro-Branding</a>
+        <p class="text-xs text-mist leading-relaxed">Classical Vedic scholarship translated into modern commercial naming, geometry, and 90-day launch timing.</p>
+      </div>
+
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-lime block">// 02 · DETERMINISTIC CODE</span>
+        <a href="../ai-systems.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">Engineered AI Systems</a>
+        <p class="text-xs text-mist leading-relaxed">Private, air-gapped agentic pipelines and sovereign intelligence replacing fragile SaaS tools.</p>
+      </div>
+
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-white block">// 03 · EXECUTION ENGINES (CURRENT)</span>
+        <a href="index.html" class="menu-link block font-display text-2xl text-lime transition-colors">Capabilities</a>
+        <p class="text-xs text-mist leading-relaxed">Full-stack practice: Brand Strategy, Web Flagships, Commercial Cinema (46+ films), and AI Growth.</p>
+      </div>
+    </div>
+
+    <div class="w-full border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-ash">
+      <span>NEER (नीर) // CINEMA TO CODE · BRAND STRATEGY TO AUTONOMOUS SOFTWARE</span>
+      <span>46+ FEATURE FILMS · 2,000+ BRAND BUILDS</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- =========================================================================
+         01. HERO: CINEMA TO CODE. STRATEGY TO SOFTWARE.
+         Three Phase States Monolith Visual Centerpiece (capabilities_hero_monolith.png)
+         ========================================================================= -->
+    <section class="min-h-screen pt-32 sm:pt-40 pb-20 px-6 sm:px-10 lg:px-16 flex flex-col justify-center relative overflow-hidden border-b border-white/10">
+      
+      <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left 7 Cols: Editorial Manifesto -->
+        <div class="lg:col-span-7 space-y-8 reveal">
+          
+          <div class="inline-flex items-center gap-2.5 font-mono text-xs text-mist">
+            <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+            <span class="tracking-widest uppercase">// NEER ADVISORY CONTINUUM // 03 · FULL-STACK CAPABILITIES</span>
+          </div>
+
+          <h1 class="font-display text-[11vw] sm:text-[8vw] lg:text-[6.2vw] leading-[0.94] tracking-tighter text-white">
+            Cinema to Code. <br />
+            Strategy to <br />
+            <span class="text-lime">Software.</span>
+          </h1>
+
+          <p class="text-base sm:text-xl text-mist leading-relaxed max-w-2xl font-normal">
+            Most businesses hire one agency for brand naming, another for web development, a third for commercial filmmaking, and an IT vendor for AI. The result is disjointed execution and diluted enterprise value. NEER synthesizes these four forces under one sovereign roof—uniting classical diagnostic scholarship with world-class commercial cinema and deterministic AI engineering.
+          </p>
+
+          <!-- Kinetic Action Links -->
+          <div class="flex flex-wrap items-center gap-5 pt-2">
+            <a href="#configurator" class="inline-flex items-center gap-3 bg-lime text-obsidian font-display px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-xl shadow-lime/20 text-xs sm:text-sm tracking-wider">
+              <span>CONFIGURE ENGAGEMENT SCOPE</span>
+              <span class="font-mono text-sm">→</span>
+            </a>
+            <a href="#engines" class="inline-flex items-center gap-2 font-mono text-xs text-mist hover:text-lime transition-colors">
+              <span>Inspect the 4 Execution Engines</span>
+              <span>↓</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right 5 Cols: Three Phase States Monolith (capabilities_hero_monolith.png) -->
+        <div class="lg:col-span-5 flex justify-center items-center relative reveal">
+          <div class="relative w-full max-w-[460px] aspect-[4/5] rounded-[32px] overflow-hidden border border-lime/30 group shadow-2xl bg-charcoal">
+            
+            <img 
+              src="../images/capabilities_hero_monolith.png" 
+              alt="The Three Phase States of Water: Solid Crystal, Flowing Liquid, and Vapor Monolith" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src="../images/capabilities_hero_monolith.jpg';}"
+            />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian/95 via-transparent to-transparent opacity-90"></div>
+            
+            <!-- Telemetry Indicator -->
+            <div class="absolute top-5 left-5">
+              <span class="px-3.5 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-lime/40 font-mono text-[10px] text-lime tracking-widest uppercase flex items-center gap-1.5 shadow-lg">
+                <span class="w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+                <span>THREE PHASE STATES // SOLID &middot; LIQUID &middot; VAPOR</span>
+              </span>
+            </div>
+
+            <!-- Kinetic Bottom Annotation -->
+            <div class="absolute bottom-6 left-6 right-6 font-mono text-xs text-white space-y-1">
+              <div class="text-lime font-semibold">// OMNICHANNEL REPUTATIONAL ARCHITECTURE</div>
+              <p class="text-mist text-[11px] leading-relaxed">
+                Physical retail packaging to WebGL flagships to sovereign agentic workflows.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Capability Matrix Strip -->
+      <div class="w-full mt-20 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 font-mono text-xs">
+        <div class="space-y-1">
+          <span class="text-ash block">// ENGINE 01: SOLID CORE</span>
+          <span class="text-white font-medium text-sm">Brand Strategy &amp; Packaging</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-ash block">// ENGINE 02: FLUID CONDUIT</span>
+          <span class="text-white font-medium text-sm">Sub-50ms Edge Web Flagships</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-ash block">// ENGINE 03: VAPOR NARRATIVE</span>
+          <span class="text-white font-medium text-sm">Commercial Cinema &amp; 8K CGI</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-ash block">// ENGINE 04: AUTONOMOUS SWARM</span>
+          <span class="text-lime font-medium text-sm">Deterministic AI Infrastructure</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================================
+         02. THE FOUR EXECUTION ENGINES
+         Editorial Spreads with Authentic Project Specimens (Zero Generic Cards)
+         ========================================================================= -->
+    <section id="engines" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-void relative border-b border-white/10">
+      <div class="w-full space-y-24 reveal">
+
+        <div class="max-w-4xl space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-lime animate-pulse"></span>
+            <span class="font-mono text-xs text-lime tracking-widest uppercase">// 01 / FOUR INTEGRATED DISCIPLINES</span>
+          </div>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Four Execution Engines. <br />
+            <span class="text-lime">One Continuous Current.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            We operate across the three physical phase states of water to build unyielding commercial authority:
+          </p>
+        </div>
+
+        <!-- ENGINE 01: Brand Strategy & Tactile Packaging (The Solid Core) -->
+        <div class="specimen-vessel p-8 sm:p-14 space-y-8">
+          
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div>
+              <span class="font-mono text-xs text-lime uppercase">// ENGINE 01 &middot; THE SOLID CORE (CRYSTALLINE ARCHITECTURE)</span>
+              <h3 class="font-display text-3xl sm:text-4xl text-white">Brand Strategy, Identity &amp; Packaging</h3>
+            </div>
+            <span class="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 font-mono text-xs text-white">
+              CATEGORY POSITIONING &middot; AYADI GEOMETRY
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-charcoal group">
+              <img 
+                src="../images/astro_deliverables_monolith.png" 
+                alt="Tactile Luxury Brand Packaging Suite: Smoked Glass Flacon & Debossed Ledger" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src="../images/astro_deliverables_monolith.jpg';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4 font-mono text-[10px] text-white flex justify-between">
+                <span class="text-lime">// STRUCTURAL PACKAGING SPECIMEN</span>
+                <span class="text-mist">TACTILE BASALT &middot; AMBER GLASS</span>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 space-y-6">
+              <p class="text-base sm:text-lg text-mist leading-relaxed font-normal">
+                Before a brand can flow across digital channels, it needs unshakeable physical structure. We define your category position, name your venture using phonetic acoustics, architect your visual token systems, and engineer tactile packaging and retail environments that command instant shelf authority.
+              </p>
+              
+              <div class="space-y-3 pt-2">
+                <span class="font-mono text-xs text-ash uppercase tracking-wider block">Delivered Systems:</span>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-white/90">
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Brand Architecture</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Phonetic Naming</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Ayadi Geometry</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Structural Packaging</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">In-Store Spatial Vastu</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ENGINE 02: High-Performance Web Architecture (The Fluid Conduit) -->
+        <div class="specimen-vessel p-8 sm:p-14 space-y-8 border-lime/30">
+          
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div>
+              <span class="font-mono text-xs text-lime uppercase">// ENGINE 02 &middot; THE FLUID CONDUIT (INTERACTIVE FLOW)</span>
+              <h3 class="font-display text-3xl sm:text-4xl text-white">High-Performance Web Architecture</h3>
+            </div>
+            <span class="px-4 py-1.5 rounded-full bg-lime/15 border border-lime/30 font-mono text-xs text-lime font-bold">
+              SUB-50ms TTFB &middot; WEBGL SHADERS
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-6 space-y-6 order-2 lg:order-1">
+              <p class="text-base sm:text-lg text-mist leading-relaxed font-normal">
+                In digital environments, latency is friction—and friction kills conversion. We engineer high-performance web flagships that combine museum-grade WebGL visual craft with instantaneous edge-routed server architecture. No bloated WordPress templates; pure headless code built for speed.
+              </p>
+              
+              <div class="space-y-3 pt-2">
+                <span class="font-mono text-xs text-ash uppercase tracking-wider block">Delivered Systems:</span>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-white/90">
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Edge Web Flagships</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">WebGL &amp; Three.js Shaders</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Headless Architecture</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Conversion Funnels</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Design Systems (Tokens)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-charcoal group order-1 lg:order-2">
+              <img 
+                src="../images/yourdsa_fintech_telemetry.png" 
+                alt="YourDSA High-Performance Web Flagship & Telemetry Console" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src="../images/yourdsa_fintech_telemetry.jpg';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4 font-mono text-[10px] text-white flex justify-between">
+                <span class="text-lime">// EDGE WEB SPECIMEN</span>
+                <span class="text-mist">&lt;48ms TTFB GLOBALLY</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ENGINE 03: Commercial Cinema & 8K CGI (The Atmospheric Vapor) -->
+        <div class="specimen-vessel p-8 sm:p-14 space-y-8">
+          
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div>
+              <span class="font-mono text-xs text-lime uppercase">// ENGINE 03 &middot; THE ATMOSPHERIC VAPOR (EMOTIONAL CONVICTION)</span>
+              <h3 class="font-display text-3xl sm:text-4xl text-white">Commercial Cinema, 3D CGI &amp; Production</h3>
+            </div>
+            <span class="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 font-mono text-xs text-white">
+              46+ FEATURE FILMS &middot; 35mm OPTICS
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-charcoal group">
+              <img 
+                src="../images/cinema_cgi_showcase.png" 
+                alt="High-End Commercial Cinema Still: Faceted Amber Vessel in Frozen Water Caustics" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src="../images/cinema_cgi_showcase.jpg';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4 font-mono text-[10px] text-white flex justify-between">
+                <span class="text-lime">// CINEMA PRODUCTION STILL</span>
+                <span class="text-mist">ANAMORPHIC RED/ARRI 8K</span>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 space-y-6">
+              <p class="text-base sm:text-lg text-mist leading-relaxed font-normal">
+                Vapor expands to fill every room. Our cinematic heritage across 46+ feature films gives NEER an unfair advantage in commercial storytelling. We direct, produce, shoot, and grade television commercials, high-stakes brand manifesto films, and photorealistic 3D Octane/Redshift product worlds that command undivided attention.
+              </p>
+              
+              <div class="space-y-3 pt-2">
+                <span class="font-mono text-xs text-ash uppercase tracking-wider block">Delivered Systems:</span>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-white/90">
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Broadcast TV Commercials</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">35mm Anamorphic Cinematography</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Photorealistic 3D CGI</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Sound Design &amp; Acoustics</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Brand Documentaries</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ENGINE 04: Engineered AI Systems & Growth (The Autonomous Swarm) -->
+        <div class="specimen-vessel p-8 sm:p-14 space-y-8 border-lime/30">
+          
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div>
+              <span class="font-mono text-xs text-lime uppercase">// ENGINE 04 &middot; THE AUTONOMOUS SWARM (SELF-CORRECTING CODE)</span>
+              <h3 class="font-display text-3xl sm:text-4xl text-white">Engineered AI Systems &amp; Autonomous Workflows</h3>
+            </div>
+            <span class="px-4 py-1.5 rounded-full bg-lime/15 border border-lime/30 font-mono text-xs text-lime font-bold">
+              AIR-GAPPED VPC &middot; LANGGRAPH
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-6 space-y-6 order-2 lg:order-1">
+              <p class="text-base sm:text-lg text-mist leading-relaxed font-normal">
+                Replacing SaaS chaos with deterministic, sovereign, air-gapped agentic pipelines. We build multi-modal customer concierges, automated document underwriting swarms, predictive commercial modeling, and private VPC infrastructure where you retain 100% ownership of code, fine-tuned weights, and data.
+              </p>
+              
+              <div class="space-y-3 pt-2">
+                <span class="font-mono text-xs text-ash uppercase tracking-wider block">Delivered Systems:</span>
+                <div class="flex flex-wrap gap-2 font-mono text-xs text-white/90">
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">LangGraph Agent Swarms</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Deterministic RAG</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Private VPC Deployment</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Zero Data Retention</span>
+                  <span class="px-3.5 py-1.5 rounded-full bg-surface border border-white/10">Predictive Modeling</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-charcoal group order-1 lg:order-2">
+              <img 
+                src="../images/axis_hardware_token_monolith.png" 
+                alt="AXIS Solution Enterprise Hardware Monolith & AI Telemetry Device" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src="../images/axis_hardware_token_monolith.jpg';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4 font-mono text-[10px] text-white flex justify-between">
+                <span class="text-lime">// AUTONOMOUS AI SPECIMEN</span>
+                <span class="text-mist">LANGGRAPH TELEMETRY AGENT</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         03. CROSS-DISCIPLINARY CASE STUDIES
+         Verified Production Builds
+         ========================================================================= -->
+    <section id="proof" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-b border-white/10">
+      <div class="w-full space-y-16 reveal">
+
+        <div class="max-w-4xl space-y-4">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 02 / REAL PRODUCTION EVIDENCE</span>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Cross-Disciplinary Proof: <br />
+            <span class="text-lime">Where Craft Meets Code.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            Real client transformations executed across identity, packaging, web flagships, and autonomous AI systems:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Proof 01: AXIS -->
+          <div class="specimen-vessel p-8 space-y-5">
+            <div class="flex items-center justify-between">
+              <img src="https://neermedia.com/wp-content/uploads/2024/12/axis-logo-neer-media-client.webp" alt="AXIS Logo" class="h-6 w-auto object-contain brightness-200" />
+              <span class="font-mono text-[10px] text-lime">// HARDWARE + AI</span>
+            </div>
+            <h4 class="font-display text-2xl text-white">AXIS Solution</h4>
+            <p class="text-xs font-mono text-mist">Enterprise Identity &middot; IoT Fleet Triage</p>
+            <p class="text-sm text-mist leading-relaxed font-normal">
+              Redesigned enterprise hardware branding and engineered an autonomous telemetry triage swarm that reduced maintenance backlog by 84%.
+            </p>
+            <div class="pt-4 border-t border-white/10 font-mono text-xs text-lime">
+              RESULT: 84% Triage Speedup &middot; 99.4% Uptime
+            </div>
+          </div>
+
+          <!-- Proof 02: YourDSA -->
+          <div class="specimen-vessel p-8 space-y-5 border-lime/30">
+            <div class="flex items-center justify-between">
+              <img src="https://neermedia.com/wp-content/uploads/2024/12/your-dsa-logo-neer-media-client.webp" alt="YourDSA Logo" class="h-6 w-auto object-contain brightness-200" />
+              <span class="font-mono text-[10px] text-lime">// WEB + FINTECH AGENTS</span>
+            </div>
+            <h4 class="font-display text-2xl text-white">YourDSA</h4>
+            <p class="text-xs font-mono text-mist">Fintech Platform &middot; Underwriting Agent</p>
+            <p class="text-sm text-mist leading-relaxed font-normal">
+              Architected sub-50ms distributor portal and engineered a multi-modal document extraction pipeline dropping underwriting from 48h to 9m.
+            </p>
+            <div class="pt-4 border-t border-white/10 font-mono text-xs text-lime">
+              RESULT: 48h &rarr; 9m Underwriting &middot; 0 Data Leaks
+            </div>
+          </div>
+
+          <!-- Proof 03: Soil Story -->
+          <div class="specimen-vessel p-8 space-y-5">
+            <div class="flex items-center justify-between">
+              <img src="https://neermedia.com/wp-content/uploads/2024/12/soil-story-logo-neer-media-client.webp" alt="Soil Story Logo" class="h-6 w-auto object-contain brightness-200" />
+              <span class="font-mono text-[10px] text-lime">// PACKAGING + D2C</span>
+            </div>
+            <h4 class="font-display text-2xl text-white">Soil Story</h4>
+            <p class="text-xs font-mono text-mist">Packaging Architecture &middot; Brand Identity</p>
+            <p class="text-sm text-mist leading-relaxed font-normal">
+              Engineered sustainable tactile packaging flacons, blind-debossed labels, and an e-commerce digital flagship for organic agricultural products.
+            </p>
+            <div class="pt-4 border-t border-white/10 font-mono text-xs text-lime">
+              RESULT: 3.8× Direct Conversion &middot; National Distribution
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         04. INTERACTIVE SCOPE CONFIGURATOR & RFP DESK
+         ========================================================================= -->
+    <section id="configurator" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-void relative">
+      <div class="w-full max-w-4xl mx-auto space-y-12 text-center reveal">
+
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-lime">
+            <span class="w-2 h-2 rounded-full bg-lime animate-ping"></span>
+            <span>// COMMENCE SCOPE ARCHITECTURE</span>
+          </div>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Configure Your Sovereign <br />
+            <span class="text-lime">Transformation Scope.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Select the required execution engines for your commercial challenge. Our senior partners review scope requirements directly.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4 font-mono text-xs">
+          <a href="https://neermedia.com/contact/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-lime text-obsidian font-display px-8 py-4 rounded-full hover:scale-105 transition-transform font-medium text-sm tracking-wider shadow-xl shadow-lime/20">
+            <span>INITIATE ENGAGEMENT DIALOGUE</span>
+            <span>→</span>
+          </a>
+          <a href="../philosophy.html" class="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/20 text-white hover:bg-white/5 transition-colors">
+            <span>Read Studio Philosophy</span>
+            <span>→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       05. ARCHITECTURAL FOOTER
+       ========================================================================= -->
+  <footer class="border-t border-white/10 bg-void px-6 sm:px-10 lg:px-16 py-16 text-mist font-mono text-xs">
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      
+      <!-- Monolithic Brand Col -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="../Homepage Concpet.html" class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-lime"></span>
+          <span class="font-display text-2xl text-white tracking-tighter">NEER</span>
+        </a>
+        <p class="text-ash max-w-sm leading-relaxed text-[11px]">
+          The Hydro-Kinetic Monolith. 360° Brand Strategy, Creative Craft, Engineered AI Systems, and Astro-Branding practice. Sanskrit नीर (Nīra) — Water: The Origin of Everything.
+        </p>
+        <div class="text-ash text-[10px]">
+          LEGAL ENTITY: <a href="https://neermedia.com/" target="_blank" rel="noopener" class="text-white hover:text-lime transition-colors underline">NEER MEDIA</a> &middot; AHMEDABAD
+        </div>
+      </div>
+
+      <!-- Practices -->
+      <div class="space-y-3">
+        <span class="text-white uppercase tracking-wider block font-bold">// PRACTICES</span>
+        <a href="../astro-branding.html" class="block text-mist hover:text-lime transition-colors">✦ Astro-Branding (× Reva Astro)</a>
+        <a href="../ai-systems.html" class="block text-mist hover:text-lime transition-colors">● Engineered AI Workflows</a>
+        <a href="index.html" class="block text-lime transition-colors">■ 360° Execution Engines</a>
+        <a href="../philosophy.html" class="block text-mist hover:text-lime transition-colors">▲ Studio Philosophy</a>
+      </div>
+
+      <!-- Frameworks -->
+      <div class="space-y-3">
+        <span class="text-white uppercase tracking-wider block font-bold">// ENGINES</span>
+        <a href="#engines" class="block text-mist hover:text-lime transition-colors">Brand Strategy &amp; Packaging</a>
+        <a href="#engines" class="block text-mist hover:text-lime transition-colors">High-Performance Web</a>
+        <a href="#engines" class="block text-mist hover:text-lime transition-colors">Commercial Cinema &amp; CGI</a>
+        <a href="#engines" class="block text-mist hover:text-lime transition-colors">Engineered AI Systems</a>
+      </div>
+
+      <!-- Verification & Connect -->
+      <div class="space-y-3">
+        <span class="text-white uppercase tracking-wider block font-bold">// CONNECT</span>
+        <a href="https://neermedia.com/contact/" target="_blank" rel="noopener" class="block text-mist hover:text-lime transition-colors">RFP Desk &rarr;</a>
+        <a href="https://neermedia.com/know-the-clan/" target="_blank" rel="noopener" class="block text-mist hover:text-lime transition-colors">Know the Clan &rarr;</a>
+        <a href="../Homepage Concpet.html" class="block text-mist hover:text-lime transition-colors">The Flagship &rarr;</a>
+        <span class="text-ash block pt-2 text-[10px]">VERIFIED BRAND CONSTITUTION 2026</span>
+      </div>
+
+    </div>
+
+    <div class="w-full mt-12 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4 text-[11px] text-ash">
+      <div>&copy; 2011–2026 NEER Media. All rights reserved. Currents endure.</div>
+      <div class="flex items-center gap-4">
+        <span>Obsidian // #050505</span>
+        <span>Pure White // #FFFFFF</span>
+        <span class="text-lime font-bold">Acid Lime // #CCFF00</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       INTERACTIVE SCRIPTS & DYNAMICS
+       ========================================================================= -->
+  <script>
+    (function() {
+      // 1. Kinetic Cursor Follower
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '56px';
+          ring.style.height = '56px';
+          ring.style.borderColor = '#CCFF00';
+          ring.style.backgroundColor = 'rgba(204, 255, 0, 0.05)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '38px';
+          ring.style.height = '38px';
+          ring.style.borderColor = 'rgba(204, 255, 0, 0.45)';
+          ring.style.backgroundColor = 'transparent';
+        });
+      });
+
+      // 2. Navigation Overlay Toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navCloseBtn = document.getElementById('nav-close-btn');
+      const navOverlay = document.getElementById('nav-overlay');
+      let menuOpen = false;
+
+      function toggleMenu() {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+          navOverlay.classList.remove('opacity-0', 'pointer-events-none');
+          navOverlay.classList.add('opacity-100', 'pointer-events-auto');
+          document.body.style.overflow = 'hidden';
+        } else {
+          navOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+          navOverlay.classList.add('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = '';
+        }
+      }
+
+      menuToggle.addEventListener('click', toggleMenu);
+      navCloseBtn.addEventListener('click', toggleMenu);
+      document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (menuOpen) toggleMenu();
+        });
+      });
+
+      // 3. Scroll Reveal Observer
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      reveals.forEach(r => observer.observe(r));
+
+      // 4. Ambient Liquid Caustic Canvas
+      const canvas = document.getElementById('ambient-water-canvas');
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      let t = 0;
+
+      function resizeCanvas() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function drawLiquidCaustics() {
+        t += 0.005;
+        ctx.clearRect(0, 0, w, h);
+        
+        ctx.strokeStyle = 'rgba(204, 255, 0, 0.035)';
+        ctx.lineWidth = 1.2;
+
+        for (let i = 0; i < 4; i++) {
+          ctx.beginPath();
+          for (let x = 0; x < w; x += 30) {
+            const y = Math.sin(x * 0.003 + t + i) * 60 + Math.cos(x * 0.002 - t) * 40 + (h * 0.3 * (i + 1));
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(drawLiquidCaustics);
+      }
+      drawLiquidCaustics();
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Astro Branding – Energy Clock scroll concept</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+<style>
+:root{--ink:#000;--paper:#fff;--lime:#c8f31d;--ash:#b4b4b4;
+  --top:max(20px,env(safe-area-inset-top,0px));--bot:max(20px,env(safe-area-inset-bottom,0px))}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink)}
+body{font-family:'Outfit','Segoe UI',system-ui,sans-serif;color:var(--paper)}
+#track{height:1440svh;position:relative}
+.stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:var(--ink)}
+.layer{position:absolute;inset:0}
+
+/* 1 · black hero */
+.hero{display:flex;flex-direction:column;justify-content:center;padding:var(--top) 6vw var(--bot);will-change:transform,opacity}
+.hero h1{margin:0;font-weight:500;font-size:clamp(2.8rem,10vw,8rem);line-height:.95;letter-spacing:-.02em}
+.hero p{margin:1.4rem 0 0;max-width:30ch;font-weight:300;font-size:clamp(1.05rem,2.2vw,1.5rem);color:var(--ash)}
+.cue{position:absolute;left:6vw;bottom:var(--bot);display:flex;align-items:center;gap:12px;font-size:.95rem;color:var(--ash)}
+.cue i{display:block;width:2px;height:38px;background:linear-gradient(var(--lime),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* 2 · white section */
+.white{background:var(--paper);will-change:transform;transform:translateY(100%)}
+.title{position:absolute;left:5vw;top:var(--top);margin:0;color:#000;font-weight:400;font-size:clamp(1.9rem,5.2vw,3.6rem);line-height:1.12;opacity:0;will-change:transform,opacity}
+.wrap{position:absolute;left:0;will-change:transform}
+svg{display:block;width:100%;height:100%;overflow:visible;font-family:inherit}
+svg text{fill:#000}
+.ln{fill:none;stroke-linecap:round;stroke-dasharray:1 2;stroke-dashoffset:1}
+.pop{transform-box:fill-box;transform-origin:center}
+.dl,.dd,#times{opacity:0}
+
+/* 3 · black takeover */
+.black{background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:var(--top) 6vw var(--bot);clip-path:circle(0 at 50% 50%);will-change:clip-path}
+.black h2{margin:0;font-weight:500;font-size:clamp(2.4rem,8vw,6rem);line-height:1;letter-spacing:-.02em;opacity:0}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:2.2rem;opacity:0;visibility:hidden}
+.btn{font:500 1.05rem/1 inherit;font-family:inherit;padding:1.05rem 2rem;border-radius:999px;cursor:pointer;border:2px solid var(--lime);transition:background .2s,color .2s,transform .2s}
+.btn.go{background:var(--lime);color:#000}
+.btn.alt{background:transparent;color:#fff;border-color:#fff}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt:hover{background:#fff;color:#000}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* 4 · AI Solutions */
+.ai{position:absolute;inset:0;pointer-events:none;will-change:transform,opacity}
+.black .aih{opacity:1;position:absolute;left:6vw;top:calc(var(--top) + 7vh);margin:0;max-width:15em;font-weight:500;font-size:clamp(2rem,6vw,4.8rem);line-height:1.06;letter-spacing:-.02em}
+.aih span{display:inline-block;margin-right:.24em;opacity:0}
+.loop{position:absolute;left:0;bottom:5vh;width:100%;height:42vh}
+.lp{fill:none;stroke:var(--lime);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 2;stroke-dashoffset:1}
+.svcs{position:absolute;inset:0;padding:calc(var(--top) + 2vh) 6vw var(--bot);opacity:0;visibility:hidden}
+.rail{display:flex;gap:14px}
+.rb{flex:1}
+.rb i{display:block;height:2px;background:#333;position:relative}
+.rb i::after{content:'';position:absolute;inset:0;background:var(--lime);transform:scaleX(var(--f,0));transform-origin:left}
+.rb span{display:block;margin-top:.7rem;font-size:.95rem;color:var(--ash)}
+.svc{position:absolute;left:6vw;right:6vw;top:calc(var(--top) + 11vh);bottom:var(--bot);display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;opacity:0;visibility:hidden}
+.viz{order:2;height:auto;max-height:58vh}
+.viz text{fill:#fff;font-family:inherit}
+.txt h3{margin:0;font-weight:500;font-size:clamp(1.9rem,4.4vw,3.6rem);line-height:1.05;letter-spacing:-.02em}
+.sub{margin:1rem 0 .6rem;font-size:clamp(1.05rem,2vw,1.4rem)}
+.desc{margin:0 0 1.6rem;max-width:38ch;font-weight:300;color:var(--ash)}
+@media (max-width:759px){.svc{grid-template-columns:1fr;gap:1.2rem;align-content:center}.viz{order:0;max-height:34vh}.rb span{display:none}.desc{margin-bottom:1.2rem}}
+@media (prefers-reduced-motion:reduce){.cue i{animation:none}}
+</style>
+</head>
+<body>
+<main id="track">
+  <div class="stage" id="stage">
+    <section class="layer hero" id="hero">
+      <h1>Astro<br>Branding</h1>
+      <p>Your brand has a right time. Learn to read it.</p>
+      <div class="cue" id="cue"><i></i>Scroll</div>
+    </section>
+
+    <section class="layer white" id="white">
+      <h2 class="title" id="title">Universe has a<br>Energy Clock</h2>
+      <div class="wrap" id="wrap">
+        <svg id="svg" viewBox="-40 -20 2700 760" preserveAspectRatio="xMidYMid meet" aria-label="Three different waves of energy over time. The green wave, guided by astro branding, reaches success.">
+          <!-- three different times -->
+          <g stroke="#000" stroke-width="3" fill="none">
+            <path class="dl" d="M84 295V573" pathLength="1" style="stroke-dasharray:1 2"/>
+            <path class="dl" d="M153 295V573" pathLength="1" style="stroke-dasharray:1 2"/>
+            <path class="dl" d="M217 295V573" pathLength="1" style="stroke-dasharray:1 2"/>
+          </g>
+          <circle class="pop dd" cx="84" cy="573" r="19"/>
+          <circle class="pop dd" cx="153" cy="573" r="19"/>
+          <circle class="pop dd" cx="217" cy="573" r="19"/>
+          <text id="times" x="0" y="650" font-size="38" font-weight="400">three different times</text>
+
+          <!-- waves -->
+          <path id="gA" class="ln" pathLength="1" stroke="#b4b4b4" stroke-width="3.5" d="M84 343C150 300 230 285 330 315C450 360 560 375 650 365C780 355 880 270 960 215C1040 160 1150 175 1210 245C1260 310 1300 365 1360 365C1440 365 1540 280 1640 225C1720 180 1800 150 1830 190C1850 240 1880 262 1920 255C1990 245 2060 190 2140 163"/>
+          <path id="gB" class="ln" pathLength="1" stroke="#b4b4b4" stroke-width="3.5" d="M217 476C270 380 370 290 480 287C580 285 660 350 760 440C880 550 1000 650 1120 685C1230 705 1340 680 1420 590C1500 500 1580 380 1650 270C1720 160 1800 60 1895 67C2000 75 2090 250 2118 425"/>
+          <path id="gG" class="ln" pathLength="1" stroke="#c8f31d" stroke-width="4.5" d="M152 520C300 535 500 535 650 495C780 460 900 360 1000 300C1040 275 1080 265 1110 278C1250 315 1380 345 1480 345C1580 345 1650 320 1720 265C1790 215 1850 175 1927 163"/>
+
+          <!-- legend -->
+          <g id="legend" opacity="0">
+            <rect x="1625" y="487" width="43" height="25" fill="#c8f31d" stroke="#000" stroke-width="2.5"/>
+            <text x="1685" y="514" font-size="40">By using astrobranding</text>
+          </g>
+
+          <!-- success -->
+          <path id="lead" d="M1836 42L1925 135" stroke="#000" stroke-width="2.5" fill="none" opacity="0"/>
+          <text id="succ" x="1768" y="30" font-size="46" opacity="0">Success</text>
+          <circle id="ring" class="pop" cx="1927" cy="163" r="28" fill="none" stroke="#c8f31d" stroke-width="3" opacity="0"/>
+          <circle id="dotc" class="pop" cx="1927" cy="163" r="15" fill="#c8f31d" opacity="0"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="layer black" id="black">
+      <h2 id="bh">Strategy + Time<br>= Success</h2>
+      <div class="cta" id="bc">
+        <button type="button" class="btn go">Try now</button>
+        <button type="button" class="btn alt">Know more</button>
+      </div>
+      <div class="ai" id="ai">
+        <h2 class="aih" id="aih"><span>Let</span><span>the</span><span>AI</span><span>handle</span><span>loops</span><span>while</span><span>you</span><span>breathe</span><span>for</span><span>expansion.</span></h2>
+        <svg class="loop" id="loop" viewBox="0 0 1200 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path id="lp" class="lp" pathLength="1" d=""/><circle id="lh" cx="0" cy="0" r="10" fill="#c8f31d" opacity="0"/></svg>
+      </div>
+      <div class="svcs" id="svcs">
+        <div class="rail"><div class="rb"><i></i><span>Custom AI products</span></div><div class="rb"><i></i><span>Workflow upgrade</span></div><div class="rb"><i></i><span>Business autonomy</span></div></div>
+        <article class="svc"><svg class="viz" viewBox="0 0 400 300" aria-hidden="true"><rect x="110" y="40" width="180" height="220" rx="16" fill="none" stroke="#777" stroke-width="2" stroke-dasharray="6 8"/><rect class="v1" x="130" y="62" width="140" height="44" rx="8" fill="#fff"/><rect class="v1" x="130" y="118" width="140" height="44" rx="8" fill="#fff"/><rect class="v1" x="130" y="174" width="84" height="64" rx="8" fill="#c8f31d"/><circle id="v1d" cx="290" cy="40" r="10" fill="#c8f31d"/></svg><div class="txt"><h3>Custom AI-native products</h3><p class="sub">Tell us the need. We build the product around it.</p><p class="desc">You bring the problem. We design, build and ship an AI product made only for your company.</p><button type="button" class="btn go">Contact us</button></div></article><article class="svc"><svg class="viz" viewBox="0 0 400 300" aria-hidden="true"><path d="M140 232H170M250 232H280" stroke="#555" stroke-width="2"/><rect class="v2n" x="60" y="200" width="80" height="64" rx="10" fill="none" stroke="#888" stroke-width="2.5"/><rect class="v2n" x="170" y="200" width="80" height="64" rx="10" fill="none" stroke="#888" stroke-width="2.5"/><rect class="v2n" x="280" y="200" width="80" height="64" rx="10" fill="none" stroke="#888" stroke-width="2.5"/><path class="v2l" pathLength="1" d="M200 84L100 200" fill="none" stroke="#c8f31d" stroke-width="3" stroke-dasharray="1 2"/><path class="v2l" pathLength="1" d="M200 84L210 200" fill="none" stroke="#c8f31d" stroke-width="3" stroke-dasharray="1 2"/><path class="v2l" pathLength="1" d="M200 84L320 200" fill="none" stroke="#c8f31d" stroke-width="3" stroke-dasharray="1 2"/><circle id="v2a" class="pop" cx="200" cy="56" r="30" fill="#c8f31d"/><text x="200" y="64" font-size="22" font-weight="600" text-anchor="middle" style="fill:#000">AI</text></svg><div class="txt"><h3>Workflow upgrade</h3><p class="sub">Your software stays. We plug AI into it.</p><p class="desc">Keep the tools your team already uses. We connect them and add AI where it saves the most time.</p><button type="button" class="btn go">Contact us</button></div></article><article class="svc"><svg class="viz" viewBox="0 0 400 300" aria-hidden="true"><circle cx="170" cy="150" r="90" fill="none" stroke="#444" stroke-width="2.5"/><path id="v3x" pathLength="1" d="M260 150C300 150 330 110 380 60" fill="none" stroke="#c8f31d" stroke-width="3" stroke-dasharray="1 2" stroke-dashoffset="1"/><circle id="v3o" cx="260" cy="150" r="11" fill="#c8f31d"/><text x="170" y="158" font-size="22" text-anchor="middle" font-weight="500">on its own</text></svg><div class="txt"><h3>Business autonomy</h3><p class="sub">Your services run themselves. You review, not repeat.</p><p class="desc">We automate the repeated work in your services, so your team can spend its time on growth.</p><button type="button" class="btn go">Contact us</button></div></article>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var track=$('track'),stage=$('stage'),hero=$('hero'),cue=$('cue'),white=$('white'),title=$('title'),
+      wrap=$('wrap'),black=$('black'),bh=$('bh'),bc=$('bc'),
+      gA=$('gA'),gB=$('gB'),gG=$('gG'),legend=$('legend'),lead=$('lead'),succ=$('succ'),ring=$('ring'),dotc=$('dotc'),times=$('times'),
+      dl=document.querySelectorAll('.dl'),dd=document.querySelectorAll('.dd'),
+      ai=$('ai'),words=$('aih').children,lp=$('lp'),lh=$('lh'),svcs=$('svcs'),
+      svc=document.querySelectorAll('.svc'),bars=document.querySelectorAll('.rb i'),
+      v1=document.querySelectorAll('.v1'),v1d=$('v1d'),v2n=document.querySelectorAll('.v2n'),v2l=document.querySelectorAll('.v2l'),v2a=$('v2a'),
+      v3o=$('v3o'),v3x=$('v3x');
+  var sm=function(t){return t*t*(3-2*t)};
+  /* the loop line: tight loops (repeated work) that open into a straight rising line (expansion) */
+  (function(){var N=260,d='';for(var i=0;i<=N;i++){var u=i/N,th=u*3.4*2*Math.PI,rho=95*(1-sm(Math.min(1,Math.max(0,(u-.5)/.4))));
+    d+=(i?'L':'M')+(100+u*1000-rho*Math.sin(th)).toFixed(1)+' '+(330-210*sm(u)-rho*Math.cos(th)).toFixed(1)}
+    lp.setAttribute('d',d)})();
+  var lplen=lp.getTotalLength();
+  var R=2700/760, STEPS=14.4, glen=gG.getTotalLength();
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var vw,vh,W,H,off,cur=0,target=0,lastW=0;
+
+  var clamp=function(x){return Math.min(1,Math.max(0,x))};
+  var seg=function(s,a,b){return clamp((s-a)/(b-a))};
+  var ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2};
+  var draw=function(el,f){el.style.strokeDashoffset=1-f;el.style.opacity=f>.001?1:0};
+
+  function sizes(){
+    var ih=window.innerHeight||document.documentElement.clientHeight||800;
+    if(!track.offsetHeight||track.offsetHeight<ih*2||stage.clientHeight<50){
+      track.style.height=(ih*STEPS)+'px';stage.style.height=ih+'px';
+    }
+  }
+  function layout(){
+    sizes();
+    vw=innerWidth;vh=stage.clientHeight||window.innerHeight;
+    var mobile=vw<760;
+    H=mobile?vh*.56:Math.min(vh*.9,Math.max(vh*.8,vw*1.25/R));
+    W=H*R; off=W<vw?(vw-W)/2:0;
+    var sc=Math.min(vw/1200,vh*.42/440),sw=3.5/sc;lp.style.strokeWidth=sw;lh.setAttribute('r',sw*2.6);
+    wrap.style.width=W+'px';wrap.style.height=H+'px';
+    wrap.style.top=((vh-H)/2+vh*.07)+'px';
+  }
+
+  function render(s){
+    /* section 1 → 2 : hero leaves, white section wipes up */
+    var h=seg(s,.5,1.3);
+    hero.style.opacity=1-h;hero.style.transform='translateY('+(-h*50)+'px)';
+    cue.style.opacity=1-seg(s,.1,.5);
+    white.style.transform='translateY('+((1-ease(seg(s,.7,1.4)))*100)+'%)';
+
+    /* headline appears one time, top-left */
+    var t=ease(seg(s,1.3,1.9));
+    title.style.opacity=t*(1-seg(s,2.5,3.1));title.style.transform='translateY('+((1-t)*22)+'px)';
+
+    /* three dots (three different times) */
+    for(var i=0;i<3;i++){
+      var d=ease(seg(s,1.5+i*.15,1.95+i*.15));
+      draw(dl[i],d);
+      dd[i].style.opacity=d;dd[i].style.transform='scale('+d+')';
+    }
+    times.style.opacity=seg(s,2,2.4);
+
+    /* 3 waves run left → right together; gray stops short and fades, only green reaches success */
+    var g=ease(seg(s,2.2,4.5));
+    var gray=ease(seg(s,2.2,3.6))*.82;
+    var fade=1-.7*seg(s,3.8,4.6);
+    draw(gA,gray);draw(gB,gray*.97);
+    gA.style.opacity=gray>.001?fade:0;gB.style.opacity=gray>.001?fade:0;
+    draw(gG,g);
+    legend.setAttribute('opacity',seg(s,2.6,3));
+
+    /* success dot */
+    var k=ease(seg(s,4.4,4.8));
+    dotc.style.opacity=k;dotc.style.transform='scale('+k+')';
+    ring.style.opacity=k;ring.style.transform='scale('+(.4+.6*k)+')';
+    succ.setAttribute('opacity',k);lead.setAttribute('opacity',k);
+
+    /* camera: follows the green line head (matters on mobile, where the chart is wider than the screen) */
+    var headX=gG.getPointAtLength(Math.max(g,.001)*glen).x;
+    var px=(headX+40)/2700*W, cam=0;
+    if(W>vw){cam=Math.min(W-vw,Math.max(0,px-vw*.45))}
+    wrap.style.transform='translateX('+(off-cam)+'px)';
+
+    /* section 3 : black grows out of the success dot */
+    var b=ease(seg(s,4.9,5.7));
+    if(b>0){
+      var r=dotc.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+      var max=Math.hypot(Math.max(cx,vw-cx),Math.max(cy,vh-cy))*1.03;
+      black.style.clipPath='circle('+(b*max)+'px at '+cx+'px '+cy+'px)';
+    }else{black.style.clipPath='circle(0px at 50% 50%)'}
+    /* text only after the screen is fully black; it leaves first when scrolling back */
+    var tx=seg(s,5.8,6.3), bt=seg(s,6.2,6.6);
+    var ex=seg(s,6.8,7.4);
+    bh.style.opacity=tx*(1-ex);bh.style.transform='translateY('+((1-tx)*20-ex*70)+'px)';
+    bc.style.opacity=bt*(1-ex);bc.style.visibility=(bt>.02&&ex<.98)?'visible':'hidden';bc.style.transform='translateY('+((1-bt)*16-ex*70)+'px)';
+
+    /* AI Solutions · heading + loop line (the Success dot becomes the head of this line) */
+    for(var w=0;w<words.length;w++){var wv=ease(seg(s,7.3+w*.07,7.7+w*.07));words[w].style.opacity=wv;words[w].style.transform='translateY('+((1-wv)*.5)+'em)'}
+    var lg=ease(seg(s,7.2,8.5));draw(lp,lg);
+    var hp=lp.getPointAtLength(Math.max(lg,.001)*lplen);lh.setAttribute('cx',hp.x);lh.setAttribute('cy',hp.y);lh.setAttribute('opacity',lg>.001?1:0);
+    var ax=seg(s,9,9.5);ai.style.opacity=1-ax;ai.style.transform='translateY('+(-ax*40)+'px)';
+
+    /* AI Solutions · three services, one per scroll step */
+    var sv=seg(s,9.1,9.5);svcs.style.opacity=sv;svcs.style.visibility=sv>.01?'visible':'hidden';
+    for(var i=0;i<3;i++){
+      var a=9.3+1.3*i,b=a+1.3,p=seg(s,a,b),op=seg(s,a-.1,a+.15)*(i<2?1-seg(s,b-.15,b+.1):1);
+      svc[i].style.opacity=op;svc[i].style.visibility=op>.02?'visible':'hidden';svc[i].style.transform='translateY('+((1-op)*24)+'px)';
+      svc[i].style.pointerEvents=op>.8?'auto':'none';bars[i].style.setProperty('--f',p);
+      if(i==0){for(var k=0;k<3;k++){var e=ease(seg(p,.08+k*.2,.5+k*.2));v1[k].style.opacity=e;v1[k].style.transform='translateX('+((1-e)*(k%2?160:-160))+'px)'}
+        v1d.style.opacity=seg(p,.7,.9)}
+      if(i==1){v2a.style.transform='scale('+ease(seg(p,0,.2))+')';
+        for(var k=0;k<3;k++){var e=ease(seg(p,.2+k*.2,.5+k*.2));draw(v2l[k],e);v2n[k].style.stroke=e>.97?'#c8f31d':'#888'}}
+      if(i==2){var an=p*Math.PI*6;v3o.setAttribute('cx',170+90*Math.cos(an));v3o.setAttribute('cy',150+90*Math.sin(an));
+        v3x.style.strokeDashoffset=1-ease(seg(p,.35,.95))}
+    }
+  }
+
+  function readScroll(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;
+    var unit=(track.offsetHeight/STEPS)||window.innerHeight||800;
+    target=y/unit; if(!isFinite(target))target=0;
+  }
+  function loop(){
+    if(!isFinite(cur))cur=0;
+    var diff=target-cur;
+    if(reduce||Math.abs(diff)<.0004){cur=target}else{cur+=diff*.14}
+    render(cur);
+    requestAnimationFrame(loop);
+  }
+
+  addEventListener('scroll',readScroll,{passive:true});
+  document.addEventListener('scroll',readScroll,{passive:true});
+  addEventListener('resize',function(){if(innerWidth!==lastW){lastW=innerWidth}layout();readScroll()});
+  lastW=innerWidth;layout();readScroll();cur=target;loop();
+})();
+</script>
+</body>
+</html>

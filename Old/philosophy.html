@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#050505] text-white selection:bg-[#CCFF00] selection:text-black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Philosophy: Why NEER Means Water &amp; The 10 Forms of Evolution | NEER</title>
+  <meta name="description" content="Explore the philosophy of NEER (Water: The Origin of Everything), the 10-stage Dashavatara framework of enterprise evolution, and our 15-year journey from cinema to AI." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  
+  <!-- Typography: Unbounded (Medium 500 only), Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Unbounded:wght@500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#050505',
+            void: '#070709',
+            charcoal: '#0E0E12',
+            surface: '#14141A',
+            'surface-light': '#1C1C24',
+            border: 'rgba(255, 255, 255, 0.08)',
+            'border-light': 'rgba(255, 255, 255, 0.16)',
+            lime: '#CCFF00',
+            'lime-glow': 'rgba(204, 255, 0, 0.35)',
+            mist: '#A1A1AA',
+            ash: '#666670',
+          },
+          fontFamily: {
+            display: ['Unbounded', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          letterSpacing: {
+            tighter: '-0.04em',
+            tight: '-0.02em',
+            wide: '0.04em',
+            widest: '0.14em',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #050505;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Force Unbounded to strictly 500 Medium */
+    .font-display, h1, h2, h3, h4 {
+      font-family: 'Unbounded', sans-serif !important;
+      font-weight: 500 !important;
+    }
+
+    /* Kinetic Custom Cursor */
+    #cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 6px; height: 6px;
+      background: #CCFF00;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+    }
+    #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 38px; height: 38px;
+      border: 1px solid rgba(204, 255, 0, 0.45);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+
+    /* Master Laminar Motion Physics */
+    .ease-laminar {
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Interactive Specimen Vessel */
+    .specimen-vessel {
+      position: relative;
+      background: linear-gradient(145deg, rgba(20, 20, 26, 0.85) 0%, rgba(10, 10, 14, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      border-radius: 28px;
+      transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .specimen-vessel:hover {
+      border-color: rgba(204, 255, 0, 0.35);
+    }
+
+    /* Subtle Caustic Background Grid */
+    .bg-grid-pattern {
+      background-size: 64px 64px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Scroll Reveal System */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Horizontal Scrollbar for Dashavatara Timeline */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="bg-obsidian text-white relative selection:bg-lime selection:text-obsidian overflow-x-hidden">
+
+  <!-- Kinetic Cursor Follower -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Ambient Fluid Canvas (Liquid Lime Caustics) -->
+  <canvas id="ambient-water-canvas" class="fixed inset-0 pointer-events-none -z-10 opacity-30"></canvas>
+
+  <!-- Ambient Obsidian Atmosphere Spheres -->
+  <div class="fixed top-0 right-1/4 w-[800px] h-[800px] bg-lime/[0.025] rounded-full blur-[200px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-1/4 left-0 w-[700px] h-[700px] bg-lime/[0.02] rounded-full blur-[180px] pointer-events-none -z-10"></div>
+
+  <!-- =========================================================================
+       00. ARCHITECTURAL HUD & TOP NAVIGATION
+       ========================================================================= -->
+  <header id="smart-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl bg-obsidian/85 border-b border-white/5">
+    <div class="w-full px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+      
+      <!-- Monolithic Master Brand Mark -->
+      <a href="Homepage Concpet.html" class="flex items-center gap-3.5 group" aria-label="NEER Home">
+        <div class="relative w-7 h-7 rounded-full border border-white/20 flex items-center justify-center bg-charcoal group-hover:border-lime transition-colors">
+          <span class="w-2 h-2 rounded-full bg-lime"></span>
+          <span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="font-display text-2xl tracking-tighter text-white group-hover:text-lime transition-colors">NEER</span>
+          <span class="hidden sm:inline font-mono text-[10px] tracking-widest text-ash uppercase">Currents Endure</span>
+        </div>
+      </a>
+
+      <!-- Primary Main Navigation Bar -->
+      <nav class="hidden md:flex items-center gap-1 xl:gap-2 font-mono text-xs tracking-wider" aria-label="Primary Navigation">
+        <a href="Homepage Concpet.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all">
+          <span>HOME</span>
+        </a>
+        <a href="astro-branding.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-lime hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime/40 group-hover:bg-lime transition-colors"></span>
+          <span>ASTRO-BRANDING</span>
+        </a>
+        <a href="ai-systems.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-lime hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime/40 group-hover:bg-lime transition-colors"></span>
+          <span>AI SYSTEMS</span>
+        </a>
+        <a href="capabilities.html" class="px-3.5 py-1.5 rounded-full text-mist hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 group">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white transition-colors"></span>
+          <span>CAPABILITIES</span>
+        </a>
+        <a href="philosophy.html" class="px-3.5 py-1.5 rounded-full text-lime bg-lime/15 border border-lime/30 transition-all flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime animate-pulse"></span>
+          <span>PHILOSOPHY</span>
+        </a>
+      </nav>
+
+      <!-- Telemetry CTA & Drawer Trigger -->
+      <div class="flex items-center gap-4">
+        <a href="#dialogue" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/20 bg-white/5 text-white hover:bg-lime hover:text-obsidian hover:border-lime transition-all font-mono text-xs tracking-wider font-semibold">
+          <span>COMMENCE DIALOGUE</span>
+          <span class="font-mono text-xs">→</span>
+        </a>
+
+        <button id="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle Navigation Menu" class="flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-white/5 border border-white/10 hover:border-lime transition-colors font-mono text-xs">
+          <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+          <span id="menu-label">INDEX</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MASTER MAIN NAVIGATION OVERLAY
+       ========================================================================= -->
+  <div id="nav-overlay" class="fixed inset-0 z-40 bg-obsidian/95 backdrop-blur-2xl transition-all duration-500 opacity-0 pointer-events-none flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+    <div class="w-full flex items-center justify-between border-b border-white/10 pb-6 pt-16">
+      <div class="font-mono text-xs text-ash tracking-widest uppercase">
+        // NEER ENTERPRISE MAP · INTERCONNECTED ARCHITECTURE
+      </div>
+      <button id="nav-close-btn" class="font-mono text-xs text-mist hover:text-lime transition-colors">
+        [CLOSE ✕]
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-10 overflow-y-auto">
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-ash block">// 00 · PRIMARY SURFACE</span>
+        <a href="Homepage Concpet.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">The Homepage</a>
+        <p class="text-xs text-mist leading-relaxed">The flagship experience: The Hydro-Kinetic Monolith, Trinity Synthesis, and Enterprise Evolution.</p>
+      </div>
+
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-lime block">// 01 · DIAGNOSTIC PRACTICE</span>
+        <a href="astro-branding.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">Astro-Branding</a>
+        <p class="text-xs text-mist leading-relaxed">Classical Vedic scholarship translated into modern commercial naming, geometry, and 90-day launch timing.</p>
+      </div>
+
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-lime block">// 02 · DETERMINISTIC CODE</span>
+        <a href="ai-systems.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">Engineered AI Systems</a>
+        <p class="text-xs text-mist leading-relaxed">Private, air-gapped agentic pipelines and sovereign intelligence replacing fragile SaaS tools.</p>
+      </div>
+
+      <div class="space-y-4">
+        <span class="font-mono text-xs text-white block">// 03 · EXECUTION ENGINES</span>
+        <a href="capabilities.html" class="menu-link block font-display text-2xl text-white hover:text-lime transition-colors">Capabilities</a>
+        <p class="text-xs text-mist leading-relaxed">Full-stack practice: Brand Strategy, Web Flagships, Commercial Cinema (46+ films), and AI Growth.</p>
+      </div>
+    </div>
+
+    <div class="w-full border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-ash">
+      <span>NEER (नीर) // EST. 2011 · AHMEDABAD</span>
+      <span>ALL RIGHTS RESERVED · SOVEREIGN ALCHEMIST</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- =========================================================================
+         01. HERO: WHO WE ARE (EVERYTHING ENDURING BEGINS AS WATER)
+         Editorial Asymmetry + Monumental Visual Specimen
+         ========================================================================= -->
+    <section class="min-h-screen pt-32 sm:pt-40 pb-20 px-6 sm:px-10 lg:px-16 flex flex-col justify-center relative overflow-hidden border-b border-white/10">
+      
+      <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left 7 Cols: Editorial Manifesto -->
+        <div class="lg:col-span-7 space-y-8 reveal">
+          
+          <div class="inline-flex items-center gap-2.5 font-mono text-xs text-mist">
+            <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+            <span class="tracking-widest uppercase">// NEER PHILOSOPHICAL MANIFESTO // 01 · THE ORIGIN OF EVERYTHING</span>
+          </div>
+
+          <h1 class="font-display text-[11vw] sm:text-[8vw] lg:text-[6.2vw] leading-[0.94] tracking-tighter text-white">
+            Everything Enduring <br />
+            <span class="text-lime">Begins as Water.</span>
+          </h1>
+
+          <p class="text-base sm:text-xl text-mist leading-relaxed max-w-2xl font-normal">
+            Most agencies are built around a deliverable—a logo, a website, an ad campaign. <strong class="text-white font-medium">NEER</strong> is built around a law of nature. We are a 360° Brand Strategy, Creative Craft, Engineered AI, and Astro-Branding practice founded in Ahmedabad in 2011 (<a href="https://neermedia.com/know-the-clan/" target="_blank" rel="noopener" class="text-lime underline hover:text-white transition-colors">Know the Clan</a>). We exist for a single purpose: to help ambitious businesses evolve their form without ever losing their essence.
+          </p>
+
+          <!-- Kinetic Anchors -->
+          <div class="flex flex-wrap items-center gap-5 pt-2">
+            <a href="#water-laws" class="inline-flex items-center gap-3 bg-lime text-obsidian font-display px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-xl shadow-lime/20 text-xs sm:text-sm tracking-wider">
+              <span>EXPLORE THE WATER THESIS</span>
+              <span class="font-mono text-sm">↓</span>
+            </a>
+            <a href="#dashavatara" class="inline-flex items-center gap-2 font-mono text-xs text-mist hover:text-lime transition-colors">
+              <span>Read the Dashavatara Story</span>
+              <span>↓</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right 5 Cols: The Hydro-Kinetic Monolith Hero Visual -->
+        <div class="lg:col-span-5 flex justify-center items-center relative reveal">
+          <div class="relative w-full max-w-[460px] aspect-[4/5] rounded-[32px] overflow-hidden border border-white/15 group shadow-2xl bg-charcoal">
+            
+            <img 
+              src="images/philosophy_hero_monolith.png" 
+              alt="The Hydro-Kinetic Monolith: Obsidian Basalt in Refractive Water Caustics" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/philosophy_hero_monolith.jpg';}"
+            />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian/95 via-transparent to-transparent opacity-90"></div>
+            
+            <!-- Telemetry Pin -->
+            <div class="absolute top-5 left-5">
+              <span class="px-3.5 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-white/10 font-mono text-[10px] text-white tracking-widest uppercase flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+                <span>MONOLITH SPECIMEN 01</span>
+              </span>
+            </div>
+
+            <!-- Kinetic Bottom Annotation -->
+            <div class="absolute bottom-6 left-6 right-6 font-mono text-xs text-white space-y-1">
+              <div class="text-lime font-semibold">// BASALT &middot; LAMINAR CAUSTICS</div>
+              <p class="text-mist text-[11px] leading-relaxed">
+                The tension between immutable stone essence and adaptive water current.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Telemetry Strip -->
+      <div class="w-full mt-20 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 font-mono text-xs">
+        <div class="space-y-1">
+          <span class="text-ash block">// SANSKRIT ROOT</span>
+          <span class="text-white font-semibold text-sm">नीर (Nīra) · Life Water</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-ash block">// FOUNDING HERITAGE</span>
+          <span class="text-white font-semibold text-sm">2011 · Ahmedabad, India</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-ash block">// FEATURE PRODUCTIONS</span>
+          <span class="text-white font-semibold text-sm">46+ Feature Cinema Works</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-ash block">// OPERATING DISCIPLINE</span>
+          <span class="text-lime font-semibold text-sm">The Sovereign Alchemist</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================================
+         02. WHY "NEER" — THE SIX LAWS OF WATER
+         Interactive Editorial Specimen Console (ZERO Generic Repeated Cards)
+         ========================================================================= -->
+    <section id="water-laws" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-void relative border-b border-white/10">
+      <div class="w-full space-y-20 reveal">
+
+        <!-- Section Header -->
+        <div class="max-w-4xl space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-lime animate-pulse"></span>
+            <span class="font-mono text-xs text-lime tracking-widest uppercase">// 01 / THE ORIGIN OF EVERYTHING</span>
+          </div>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Six Laws of Water That Govern <br />
+            <span class="text-lime">Every Brand We Build.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            In Sanskrit, <strong class="text-white">Neer (नीर)</strong> literally means Water. Why name a transformation firm after water? Because most companies build monuments of stone—rigid identities, static playbooks, and brittle software designed for a single market moment. When customer behaviour shifts or technology leaps forward, stone cannot bend; it fractures.
+          </p>
+          <p class="text-white/90 text-base leading-relaxed">
+            Water never fractures. It carves canyons through granite, powers turbines, and transitions across states—solid ice, flowing liquid, expansive vapor—while its molecular identity (H₂O) remains untouched. At NEER, water is our operating philosophy across six continuous dimensions:
+          </p>
+        </div>
+
+        <!-- Interactive Specimen Console: Vertical Index + Kinetic Dynamic Stage -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left 5 Cols: Interactive Law Selector -->
+          <div class="lg:col-span-5 space-y-2" id="laws-index">
+            
+            <button type="button" class="law-tab w-full text-left p-6 rounded-2xl border border-lime/40 bg-white/[0.04] transition-all group" data-law="0">
+              <div class="flex items-center justify-between font-mono text-xs mb-1">
+                <span class="text-lime font-bold">// LAW 01</span>
+                <span class="text-ash uppercase group-hover:text-white transition-colors">Primordial Source</span>
+              </div>
+              <div class="font-display text-xl text-white group-hover:text-lime transition-colors">01. Origin</div>
+              <div class="text-xs text-mist mt-1 font-mono">Where Everything Begins</div>
+            </button>
+
+            <button type="button" class="law-tab w-full text-left p-6 rounded-2xl border border-white/5 bg-transparent hover:bg-white/[0.02] transition-all group" data-law="1">
+              <div class="flex items-center justify-between font-mono text-xs mb-1">
+                <span class="text-ash group-hover:text-lime transition-colors">// LAW 02</span>
+                <span class="text-ash uppercase">Form Precipitation</span>
+              </div>
+              <div class="font-display text-xl text-white group-hover:text-lime transition-colors">02. Creation</div>
+              <div class="text-xs text-mist mt-1 font-mono">Precipitating Form from Potential</div>
+            </button>
+
+            <button type="button" class="law-tab w-full text-left p-6 rounded-2xl border border-white/5 bg-transparent hover:bg-white/[0.02] transition-all group" data-law="2">
+              <div class="flex items-center justify-between font-mono text-xs mb-1">
+                <span class="text-ash group-hover:text-lime transition-colors">// LAW 03</span>
+                <span class="text-ash uppercase">Optimal Conductivity</span>
+              </div>
+              <div class="font-display text-xl text-white group-hover:text-lime transition-colors">03. Flow</div>
+              <div class="text-xs text-mist mt-1 font-mono">Frictionless Movement</div>
+            </button>
+
+            <button type="button" class="law-tab w-full text-left p-6 rounded-2xl border border-white/5 bg-transparent hover:bg-white/[0.02] transition-all group" data-law="3">
+              <div class="flex items-center justify-between font-mono text-xs mb-1">
+                <span class="text-ash group-hover:text-lime transition-colors">// LAW 04</span>
+                <span class="text-ash uppercase">Adaptive Survival</span>
+              </div>
+              <div class="font-display text-xl text-white group-hover:text-lime transition-colors">04. Evolution</div>
+              <div class="text-xs text-mist mt-1 font-mono">The Dashavatara Continuum</div>
+            </button>
+
+            <button type="button" class="law-tab w-full text-left p-6 rounded-2xl border border-white/5 bg-transparent hover:bg-white/[0.02] transition-all group" data-law="4">
+              <div class="flex items-center justify-between font-mono text-xs mb-1">
+                <span class="text-ash group-hover:text-lime transition-colors">// LAW 05</span>
+                <span class="text-ash uppercase">Growth Infrastructure</span>
+              </div>
+              <div class="font-display text-xl text-white group-hover:text-lime transition-colors">05. Sustenance</div>
+              <div class="text-xs text-mist mt-1 font-mono">The Infrastructure of Growth</div>
+            </button>
+
+            <button type="button" class="law-tab w-full text-left p-6 rounded-2xl border border-white/5 bg-transparent hover:bg-white/[0.02] transition-all group" data-law="5">
+              <div class="flex items-center justify-between font-mono text-xs mb-1">
+                <span class="text-ash group-hover:text-lime transition-colors">// LAW 06</span>
+                <span class="text-ash uppercase">State Transition</span>
+              </div>
+              <div class="font-display text-xl text-white group-hover:text-lime transition-colors">06. Transformation</div>
+              <div class="text-xs text-mist mt-1 font-mono">Changing State Without Losing Essence</div>
+            </button>
+
+          </div>
+
+          <!-- Right 7 Cols: Active Kinetic Stage -->
+          <div class="lg:col-span-7">
+            <div class="specimen-vessel p-8 sm:p-12 space-y-8 min-h-[460px] flex flex-col justify-between" id="active-law-stage">
+              
+              <div class="space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                  <span id="stage-num" class="font-mono text-xs text-lime font-bold tracking-widest">// LAW 01 · ORIGIN</span>
+                  <span id="stage-tag" class="font-mono text-xs text-ash tracking-widest uppercase">UDGAMA // THE SOURCE WELL</span>
+                </div>
+
+                <h3 id="stage-title" class="font-display text-3xl sm:text-4xl text-white">
+                  Where Everything Begins.
+                </h3>
+
+                <p id="stage-body" class="text-base sm:text-lg text-mist leading-relaxed font-normal">
+                  Just as biological life emerged from primordial waters, every enduring company begins as an unformed current of founder conviction. Before we write code or draw a mark, we go to the source—extracting why your business deserves to exist.
+                </p>
+              </div>
+
+              <!-- Architectural Specimen Metric Footer -->
+              <div class="pt-8 border-t border-white/10 grid grid-cols-2 gap-6 font-mono text-xs">
+                <div>
+                  <span class="text-ash block">// COMMERCIAL APPLICATION</span>
+                  <span id="stage-app" class="text-white font-medium text-sm">Foundational Diagnostic Audit</span>
+                </div>
+                <div>
+                  <span class="text-ash block">// MOLECULAR BEHAVIOR</span>
+                  <span id="stage-behavior" class="text-lime font-medium text-sm">Unbroken Invariant Core (H₂O)</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         03. THE MONOLITH & HYDRO-KINETICS + THE SOVEREIGN ALCHEMIST
+         Editorial Tension Between Permanence & Movement
+         ========================================================================= -->
+    <section id="alchemist" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-b border-white/10">
+      <div class="w-full space-y-20 reveal">
+
+        <div class="max-w-4xl space-y-4">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 02 / DUAL NATURE OF TRANSFORMATION</span>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            The Hydro-Kinetic Monolith: <br />
+            <span class="text-lime">Permanence in Living Movement.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            If water is our philosophy, <strong class="text-white font-medium">The Hydro-Kinetic Monolith</strong> is how we practice it. Fluidity without structure is just drift; structure without fluidity is a prison. Every great enterprise requires both:
+          </p>
+        </div>
+
+        <!-- The Dual Polarities (Two Monumental Architectural Panels) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div class="specimen-vessel p-8 sm:p-12 space-y-6">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-white/10 text-white font-bold border border-white/20">POLARITY I</span>
+              <span class="text-ash uppercase">// INVARIANT ESSENCE</span>
+            </div>
+            <h3 class="font-display text-3xl sm:text-4xl text-white">The Monolith</h3>
+            <p class="font-mono text-xs text-mist uppercase tracking-wider">// Foundational Structural Truth</p>
+            <p class="text-mist text-base leading-relaxed">
+              The unshakable core of your business—your foundational truth, your category position, your mathematical design proportions, and your ethical governance. This never wavers with temporary market fads.
+            </p>
+            <div class="pt-4 border-t border-white/10 font-mono text-xs text-ash">
+              DISCIPLINE: Jyotisha · Shilpa Shastra · Brand Positioning · Core IP
+            </div>
+          </div>
+
+          <div class="specimen-vessel p-8 sm:p-12 space-y-6 border-lime/30">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-lime/20 text-lime font-bold border border-lime/30">POLARITY II</span>
+              <span class="text-lime uppercase">// ADAPTIVE INTELLIGENCE</span>
+            </div>
+            <h3 class="font-display text-3xl sm:text-4xl text-white">Hydro-Kinetics</h3>
+            <p class="font-mono text-xs text-lime uppercase tracking-wider">// Living Adaptive Current</p>
+            <p class="text-mist text-base leading-relaxed">
+              The living current that surrounds that core—your digital interfaces, your cinema and storytelling, and your autonomous AI operations that shift with the market in real time.
+            </p>
+            <div class="pt-4 border-t border-white/10 font-mono text-xs text-lime">
+              DISCIPLINE: LangGraph Multi-Agents · WebGL Flagships · 35mm Cinema
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Physical Specimen Anchor: Sample-1.png (Mathematical Invariance in Liquid Ripples) -->
+        <div class="relative w-full aspect-[21/9] min-h-[300px] sm:min-h-[420px] rounded-[32px] overflow-hidden border border-lime/30 group shadow-2xl bg-charcoal">
+          <img 
+            src="images/Sample-1.png" 
+            alt="NEER Invariant Essence Specimen: Sri Yantra Astrolabe in Refractive Water Caustics (Sample-1)" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/Sample-1.png';}"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian/95 via-obsidian/30 to-transparent"></div>
+          
+          <div class="absolute top-6 left-6">
+            <span class="px-3.5 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-lime/40 font-mono text-[10px] text-lime tracking-widest uppercase flex items-center gap-1.5 shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+              <span>PROOF SPECIMEN // THE IMMUTABLE MONOLITH IN HYDRO-KINETIC FLOW</span>
+            </span>
+          </div>
+
+          <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs text-white">
+            <span class="text-white font-semibold">
+              AYADI SHADVARGA GEOMETRY &middot; OBSIDIAN &middot; #CCFF00 LIQUID CAUSTICS
+            </span>
+            <span class="text-lime text-[11px] uppercase tracking-wider">
+              &ldquo;Form changes; molecular essence endures.&rdquo;
+            </span>
+          </div>
+        </div>
+
+        <!-- Our Persona: The Sovereign Alchemist (Tri-Partite Identity Convergence) -->
+        <div class="specimen-vessel p-8 sm:p-14 space-y-10">
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 font-mono text-xs text-lime">
+              <span>// CHAPTER 02 &middot; TRI-PARTITE IDENTITY CONVERGENCE</span>
+            </div>
+            <h3 class="font-display text-3xl sm:text-5xl text-white">Our Persona: The Sovereign Alchemist</h3>
+            <p class="text-mist text-base sm:text-lg max-w-3xl leading-relaxed">
+              We do not operate like a noisy advertising vendor or a cold IT outsourcing shop. NEER combines three minds at one table:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-white/10">
+            
+            <div class="space-y-4">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="w-7 h-7 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-white">I</span>
+                <span class="text-lime font-mono text-[10px] tracking-widest uppercase">ORIGIN // UDGAMA</span>
+              </div>
+              <h4 class="font-display text-xl text-white">The Scholar-Strategist</h4>
+              <p class="text-sm text-mist leading-relaxed font-normal">
+                Calm, incisive, and text-grounded. Combines classical Indian systems of phonetics, time, and spatial geometry (<em class="text-white">Jyotisha, Shilpa Shastra, Sankhya</em>) with modern market category strategy to diagnose where a business is out of alignment.
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="w-7 h-7 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-white">II</span>
+                <span class="text-lime font-mono text-[10px] tracking-widest uppercase">CREATION // SWARUPA</span>
+              </div>
+              <h4 class="font-display text-xl text-white">The Craftsperson &amp; Filmmaker</h4>
+              <p class="text-sm text-mist leading-relaxed font-normal">
+                Obsessed with light, proportion, typography, and emotional resonance. Honed across 46+ feature films and 2,000+ brand builds (<a href="https://neermedia.com/" target="_blank" rel="noopener" class="text-lime underline hover:text-white transition-colors">NEER Media</a>), translating abstract strategy into cinema-grade visual authority.
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="w-7 h-7 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-white">III</span>
+                <span class="text-lime font-mono text-[10px] tracking-widest uppercase">AUTONOMY // PRAYOGA</span>
+              </div>
+              <h4 class="font-display text-xl text-white">The Systems Architect</h4>
+              <p class="text-sm text-mist leading-relaxed font-normal">
+                Pragmatic and engineering-led. Replaces manual chaos and bloated SaaS subscriptions with deterministic LangGraph multi-agent workflows, private air-gapped models, and sovereign code owned entirely by the client.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         04. THE DASHAVATARA STORY — TEN FORMS OF EVOLUTION
+         The Visual Continuum of Morphogenesis
+         ========================================================================= -->
+    <section id="dashavatara" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-void relative border-b border-white/10">
+      <div class="w-full space-y-16 reveal">
+
+        <!-- Section Kicker & Academic Boundary -->
+        <div class="max-w-4xl space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-lime animate-pulse"></span>
+            <span class="font-mono text-xs text-lime tracking-widest uppercase">// 03 / THE EVOLUTIONARY CONTINUUM</span>
+          </div>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Why Intelligence Never Arrives <br />
+            <span class="text-lime">in One Permanent Shape.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            Long before modern business theory studied why companies stagnate, classical Indian philosophy articulated a profound metaphor for progressive adaptation: the Dashavatara—the ten successive descents of consciousness across changing epochs.
+          </p>
+          <div class="p-4 rounded-2xl border border-white/10 bg-white/[0.01] font-mono text-xs text-ash leading-relaxed">
+            ACADEMIC INTEGRITY NOTICE: We do not invoke Dashavatara as religious dogma or mystical fortune-telling. We treat it as humanity's most sophisticated ancient treatise on evolutionary morphology: the principle that enduring consciousness must continuously adopt new forms to resolve the specific entropy of its age.
+          </div>
+        </div>
+
+        <!-- Monumental Morphogenesis Visual Centerpiece: Sample-2.png -->
+        <div class="relative w-full aspect-[16/9] max-h-[540px] rounded-[32px] overflow-hidden border border-lime/30 group shadow-2xl bg-charcoal">
+          <img 
+            src="images/Sample-2.png" 
+            alt="NEER Evolutionary Continuum: Laminar Liquid to Autonomous Crystalline Lattice (Sample-2)" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/Sample-2.png';}"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-90"></div>
+          
+          <div class="absolute top-6 left-6 flex items-center gap-2">
+            <span class="px-3.5 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-lime/40 font-mono text-[10px] text-lime tracking-widest uppercase flex items-center gap-1.5 shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-lime animate-ping"></span>
+              <span>CONTINUUM SPECIMEN 02 // THREE-STAGE MORPHOGENESIS (FLUID TO LATTICE)</span>
+            </span>
+          </div>
+
+          <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs">
+            <span class="text-white font-semibold">
+              // PHASE 01: TURBULENT WATER &rarr; PHASE 02: SIGNAL CONDUIT &rarr; PHASE 03: AUTONOMOUS LATTICE
+            </span>
+            <span class="text-lime text-[11px] uppercase tracking-wider">
+              &ldquo;Survival belongs to the system that changes form.&rdquo;
+            </span>
+          </div>
+        </div>
+
+        <!-- The 10 Evolutionary Epochs: Scrollable Architectural Ribbon -->
+        <div class="space-y-6">
+          <div class="flex items-center justify-between font-mono text-xs text-mist">
+            <span>// THE 10 EVOLUTIONARY FORMS (HORIZONTAL TIMELINE)</span>
+            <span class="hidden sm:inline">DRAG OR SCROLL TO NAVIGATE THE EPOCHS &rarr;</span>
+          </div>
+
+          <div class="flex gap-5 overflow-x-auto pb-6 no-scrollbar snap-x snap-mandatory">
+            
+            <!-- Matsya -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">01 // MATSYA</span>
+                <span class="text-ash">THE AQUATIC SEED</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Primordial Survival</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Navigating the deluge. Raw founder conviction surviving category turbulence before formal product-market fit exists.
+              </p>
+            </div>
+
+            <!-- Kurma -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">02 // KURMA</span>
+                <span class="text-ash">THE ANCHORING FOUNDATION</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Structural Stability</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                The unyielding carapace. Establishing core unit economics, proprietary IP, and governance so future growth does not buckle.
+              </p>
+            </div>
+
+            <!-- Varaha -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">03 // VARAHA</span>
+                <span class="text-ash">CATEGORY RESCUE</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Terra Firma Claim</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Dredging value from dark waters. Rescuing sinking assets, repositioning distressed product lines, and securing category ground.
+              </p>
+            </div>
+
+            <!-- Narasimha -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">04 // NARASIMHA</span>
+                <span class="text-ash">PARADOX SYNTHESIS</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Shattering Orthodoxy</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Neither man nor beast. Overcoming category deadlocks through unconventional synthesis that legacy competitors cannot counter.
+              </p>
+            </div>
+
+            <!-- Vamana -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">05 // VAMANA</span>
+                <span class="text-ash">EXPONENTIAL LEAP</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Three Cosmic Steps</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Modest footprint, infinite reach. The lean digital core that scales across global territories without proportional overhead.
+              </p>
+            </div>
+
+            <!-- Parashurama -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">06 // PARASHURAMA</span>
+                <span class="text-ash">SURGICAL CLEANSING</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Eliminating Rot</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                The axe of renewal. Cutting unprofitable product variants, bloated SaaS stacks, and bureaucratic friction without sentiment.
+              </p>
+            </div>
+
+            <!-- Rama -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">07 // RAMA</span>
+                <span class="text-ash">ETHICAL INFRASTRUCTURE</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Sovereign Governance</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Order, duty, and inviolable guardrails. Architecting enterprise brand trust, data compliance, and institutional longevity.
+              </p>
+            </div>
+
+            <!-- Krishna -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">08 // KRISHNA</span>
+                <span class="text-ash">STRATEGIC PLAY &amp; NARRATIVE</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Commercial Cinema</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Mastery of emotional resonance and narrative warfare. Capturing audience imagination through cinema-grade craft and charm.
+              </p>
+            </div>
+
+            <!-- Buddha -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">09 // BUDDHA</span>
+                <span class="text-ash">RADICAL SIMPLICITY</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Minimalist Clarity</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                Subtractive mastery. Stripping noise from the signal, delivering frictionless customer journeys with zero cognitive fatigue.
+              </p>
+            </div>
+
+            <!-- Kalki -->
+            <div class="snap-start shrink-0 w-80 specimen-vessel p-6 space-y-3 border-lime/40">
+              <div class="flex items-center justify-between font-mono text-xs text-lime">
+                <span class="font-bold">10 // KALKI</span>
+                <span class="text-ash">THE AUTONOMOUS FUTURE</span>
+              </div>
+              <h4 class="font-display text-xl text-white">Engineered AI Autonomy</h4>
+              <p class="text-xs text-mist leading-relaxed font-mono">
+                The white horse of computation. Self-improving multi-agent platforms executing continuous commercial optimization.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         05. OUR 15-YEAR EVOLUTION — CINEMA TO CODE
+         Authentic Studio Heritage & Cinematic Visual Architecture
+         ========================================================================= -->
+    <section id="evolution" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-obsidian relative border-b border-white/10">
+      <div class="w-full space-y-20 reveal">
+
+        <div class="max-w-4xl space-y-4">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 04 / 15-YEAR OPERATIONAL ARCHITECTURE</span>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            From 35mm Cinema Lenses <br />
+            <span class="text-lime">to Deterministic AI Code.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            NEER was not born in a Silicon Valley venture incubator or an outsourced call center. We emerged from the uncompromising craft of commercial cinema and high-stakes feature film storytelling. Over fifteen years, we transformed our form while preserving our rigorous commitment to emotional truth:
+          </p>
+        </div>
+
+        <!-- Cinema Heritage Visual Banner: Behind-the-Scenes Feature Film Production -->
+        <div class="relative w-full aspect-[21/9] min-h-[280px] sm:min-h-[400px] rounded-[32px] overflow-hidden border border-white/10 group shadow-2xl bg-charcoal">
+          <img 
+            src="https://neermedia.com/wp-content/uploads/2024/11/neer_media_fil_shoot_behind_the_scene.webp" 
+            alt="NEER Media 15-Year Film Production Heritage Behind the Scenes" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent"></div>
+          
+          <div class="absolute top-6 left-6 flex items-center gap-2">
+            <span class="px-3.5 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-white/10 font-mono text-[10px] text-white tracking-widest uppercase">
+              // STUDIO HERITAGE: 46+ FEATURE FILMS &middot; 2,000+ BRAND BUILDS
+            </span>
+          </div>
+
+          <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs text-white">
+            <span class="text-white font-medium">
+              35mm ARRI &amp; RED CINEMATOGRAPHY &rarr; DETERMINISTIC AGENTIC AI
+            </span>
+            <span class="text-lime">AHMEDABAD &middot; MUMBAI &middot; GLOBAL</span>
+          </div>
+        </div>
+
+        <!-- Three Epochs of Evolution: Unboxed Editorial Typography -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-8 border-t border-white/10">
+          
+          <div class="space-y-4">
+            <div class="font-mono text-xs text-lime">// EPOCH 01 (2011–2016)</div>
+            <h3 class="font-display text-2xl text-white">The Anamorphic Era</h3>
+            <p class="text-sm text-mist leading-relaxed font-normal">
+              Commercial filmmaking, national ad campaigns, and 46+ feature film productions. Mastery of lighting, human emotion, typography, and anamorphic lens optics. Learning that audiences never buy features; they surrender to compelling narrative conviction.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="font-mono text-xs text-lime">// EPOCH 02 (2017–2021)</div>
+            <h3 class="font-display text-2xl text-white">The Systems Era</h3>
+            <p class="text-sm text-mist leading-relaxed font-normal">
+              Bridging cinema with 360° enterprise identity, tactile packaging architecture (Soil Story), and industrial IoT branding (AXIS Solution). Developing Vedic Astro-Branding diagnostics via Reva Astro to harmonize founder temperament with market timing.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="font-mono text-xs text-lime">// EPOCH 03 (2022–PRESENT)</div>
+            <h3 class="font-display text-2xl text-white">The Autonomous Era</h3>
+            <p class="text-sm text-mist leading-relaxed font-normal">
+              Engineering deterministic multi-agent workflows, private air-gapped RAG pipelines, and sub-50ms web flagships. Translating water's frictionless flow into automated operational intelligence that compounds enterprise value without human bottlenecks.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         06. LEADERSHIP DESK & THE CLAN
+         The Sovereign Alchemist Minds
+         ========================================================================= -->
+    <section id="clan" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-void relative border-b border-white/10">
+      <div class="w-full space-y-16 reveal">
+
+        <div class="max-w-4xl space-y-4">
+          <span class="font-mono text-xs text-lime tracking-widest uppercase block">// 05 / LEADERSHIP DESK</span>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Know the Clan: <br />
+            <span class="text-lime">Guardians of the Current.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            NEER is steered by seasoned practitioners with deep roots across Indian cinema, Vedic scholarship, and enterprise software architecture. We do not delegate leadership to junior account managers.
+          </p>
+        </div>
+
+        <div class="specimen-vessel p-8 sm:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div class="space-y-3 max-w-2xl">
+            <span class="font-mono text-xs text-lime uppercase tracking-widest block">// DIRECT EXECUTIVE ENGAGEMENT</span>
+            <h3 class="font-display text-2xl sm:text-3xl text-white">Explore Full Clan Credentials</h3>
+            <p class="text-sm text-mist leading-relaxed">
+              Read verified bios, filmography credits, and academic publications of our founders and technical directors at the official studio clan archive.
+            </p>
+          </div>
+          <a href="https://neermedia.com/know-the-clan/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-white text-obsidian font-display px-8 py-4 rounded-full hover:bg-lime transition-colors text-xs font-semibold tracking-wider whitespace-nowrap">
+            <span>VISIT CLAN ARCHIVE</span>
+            <span class="font-mono text-xs">↗</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         07. CONVERSATIONAL CTA & DIALOGUE DESK
+         ========================================================================= -->
+    <section id="dialogue" class="py-28 sm:py-36 px-6 sm:px-10 lg:px-16 bg-obsidian relative">
+      <div class="w-full max-w-4xl mx-auto space-y-12 text-center reveal">
+
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-lime">
+            <span class="w-2 h-2 rounded-full bg-lime animate-ping"></span>
+            <span>// COMMENCE THE TRANSFORMATION</span>
+          </div>
+          <h2 class="font-display text-4xl sm:text-6xl text-white tracking-tight leading-tight">
+            Ready to Evolve Your Form <br />
+            <span class="text-lime">Without Losing Your Essence?</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Whether your venture requires foundational Astro-Branding diagnostics, high-performance cinema and web flagships, or sovereign AI automation—our executive partners are ready for dialogue.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4 font-mono text-xs">
+          <a href="https://neermedia.com/contact/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-lime text-obsidian font-display px-8 py-4 rounded-full hover:scale-105 transition-transform font-medium text-sm tracking-wider shadow-xl shadow-lime/20">
+            <span>SCHEDULE STRATEGIC AUDIT</span>
+            <span>→</span>
+          </a>
+          <a href="capabilities.html" class="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/20 text-white hover:bg-white/5 transition-colors">
+            <span>Explore Full Capabilities</span>
+            <span>→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       08. ARCHITECTURAL FOOTER
+       ========================================================================= -->
+  <footer class="border-t border-white/10 bg-void px-6 sm:px-10 lg:px-16 py-16 text-mist font-mono text-xs">
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      
+      <!-- Monolithic Brand Col -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="Homepage Concpet.html" class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-lime"></span>
+          <span class="font-display text-2xl text-white tracking-tighter">NEER</span>
+        </a>
+        <p class="text-ash max-w-sm leading-relaxed text-[11px]">
+          The Hydro-Kinetic Monolith. 360° Brand Strategy, Creative Craft, Engineered AI Systems, and Astro-Branding practice. Sanskrit नीर (Nīra) — Water: The Origin of Everything.
+        </p>
+        <div class="text-ash text-[10px]">
+          LEGAL ENTITY: <a href="https://neermedia.com/" target="_blank" rel="noopener" class="text-white hover:text-lime transition-colors underline">NEER MEDIA</a> &middot; AHMEDABAD
+        </div>
+      </div>
+
+      <!-- Practices -->
+      <div class="space-y-3">
+        <span class="text-white uppercase tracking-wider block font-bold">// PRACTICES</span>
+        <a href="astro-branding.html" class="block text-mist hover:text-lime transition-colors">✦ Astro-Branding (× Reva Astro)</a>
+        <a href="ai-systems.html" class="block text-mist hover:text-lime transition-colors">● Engineered AI Workflows</a>
+        <a href="capabilities.html" class="block text-mist hover:text-lime transition-colors">■ 360° Execution Engines</a>
+        <a href="philosophy.html" class="block text-lime transition-colors">▲ Studio Philosophy</a>
+      </div>
+
+      <!-- Frameworks -->
+      <div class="space-y-3">
+        <span class="text-white uppercase tracking-wider block font-bold">// FRAMEWORKS</span>
+        <a href="philosophy.html#water-laws" class="block text-mist hover:text-lime transition-colors">The 6 Laws of Water</a>
+        <a href="philosophy.html#dashavatara" class="block text-mist hover:text-lime transition-colors">10 Dashavatara Epochs</a>
+        <a href="astro-branding.html#diagnostics" class="block text-mist hover:text-lime transition-colors">Ayadi Shadvarga Geometry</a>
+        <a href="ai-systems.html#security" class="block text-mist hover:text-lime transition-colors">The Sovereign Stack</a>
+      </div>
+
+      <!-- Verification & Connect -->
+      <div class="space-y-3">
+        <span class="text-white uppercase tracking-wider block font-bold">// CONNECT</span>
+        <a href="https://neermedia.com/know-the-clan/" target="_blank" rel="noopener" class="block text-mist hover:text-lime transition-colors">The Clan &rarr;</a>
+        <a href="https://neermedia.com/contact/" target="_blank" rel="noopener" class="block text-mist hover:text-lime transition-colors">Studio Desk &rarr;</a>
+        <a href="https://revaastro.com/" target="_blank" rel="noopener" class="block text-mist hover:text-lime transition-colors">Reva Astro &rarr;</a>
+        <span class="text-ash block pt-2 text-[10px]">VERIFIED BRAND CONSTITUTION 2026</span>
+      </div>
+
+    </div>
+
+    <div class="w-full mt-12 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4 text-[11px] text-ash">
+      <div>&copy; 2011–2026 NEER Media. All rights reserved. Currents endure.</div>
+      <div class="flex items-center gap-4">
+        <span>Obsidian // #050505</span>
+        <span>Pure White // #FFFFFF</span>
+        <span class="text-lime font-bold">Acid Lime // #CCFF00</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       INTERACTIVE SCRIPTS & DYNAMICS
+       ========================================================================= -->
+  <script>
+    (function() {
+      // 1. Kinetic Cursor Follower
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '56px';
+          ring.style.height = '56px';
+          ring.style.borderColor = '#CCFF00';
+          ring.style.backgroundColor = 'rgba(204, 255, 0, 0.05)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '38px';
+          ring.style.height = '38px';
+          ring.style.borderColor = 'rgba(204, 255, 0, 0.45)';
+          ring.style.backgroundColor = 'transparent';
+        });
+      });
+
+      // 2. Navigation Overlay Toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navCloseBtn = document.getElementById('nav-close-btn');
+      const navOverlay = document.getElementById('nav-overlay');
+      let menuOpen = false;
+
+      function toggleMenu() {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+          navOverlay.classList.remove('opacity-0', 'pointer-events-none');
+          navOverlay.classList.add('opacity-100', 'pointer-events-auto');
+          document.body.style.overflow = 'hidden';
+        } else {
+          navOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+          navOverlay.classList.add('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = '';
+        }
+      }
+
+      menuToggle.addEventListener('click', toggleMenu);
+      navCloseBtn.addEventListener('click', toggleMenu);
+      document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (menuOpen) toggleMenu();
+        });
+      });
+
+      // 3. Six Laws of Water Interactive Console
+      const lawsData = [
+        {
+          num: '// LAW 01 · ORIGIN',
+          tag: 'UDGAMA // THE SOURCE WELL',
+          title: 'Where Everything Begins.',
+          body: 'Just as biological life emerged from primordial waters, every enduring company begins as an unformed current of founder conviction. Before we write code or draw a mark, we go to the source—extracting why your business deserves to exist.',
+          app: 'Foundational Diagnostic Audit & Archetype Alignment',
+          behavior: 'Unbroken Invariant Core (H₂O)'
+        },
+        {
+          num: '// LAW 02 · CREATION',
+          tag: 'SWARUPA // FORM PRECIPITATION',
+          title: 'Precipitating Form from Potential.',
+          body: 'Water is the universal catalyst that turns dormant seed into living matter. NEER turns raw commercial ambition into tangible form—names, visual systems, physical packaging, digital flagships, and intelligent software.',
+          app: 'Brand Strategy, Tactile Packaging & Digital Systems',
+          behavior: 'Condensation into Tangible Architecture'
+        },
+        {
+          num: '// LAW 03 · FLOW',
+          tag: 'GATI // OPTIMAL CONDUCTIVITY',
+          title: 'Frictionless Movement.',
+          body: 'Water does not fight an obstacle; it finds the path of optimal conductivity around or through it. In our work, Flow means customer experiences with zero friction and internal AI workflows where data moves across systems without human bottlenecks.',
+          app: 'Edge Web Flagships & Autonomous Agentic Pipelines',
+          behavior: 'Laminar Hydraulic Viscosity'
+        },
+        {
+          num: '// LAW 04 · EVOLUTION',
+          tag: 'PARINAMA // ADAPTIVE SURVIVAL',
+          title: 'The Dashavatara Continuum.',
+          body: 'Standing water stagnates; living water stays in motion. Markets punish companies that cling to yesterday’s shape. We design modular brand systems and self-improving platforms built to adapt continuously across technological epochs.',
+          app: 'Dashavatara 10-Stage Evolutionary Matrix',
+          behavior: 'Progressive Morphological Adaptation'
+        },
+        {
+          num: '// LAW 05 · SUSTENANCE',
+          tag: 'POSHANA // GROWTH INFRASTRUCTURE',
+          title: 'The Infrastructure of Growth.',
+          body: 'Civilization forms around watersheds because water sustains life over generations. NEER provides the ongoing creative, analytical, and engineering infrastructure that nourishes long-term commercial compounding.',
+          app: 'Sovereign Advisory & Engineering Retainers',
+          behavior: 'Nourishing Category Dominance'
+        },
+        {
+          num: '// LAW 06 · TRANSFORMATION',
+          tag: 'RUPANTARA // STATE INVARIANCE',
+          title: 'Changing State Without Losing Essence.',
+          body: 'Freeze water and it becomes crystalline architecture; heat it and it becomes invisible atmosphere. Exceptional brands do the same—moving from a physical retail shelf to an interactive WebGL flagship to an autonomous AI concierge while remaining unmistakably themselves.',
+          app: 'Omnichannel Phase State Synthesis (Solid, Liquid, Vapor)',
+          behavior: 'Phase Transition Across Solid, Liquid & Vapor'
+        }
+      ];
+
+      const lawTabs = document.querySelectorAll('.law-tab');
+      const stageNum = document.getElementById('stage-num');
+      const stageTag = document.getElementById('stage-tag');
+      const stageTitle = document.getElementById('stage-title');
+      const stageBody = document.getElementById('stage-body');
+      const stageApp = document.getElementById('stage-app');
+      const stageBehavior = document.getElementById('stage-behavior');
+
+      lawTabs.forEach((tab, idx) => {
+        tab.addEventListener('click', () => {
+          lawTabs.forEach(t => {
+            t.classList.remove('border-lime/40', 'bg-white/[0.04]');
+            t.classList.add('border-white/5', 'bg-transparent');
+            t.querySelector('span:first-child').classList.remove('text-lime', 'font-bold');
+            t.querySelector('span:first-child').classList.add('text-ash');
+          });
+
+          tab.classList.add('border-lime/40', 'bg-white/[0.04]');
+          tab.classList.remove('border-white/5', 'bg-transparent');
+          tab.querySelector('span:first-child').classList.add('text-lime', 'font-bold');
+          tab.querySelector('span:first-child').classList.remove('text-ash');
+
+          const d = lawsData[idx];
+          stageNum.textContent = d.num;
+          stageTag.textContent = d.tag;
+          stageTitle.textContent = d.title;
+          stageBody.textContent = d.body;
+          stageApp.textContent = d.app;
+          stageBehavior.textContent = d.behavior;
+        });
+      });
+
+      // 4. Scroll Reveal Observer
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      reveals.forEach(r => observer.observe(r));
+
+      // 5. Ambient Liquid Caustic Canvas
+      const canvas = document.getElementById('ambient-water-canvas');
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      let t = 0;
+
+      function resizeCanvas() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function drawLiquidCaustics() {
+        t += 0.006;
+        ctx.clearRect(0, 0, w, h);
+        
+        ctx.strokeStyle = 'rgba(204, 255, 0, 0.035)';
+        ctx.lineWidth = 1.2;
+
+        for (let i = 0; i < 4; i++) {
+          ctx.beginPath();
+          for (let x = 0; x < w; x += 30) {
+            const y = Math.sin(x * 0.003 + t + i) * 60 + Math.cos(x * 0.002 - t) * 40 + (h * 0.3 * (i + 1));
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(drawLiquidCaustics);
+      }
+      drawLiquidCaustics();
+
+    })();
+  </script>
+
+</body>
+</html>

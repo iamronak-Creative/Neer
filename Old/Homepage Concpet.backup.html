@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEER — Fluid Intelligence. Living Brands.</title>
+  <meta name="description" content="NEER architects living brands, flagship digital platforms, autonomous AI systems, and classical Astro-Branding advisory built to flow ahead of change." />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#050505',
+            charcoal: '#111115',
+            surface: '#17171C',
+            lime: '#CCFF00',
+            solar: '#E5A93C',
+            mist: '#A1A1AA'
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --neer-black: #050505;
+      --neer-card: #121216;
+      --neer-lime: #CCFF00;
+      --neer-white: #FFFFFF;
+    }
+    body {
+      background-color: var(--neer-black);
+      color: var(--neer-white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    ::selection {
+      background: #CCFF00;
+      color: #050505;
+    }
+    /* Custom Circular Cursor Follower (NEER Signature) */
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid rgba(204, 255, 0, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
+      mix-blend-mode: difference;
+    }
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background: #CCFF00;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+    }
+    @media (max-width: 1024px) {
+      #cursor-ring, #cursor-dot { display: none; }
+    }
+    /* Smart Header: Hides on Downward Scroll, Reveals on Reverse Scroll */
+    .smart-header {
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .smart-header.nav-hidden {
+      opacity: 0;
+      transform: translateY(-42px);
+      pointer-events: none;
+    }
+    .smart-header.nav-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    /* Detached Soft-Rounded Cards — Zero Shared Objects */
+    .neer-card {
+      background: linear-gradient(145deg, rgba(24, 24, 30, 0.92) 0%, rgba(12, 12, 16, 0.96) 100%);
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.45s ease;
+    }
+    .neer-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(204, 255, 0, 0.4);
+      box-shadow: 0 28px 56px -14px rgba(0, 0, 0, 0.8), 0 0 36px -10px rgba(204, 255, 0, 0.15);
+    }
+    /* Scroll Reveal Animation Classes */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Soft Circular Ambient Glows */
+    .ambient-orb {
+      border-radius: 50%;
+      filter: blur(95px);
+      pointer-events: none;
+    }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-10px) scale(1.02); }
+    }
+    .spin-slow { animation: spinSlow 52s linear infinite; }
+    .spin-reverse { animation: spinReverse 38s linear infinite; }
+    .float-slow { animation: floatSlow 6s ease-in-out infinite; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NEER Custom Circular Cursor -->
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+
+  <!-- ===================================================================== -->
+  <!-- SMART SCROLL HEADER (Hides on vertical scroll, reveals on reverse)    -->
+  <!-- ===================================================================== -->
+  <header id="smart-header" class="smart-header nav-visible fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex items-center justify-between">
+    <!-- Detached Pill Logo Mark with Live NEER Icon -->
+    <a href="#top" class="group flex items-center gap-3 bg-charcoal/90 backdrop-blur-xl px-6 py-3.5 rounded-full border border-white/10 hover:border-lime/50 transition-all shadow-lg">
+      <img src="https://neermedia.com/wp-content/uploads/2024/10/neer-icon-light.png" alt="NEER Icon" class="w-6 h-6 object-contain" onerror="this.style.display='none'" />
+      <span class="w-2.5 h-2.5 rounded-full bg-lime group-hover:scale-125 transition-transform"></span>
+      <span class="font-display font-extrabold text-xl tracking-tight text-white">NEER</span>
+    </a>
+
+    <!-- Right Detached Controls: Quick CTA Pill + Circular Hamburger Menu Trigger -->
+    <div class="flex items-center gap-3">
+      <a href="#diagnostic" class="hidden sm:inline-flex items-center gap-2.5 bg-charcoal/90 backdrop-blur-xl text-white hover:bg-lime hover:text-obsidian px-5 py-3.5 rounded-full text-sm font-medium border border-white/10 transition-all shadow-lg">
+        <span>Initiate Transformation</span>
+        <span class="w-5 h-5 rounded-full bg-lime/20 text-lime flex items-center justify-center text-xs">→</span>
+      </a>
+
+      <button id="menu-toggle" aria-label="Toggle Navigation Menu" class="flex items-center gap-3 bg-lime text-obsidian px-5 py-3.5 rounded-full font-semibold text-sm hover:scale-105 transition-transform shadow-xl shadow-lime/15">
+        <span id="menu-label">Menu</span>
+        <span class="w-7 h-7 rounded-full bg-obsidian text-lime flex flex-col items-center justify-center gap-1">
+          <span id="bar-1" class="w-3.5 h-0.5 bg-lime rounded-full transition-transform duration-300"></span>
+          <span id="bar-2" class="w-3.5 h-0.5 bg-lime rounded-full transition-transform duration-300"></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- FULL-SCREEN HAMBURGER MENU (PRIORITY: ASTRO-BRANDING & AI SYSTEMS)    -->
+  <!-- ===================================================================== -->
+  <div id="hamburger-overlay" class="fixed inset-0 z-40 bg-obsidian/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-opacity duration-500 overflow-y-auto pt-28 pb-16 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Priority Service Pillars (Left 8 Cols) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- PRIORITY PILLAR 1: ASTRO-BRANDING -->
+            <div class="neer-card p-7 border border-solar/35">
+              <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-solar/15 text-solar font-mono text-xs">✦ PRIORITY PILLAR 01</span>
+                <a href="#astro-branding" class="menu-link w-10 h-10 rounded-full bg-white/5 hover:bg-solar hover:text-obsidian flex items-center justify-center transition-colors">→</a>
+              </div>
+              <a href="#astro-branding" class="menu-link block font-display text-2xl font-bold text-white hover:text-solar transition-colors mb-2">Astro-Branding</a>
+              <p class="text-xs text-mist mb-5">Powered by Reva Astro — Classical Vedic textual insight translated into modern brand strategy.</p>
+              <div class="flex flex-wrap gap-2">
+                <a href="#astro-branding" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-solar/20 hover:text-solar text-xs text-white/90 transition-colors">01. Founder &amp; Venture Alignment</a>
+                <a href="#astro-branding" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-solar/20 hover:text-solar text-xs text-white/90 transition-colors">02. Phonetic &amp; Classical Naming</a>
+                <a href="#astro-branding" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-solar/20 hover:text-solar text-xs text-white/90 transition-colors">03. Visual &amp; Spatial Harmony (Vastu)</a>
+                <a href="#astro-branding" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-solar/20 hover:text-solar text-xs text-white/90 transition-colors">04. Strategic Launch Windows (Muhurta)</a>
+                <a href="#astro-branding" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-solar/20 hover:text-solar text-xs text-white/90 transition-colors">05. Classical Texts &amp; Methodology</a>
+                <a href="https://revaastro.com" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-full bg-solar/15 text-solar text-xs font-medium hover:bg-solar hover:text-obsidian transition-colors">Visit Reva Astro ↗</a>
+              </div>
+            </div>
+
+            <!-- PRIORITY PILLAR 2: AI SYSTEMS -->
+            <div class="neer-card p-7 border border-lime/35">
+              <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime/15 text-lime font-mono text-xs">
+                  <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span> PRIORITY PILLAR 02
+                </span>
+                <a href="#ai-systems" class="menu-link w-10 h-10 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian flex items-center justify-center transition-colors">→</a>
+              </div>
+              <a href="#ai-systems" class="menu-link block font-display text-2xl font-bold text-white hover:text-lime transition-colors mb-2">AI Systems</a>
+              <p class="text-xs text-mist mb-5">Engineered operational autonomy, multi-agent systems, and private knowledge cores.</p>
+              <div class="flex flex-wrap gap-2">
+                <a href="#ai-systems" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">01. Workflow &amp; Process Automation</a>
+                <a href="#ai-systems" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">02. Autonomous AI Agents</a>
+                <a href="#ai-systems" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">03. Private Knowledge Cores (RAG)</a>
+                <a href="#ai-systems" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">04. AI Revenue &amp; WhatsApp Concierges</a>
+                <a href="#ai-systems" class="menu-link px-3.5 py-2 rounded-full bg-white/5 hover:bg-lime/20 hover:text-lime text-xs text-white/90 transition-colors">05. Custom AI Applications</a>
+                <a href="#ai-systems" class="menu-link px-3.5 py-2 rounded-full bg-lime/15 text-lime text-xs font-medium hover:bg-lime hover:text-obsidian transition-colors">Launch AI Blueprint →</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CORE PILLAR 3: CAPABILITIES -->
+          <div class="neer-card p-7">
+            <div class="flex items-center justify-between mb-3">
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-white font-mono text-xs">CORE PILLAR 03 · EXECUTION ENGINE</span>
+              <a href="#trinity" class="menu-link w-10 h-10 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian flex items-center justify-center transition-colors">→</a>
+            </div>
+            <a href="#trinity" class="menu-link block font-display text-2xl font-bold text-white hover:text-lime transition-colors mb-2">Capabilities — Brand, Digital &amp; Film Craft</a>
+            <p class="text-xs text-mist mb-4">The outward vessel that carries your business across every physical and digital surface.</p>
+            <div class="flex flex-wrap gap-2.5">
+              <a href="#trinity" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">01. Brand Strategy &amp; Positioning</a>
+              <a href="#trinity" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">02. Visual Identity &amp; Design Systems</a>
+              <a href="#trinity" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">03. Packaging Architecture</a>
+              <a href="#trinity" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">04. Flagship Websites &amp; Product UI/UX</a>
+              <a href="#trinity" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">05. Headless &amp; Custom E-Commerce</a>
+              <a href="#trinity" class="menu-link px-4 py-2 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-xs text-white transition-colors">06. Commercial Film, CGI &amp; VFX</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Index & Studio Coordinates (Right 4 Cols) -->
+        <div class="lg:col-span-4 flex flex-col justify-between gap-6">
+          <div class="neer-card p-7 flex flex-col gap-3">
+            <span class="font-mono text-xs text-mist uppercase tracking-wider mb-1">Navigation Index</span>
+            <a href="#work" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-bold text-lg transition-all">
+              <span>Work &amp; Proof</span><span>→</span>
+            </a>
+            <a href="#water-thesis" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-bold text-lg transition-all">
+              <span>Philosophy &amp; Origin</span><span>→</span>
+            </a>
+            <a href="#evolution" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-bold text-lg transition-all">
+              <span>Evolution Narrative</span><span>→</span>
+            </a>
+            <a href="#perspectives" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian font-display font-bold text-lg transition-all">
+              <span>Perspectives Journal</span><span>→</span>
+            </a>
+            <a href="#diagnostic" class="menu-link flex items-center justify-between px-5 py-3.5 rounded-full bg-lime text-obsidian font-display font-bold text-lg transition-all mt-2">
+              <span>Initiate Transformation</span><span>→</span>
+            </a>
+          </div>
+
+          <div class="neer-card p-7">
+            <span class="font-mono text-xs text-lime uppercase tracking-wider block mb-2">Ahmedabad · Global Desk</span>
+            <p class="text-sm text-white font-medium mb-1">+91 999 84 999 44</p>
+            <p class="text-sm text-mist mb-4">connect@neermedia.com</p>
+            <p class="text-xs text-mist/70 leading-relaxed">704, 7th Floor, Colonnade, Iskon Cross Road, Ahmedabad – 380015</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 01. HERO — THE HYDRO-KINETIC MONOLITH                                 -->
+  <!-- ===================================================================== -->
+  <section id="top" class="relative min-h-screen flex items-center pt-28 pb-20 px-6 md:px-12 overflow-hidden">
+    <div class="ambient-orb w-96 h-96 bg-lime/15 absolute -top-16 right-1/4"></div>
+    <div class="ambient-orb w-[520px] h-[520px] bg-white/5 absolute bottom-0 -left-32"></div>
+
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      <!-- Left 7 Cols: Disciplined Single Headline + Concise Supporting Copy + Clear CTA -->
+      <div class="lg:col-span-7 space-y-8 reveal-up">
+        <h1 class="font-display font-extrabold text-4xl sm:text-6xl xl:text-7xl leading-[1.06] tracking-tight text-white">
+          Monuments Fracture. <br />
+          <span class="text-lime">Currents Endure.</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-mist leading-relaxed max-w-2xl font-normal">
+          Most companies build for a single market moment—a static identity, a brittle website, and manual workflows that crack the moment the terrain shifts. NEER architects living brands, flagship digital platforms, and autonomous AI systems built to flow ahead of change.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#diagnostic" class="inline-flex items-center gap-3 bg-lime text-obsidian font-semibold px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-xl shadow-lime/20">
+            <span>Initiate Transformation</span>
+            <span class="w-7 h-7 rounded-full bg-obsidian text-lime flex items-center justify-center text-sm">→</span>
+          </a>
+          <a href="#work" class="inline-flex items-center gap-3 bg-charcoal hover:bg-surface text-white font-medium px-8 py-4 rounded-full border border-white/10 hover:border-white/30 transition-all">
+            <span>Explore Selected Work</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right 5 Cols: Circular Hydro-Kinetic Liquid Sphere Image + Interactive Caustic Canvas Overlay -->
+      <div class="lg:col-span-5 flex justify-center reveal-up">
+        <div class="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[440px] md:h-[440px] rounded-full p-3 bg-charcoal/70 border border-white/15 flex items-center justify-center shadow-2xl float-slow">
+          <div class="absolute inset-2 rounded-full border border-dashed border-lime/30 spin-slow pointer-events-none z-20"></div>
+          <div class="absolute inset-6 rounded-full border border-white/10 spin-reverse pointer-events-none z-20"></div>
+
+          <!-- Generated Hero Visual Asset -->
+          <img
+            src="images/watermarked_img_8652899205299541425.jpg"
+            alt="NEER Hydro-Kinetic Liquid Sphere"
+            class="w-full h-full object-cover rounded-full relative z-10"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_8652899205299541425.jpg.png';}else{this.style.opacity='0';}"
+          />
+          <!-- Interactive Caustic Wave Canvas Overlay -->
+          <canvas id="hydro-canvas" width="420" height="420" class="absolute inset-3 w-[calc(100%-24px)] h-[calc(100%-24px)] rounded-full z-10 mix-blend-screen pointer-events-auto cursor-pointer"></canvas>
+
+          <div class="absolute bottom-5 z-30 px-4 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-lime/30 font-mono text-[11px] text-lime tracking-wider">
+            ● HYDRO-KINETIC MONOLITH
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 02. THE WATER THESIS & LIVE TELEMETRY                                 -->
+  <!-- ===================================================================== -->
+  <section id="water-thesis" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex flex-col gap-10">
+
+      <!-- Part A: The Water Thesis Card + Behind-the-Scenes Heritage Visual -->
+      <div class="neer-card p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal-up">
+        <div class="lg:col-span-5 space-y-5">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/10 text-lime font-mono text-xs">
+            01 / THE WATER THESIS
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+            Everything Begins as Water.
+          </h2>
+          <!-- Live NEER Studio Behind-the-Scenes Pill Visual -->
+          <div class="relative h-44 rounded-[24px] overflow-hidden border border-white/10">
+            <img
+              src="https://neermedia.com/wp-content/uploads/2024/11/neer_media_fil_shoot_behind_the_scene.webp"
+              alt="NEER Studio Cinema & Craft Heritage"
+              class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700"
+              onerror="this.parentElement.style.background='#111115'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent flex items-end p-4">
+              <span class="px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md font-mono text-[11px] text-lime border border-white/10">
+                NEER STUDIO · CINEMA TO INTELLIGENCE SINCE 2011
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5 text-mist text-base sm:text-lg leading-relaxed">
+          <p>
+            Before a market has a leader, it has a current. In Sanskrit, we call this primordial force <strong class="text-white font-medium">Neer</strong>. Water is the only element in nature that transitions effortlessly across phase states—solid crystal, adaptive liquid, expansive vapor—without ever altering its molecular essence.
+          </p>
+          <p>
+            We exist for founders and enterprises ready to outgrow static form. We distill your origin through strategy. We shape your identity with cinematic precision. And we wire your operations with intelligence that learns, adapts, and compounds.
+          </p>
+        </div>
+      </div>
+
+      <!-- Part B: Live Telemetry (4 Detached Soft-Rounded Pods — No Shared Objects) -->
+      <div class="space-y-6 reveal-up">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
+          <div>
+            <span class="font-mono text-xs text-lime uppercase tracking-widest block mb-1">02 / LIVE TELEMETRY</span>
+            <h3 class="font-display font-bold text-2xl sm:text-3xl text-white">Fifteen Years of Velocity.</h3>
+          </div>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-charcoal border border-white/10 font-mono text-xs text-mist self-start sm:self-auto">
+            <span class="w-2 h-2 rounded-full bg-lime animate-ping"></span> AHMEDABAD · GLOBAL [23.0225° N, 72.5714° E]
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="neer-card p-8 flex flex-col justify-between gap-6">
+            <div class="w-14 h-14 rounded-full bg-lime/15 text-lime flex items-center justify-center font-mono font-bold text-sm border border-lime/30">01</div>
+            <div>
+              <div class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-2">2011</div>
+              <p class="text-sm text-mist leading-relaxed">Founded in Ahmedabad by Neeraj Rai as a cinema, VFX, and color-grading studio.</p>
+            </div>
+          </div>
+
+          <div class="neer-card p-8 flex flex-col justify-between gap-6">
+            <div class="w-14 h-14 rounded-full bg-white/5 text-white flex items-center justify-center font-mono font-bold text-sm border border-white/15">02</div>
+            <div>
+              <div class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-2">46<span class="text-lime">+</span></div>
+              <p class="text-sm text-mist leading-relaxed">Feature films finished before expanding in 2016 into brand architecture and full-stack digital engineering.</p>
+            </div>
+          </div>
+
+          <div class="neer-card p-8 flex flex-col justify-between gap-6">
+            <div class="w-14 h-14 rounded-full bg-white/5 text-white flex items-center justify-center font-mono font-bold text-sm border border-white/15">03</div>
+            <div>
+              <div class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-2">2,000<span class="text-lime">+</span></div>
+              <p class="text-sm text-mist leading-relaxed">Brand systems, packaging architectures, commercial films, and digital platforms shipped.</p>
+            </div>
+          </div>
+
+          <div class="neer-card p-8 flex flex-col justify-between gap-6">
+            <div class="w-14 h-14 rounded-full bg-lime text-obsidian flex items-center justify-center font-mono font-bold text-sm">04</div>
+            <div>
+              <div class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-2">03</div>
+              <p class="text-sm text-mist leading-relaxed">Integrated practices—Astro-Branding, AI Engineering, and Brand Craft—operating as one continuous current.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 03. THE TRINITY OF TRANSFORMATION (PRIORITY: ASTRO & AI FIRST)        -->
+  <!-- ===================================================================== -->
+  <section id="trinity" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-12">
+      <div class="max-w-3xl space-y-4 reveal-up">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/10 text-lime font-mono text-xs">
+          03 / CAPABILITIES
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+          Three Practices. One Continuous Current.
+        </h2>
+        <p class="text-mist text-base sm:text-lg leading-relaxed">
+          Fragmented vendors build fragmented companies. When your brand agency does not understand software, and your IT consultancy does not understand human desire, growth stalls at the handoff. We unite three disciplines under a single roof so when your business moves, how it runs, and how it is seen are architected together.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 reveal-up">
+
+        <!-- Priority I: Astro-Branding -->
+        <div class="neer-card p-8 sm:p-10 flex flex-col justify-between gap-8 border-solar/35">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <span class="w-14 h-14 rounded-full bg-solar/15 text-solar border border-solar/40 flex items-center justify-center font-display font-bold text-lg">✦ I</span>
+              <span class="px-3.5 py-1 rounded-full bg-solar/15 text-solar font-mono text-xs">NEER × REVA ASTRO</span>
+            </div>
+            <h3 class="font-display font-bold text-2xl sm:text-3xl text-white">
+              Astro-Branding (Powered by Reva Astro)
+            </h3>
+            <p class="text-mist text-sm sm:text-base leading-relaxed">
+              We bring classical temporal clarity to modern commercial strategy. In partnership with Reva Astro, we translate classical Vedic textual analysis into founder-venture alignment, phonetic naming, spatial harmony, and high-conviction launch timing.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Founder-Venture Alignment</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Phonetic Naming</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Spatial Vastu Proportion</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Strategic Launch Windows</span>
+            </div>
+          </div>
+          <a href="#astro-branding" class="inline-flex items-center justify-between w-full px-6 py-4 rounded-full bg-white/5 hover:bg-solar hover:text-obsidian text-white font-medium text-sm transition-all">
+            <span>Explore Astro-Branding</span>
+            <span class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center">→</span>
+          </a>
+        </div>
+
+        <!-- Priority II: Engineered AI Systems -->
+        <div class="neer-card p-8 sm:p-10 flex flex-col justify-between gap-8 border-lime/40">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <span class="w-14 h-14 rounded-full bg-lime/15 text-lime border border-lime/40 flex items-center justify-center font-display font-bold text-lg">● II</span>
+              <span class="px-3.5 py-1 rounded-full bg-lime/15 text-lime font-mono text-xs">OPERATIONAL AUTONOMY</span>
+            </div>
+            <h3 class="font-display font-bold text-2xl sm:text-3xl text-white">
+              Engineered AI &amp; Workflow Systems
+            </h3>
+            <p class="text-mist text-sm sm:text-base leading-relaxed">
+              We move businesses from superficial AI experiments to operational autonomy. Our engineering team designs and deploys custom AI agents, private enterprise knowledge cores, and automated CRM and ERP pipelines that sever manual bottlenecks and compound output.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Workflow Automation</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Autonomous AI Agents</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Private RAG Knowledge Cores</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">AI Revenue Concierges</span>
+            </div>
+          </div>
+          <a href="#ai-systems" class="inline-flex items-center justify-between w-full px-6 py-4 rounded-full bg-lime text-obsidian font-semibold text-sm hover:scale-[1.02] transition-all">
+            <span>Explore Engineered AI</span>
+            <span class="w-7 h-7 rounded-full bg-obsidian text-lime flex items-center justify-center">→</span>
+          </a>
+        </div>
+
+        <!-- Core Pillar III: Brand Strategy & Creative Intelligence -->
+        <div class="neer-card p-8 sm:p-10 flex flex-col justify-between gap-8">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <span class="w-14 h-14 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center font-display font-bold text-lg">III</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/10 text-white/80 font-mono text-xs">CAPABILITIES ENGINE</span>
+            </div>
+            <h3 class="font-display font-bold text-2xl sm:text-3xl text-white">
+              Brand Strategy &amp; Creative Intelligence
+            </h3>
+            <p class="text-mist text-sm sm:text-base leading-relaxed">
+              We build category-defining identities and high-converting digital flagships. From positioning, naming, and packaging systems to custom WebGL websites, headless e-commerce, and cinema-grade commercial films, we make your brand unmistakable across shelf and screen.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Positioning &amp; Naming</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Visual Identity &amp; Packaging</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Flagship Web &amp; Commerce</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-white/5 text-xs text-white/90">Commercial Film &amp; VFX</span>
+            </div>
+          </div>
+          <a href="#work" class="inline-flex items-center justify-between w-full px-6 py-4 rounded-full bg-white/5 hover:bg-white hover:text-obsidian text-white font-medium text-sm transition-all">
+            <span>Explore Brand &amp; Digital</span>
+            <span class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center">→</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 04. SELECTED PROOF — CASE STUDIES WITH GENERATED VISUAL ASSETS        -->
+  <!-- ===================================================================== -->
+  <section id="work" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-12">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal-up">
+        <div class="space-y-4 max-w-2xl">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/10 text-lime font-mono text-xs">
+            04 / SELECTED PROOF
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+            Strategy Is Theory Until It Ships.
+          </h2>
+          <p class="text-mist text-base sm:text-lg">
+            A look at how we have re-architected identities, digital products, and commercial narratives for industrial leaders and challenger brands.
+          </p>
+        </div>
+        <a href="https://neermedia.com/work/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-charcoal border border-white/15 hover:border-lime text-white text-sm font-medium self-start md:self-auto transition-all">
+          <span>View Full Work Archive (20+ Projects)</span>
+          <span class="w-6 h-6 rounded-full bg-lime text-obsidian flex items-center justify-center text-xs">↗</span>
+        </a>
+      </div>
+
+      <!-- Client Logo Trust Pills (Featuring Live Verified Client Logos from neermedia.com) -->
+      <div class="space-y-3 reveal-up">
+        <span class="font-mono text-xs text-mist uppercase tracking-widest block px-2">Trusted Across Industries Since 2011</span>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <a href="https://neermedia.com/logo-showcase/axis/" target="_blank" rel="noopener" class="neer-card p-5 rounded-full flex flex-col items-center justify-center text-center group">
+            <img src="https://neermedia.com/wp-content/uploads/2024/12/axis-logo-neer-media-client.webp" alt="AXIS Solution" class="h-7 object-contain opacity-75 group-hover:opacity-100 transition-opacity mb-1" onerror="this.style.display='none'" />
+            <span class="font-display font-bold text-sm text-white group-hover:text-lime transition-colors">AXIS Solution</span>
+            <span class="font-mono text-[10px] text-mist">Enterprise Identity</span>
+          </a>
+          <a href="https://neermedia.com/logo-showcase/yourdsa/" target="_blank" rel="noopener" class="neer-card p-5 rounded-full flex flex-col items-center justify-center text-center group">
+            <img src="https://neermedia.com/wp-content/uploads/2024/12/your-dsa-logo-neer-media-client.webp" alt="YourDSA" class="h-7 object-contain opacity-75 group-hover:opacity-100 transition-opacity mb-1" onerror="this.style.display='none'" />
+            <span class="font-display font-bold text-sm text-white group-hover:text-lime transition-colors">YourDSA</span>
+            <span class="font-mono text-[10px] text-mist">Fintech Platform</span>
+          </a>
+          <a href="https://neermedia.com/logo-showcase/soil-story/" target="_blank" rel="noopener" class="neer-card p-5 rounded-full flex flex-col items-center justify-center text-center group">
+            <img src="https://neermedia.com/wp-content/uploads/2024/12/soil-story-logo-neer-media-client.webp" alt="Soil Story" class="h-7 object-contain opacity-75 group-hover:opacity-100 transition-opacity mb-1" onerror="this.style.display='none'" />
+            <span class="font-display font-bold text-sm text-white group-hover:text-lime transition-colors">Soil Story</span>
+            <span class="font-mono text-[10px] text-mist">Packaging System</span>
+          </a>
+          <a href="https://neermedia.com/logo-showcase/cocacola/" target="_blank" rel="noopener" class="neer-card p-5 rounded-full flex flex-col items-center justify-center text-center group">
+            <span class="font-display font-bold text-base text-white/80 group-hover:text-lime transition-colors">Coca-Cola</span>
+            <span class="font-mono text-[10px] text-mist mt-0.5">Visual Showcase</span>
+          </a>
+          <div class="neer-card p-5 rounded-full flex flex-col items-center justify-center text-center group">
+            <span class="font-display font-bold text-base text-white/80 group-hover:text-lime transition-colors">eZetus</span>
+            <span class="font-mono text-[10px] text-mist mt-0.5">Pharma Packaging</span>
+          </div>
+          <div class="neer-card p-5 rounded-full flex flex-col items-center justify-center text-center group">
+            <span class="font-display font-bold text-base text-white/80 group-hover:text-lime transition-colors">Courtyard</span>
+            <span class="font-mono text-[10px] text-mist mt-0.5">Spatial Identity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Detached Soft-Rounded Case Study Cards with Generated High-Res Visuals -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Case 01: AXIS Solution -->
+        <article class="neer-card p-7 sm:p-9 flex flex-col justify-between gap-6 reveal-up group">
+          <div class="space-y-6">
+            <div class="relative h-64 rounded-[24px] bg-obsidian overflow-hidden border border-white/10">
+              <img
+                src="images/watermarked_img_2387394198825788672.jpg"
+                alt="AXIS Solution Enterprise Identity System"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_2387394198825788672.jpg.png';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[11px] text-lime">01 / ENTERPRISE ARCHITECTURE</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Brand Strategy</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Visual System</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Corporate Rollout</span>
+            </div>
+
+            <h3 class="font-display font-bold text-2xl text-white">AXIS Solution — Enterprise Identity Architecture</h3>
+            <p class="text-sm sm:text-base text-mist leading-relaxed">
+              AXIS Solution required an identity system capable of commanding authority across complex industrial and enterprise markets. We stripped away legacy visual noise to engineer a razor-sharp geometric mark, modular typography, and a unified corporate design system deployed across digital and physical infrastructure.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <span class="font-mono text-xs text-lime/80">[Multi-Division Identity System]</span>
+            <a href="https://neermedia.com/logo-showcase/axis/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian text-xs font-semibold transition-all">
+              <span>Examine Case Study</span><span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Case 02: YourDSA -->
+        <article class="neer-card p-7 sm:p-9 flex flex-col justify-between gap-6 reveal-up group">
+          <div class="space-y-6">
+            <div class="relative h-64 rounded-[24px] bg-obsidian overflow-hidden border border-white/10">
+              <img
+                src="images/watermarked_img_2550245308471080795.jpg"
+                alt="YourDSA Fintech Platform UI"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_2550245308471080795.jpg.png';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[11px] text-lime">02 / FINTECH PLATFORM</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Identity Design</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Product UI/UX</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Web Architecture</span>
+            </div>
+
+            <h3 class="font-display font-bold text-2xl text-white">YourDSA — Fintech Platform &amp; Brand System</h3>
+            <p class="text-sm sm:text-base text-mist leading-relaxed">
+              In an opaque credit and loan distribution market, YourDSA needed to turn institutional trust into frictionless digital action. We built the brand from first principles and engineered a clean, high-velocity web platform that streamlines borrower discovery and nationwide partner onboarding.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <span class="font-mono text-xs text-lime/80">[End-to-End Brand &amp; Product Ship]</span>
+            <a href="https://neermedia.com/logo-showcase/yourdsa/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian text-xs font-semibold transition-all">
+              <span>Examine Case Study</span><span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Case 03: Soil Story -->
+        <article class="neer-card p-7 sm:p-9 flex flex-col justify-between gap-6 reveal-up group">
+          <div class="space-y-6">
+            <div class="relative h-64 rounded-[24px] bg-obsidian overflow-hidden border border-white/10">
+              <img
+                src="images/watermarked_img_1424694392454476817.jpg"
+                alt="Soil Story Packaging Architecture"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_1424694392454476817.jpg.png';}"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[11px] text-solar">03 / CONSUMER &amp; PACKAGING</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Positioning</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Verbal Identity</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Structural Packaging</span>
+            </div>
+
+            <h3 class="font-display font-bold text-2xl text-white">Soil Story — Consumer Brand &amp; Packaging Architecture</h3>
+            <p class="text-sm sm:text-base text-mist leading-relaxed">
+              Organic consumer brands frequently disappear into a sea of predictable craft-paper clichés. For Soil Story, we developed an earth-first yet unmistakably modern typographic and packaging system designed to hold shelf authority across every SKU.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <span class="font-mono text-xs text-solar">[Retail &amp; D2C Packaging System]</span>
+            <a href="https://neermedia.com/logo-showcase/soil-story/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian text-xs font-semibold transition-all">
+              <span>Examine Case Study</span><span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Case 04: Commercial Film & VFX Reel -->
+        <article class="neer-card p-7 sm:p-9 flex flex-col justify-between gap-6 reveal-up group">
+          <div class="space-y-6">
+            <div class="relative h-64 rounded-[24px] bg-obsidian overflow-hidden border border-white/10 flex items-center justify-center">
+              <img
+                src="images/watermarked_img_15093798613234770069.jpg"
+                alt="NEER Commercial Film, CGI and VFX Reel"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_15093798613234770069.jpg.png';}"
+              />
+              <div class="absolute inset-0 bg-obsidian/35 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-lime text-obsidian flex items-center justify-center font-bold text-xl shadow-xl shadow-lime/30 group-hover:scale-110 transition-transform">▶</div>
+              </div>
+              <span class="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 font-mono text-[11px] text-lime">04 / 46+ FILM HERITAGE</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Commercial Direction</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">3D Visualization</span>
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-mist">Color Science &amp; VFX</span>
+            </div>
+
+            <h3 class="font-display font-bold text-2xl text-white">Cinematic &amp; Commercial Production Reel</h3>
+            <p class="text-sm sm:text-base text-mist leading-relaxed">
+              Rooted in our heritage across 46+ feature films, our production studio directs, shoots, grades, and finishes high-impact commercial films and 3D product visuals engineered to arrest attention within the first frame.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <span class="font-mono text-xs text-lime/80">[Coca-Cola &amp; Commercial Showcases]</span>
+            <a href="https://neermedia.com/logo-showcase/cocacola/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-lime hover:text-obsidian text-xs font-semibold transition-all">
+              <span>Watch the Production Reel</span><span>↗</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 05. ENGINEERED AI INTERACTIVE BLUEPRINT                               -->
+  <!-- ===================================================================== -->
+  <section id="ai-systems" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-10 reveal-up">
+
+      <div class="max-w-3xl space-y-4">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/15 text-lime font-mono text-xs">
+          05 / ENGINEERED INTELLIGENCE
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+          Stop Prompting. Start Engineering Autonomous Operations.
+        </h2>
+        <p class="text-mist text-base sm:text-lg leading-relaxed">
+          Most companies are trapped in generative AI theatre—playing with chat windows while their teams still burn thousands of hours copying data between spreadsheets, inboxes, and legacy software. Real transformation requires rewiring how work actually flows.
+        </p>
+      </div>
+
+      <!-- Interactive Pill Selector -->
+      <div class="flex flex-wrap gap-3" role="tablist">
+        <button data-ai-tab="0" class="ai-tab-btn px-6 py-3.5 rounded-full font-medium text-sm bg-lime text-obsidian transition-all">
+          01 / Autonomous Revenue &amp; Lead Triage
+        </button>
+        <button data-ai-tab="1" class="ai-tab-btn px-6 py-3.5 rounded-full font-medium text-sm bg-charcoal text-white border border-white/10 hover:border-lime/40 transition-all">
+          02 / Private Enterprise Knowledge Core
+        </button>
+        <button data-ai-tab="2" class="ai-tab-btn px-6 py-3.5 rounded-full font-medium text-sm bg-charcoal text-white border border-white/10 hover:border-lime/40 transition-all">
+          03 / Cross-System Process Orchestration
+        </button>
+      </div>
+
+      <!-- Active AI Blueprint Display Card -->
+      <div class="neer-card p-8 sm:p-12 border border-lime/25 space-y-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-5">
+            <span id="ai-badge" class="inline-block px-3.5 py-1 rounded-full bg-lime/15 text-lime font-mono text-xs">BLUEPRINT 01 · REVENUE &amp; SPEED</span>
+            <h3 id="ai-title" class="font-display font-bold text-2xl sm:text-3xl text-white">Autonomous Revenue &amp; Lead Triage</h3>
+            <div class="space-y-3">
+              <div class="p-4 rounded-2xl bg-obsidian/70 border border-white/5">
+                <span class="font-mono text-xs text-red-400 block mb-1">THE FRICTION</span>
+                <p id="ai-friction" class="text-sm text-mist">High-intent leads from ads and WhatsApp wait hours for a human reply, decaying before sales ever makes contact.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-obsidian/70 border border-lime/25">
+                <span class="font-mono text-xs text-lime block mb-1">THE ENGINEERED SYSTEM</span>
+                <p id="ai-system" class="text-sm text-white/90">A multilingual AI concierge (English, Hindi, Gujarati) wired into your verified product catalog and CRM—qualifying intent in under 10 seconds, answering technical queries, scoring the account, and booking the discovery call automatically.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-6 rounded-[28px] bg-obsidian border border-white/10 flex items-start gap-4">
+              <span class="w-10 h-10 rounded-full bg-lime/15 text-lime font-mono text-xs flex items-center justify-center shrink-0">N1</span>
+              <div>
+                <span class="font-mono text-[11px] text-mist uppercase">Trigger Node</span>
+                <h4 id="node-1" class="font-display font-bold text-white text-base mt-0.5">WhatsApp &amp; Web Webhook</h4>
+              </div>
+            </div>
+            <div class="p-6 rounded-[28px] bg-obsidian border border-white/10 flex items-start gap-4">
+              <span class="w-10 h-10 rounded-full bg-lime/15 text-lime font-mono text-xs flex items-center justify-center shrink-0">N2</span>
+              <div>
+                <span class="font-mono text-[11px] text-mist uppercase">Intelligence Layer</span>
+                <h4 id="node-2" class="font-display font-bold text-white text-base mt-0.5">Multilingual Intent &amp; Catalog RAG</h4>
+              </div>
+            </div>
+            <div class="p-6 rounded-[28px] bg-obsidian border border-white/10 flex items-start gap-4">
+              <span class="w-10 h-10 rounded-full bg-lime/15 text-lime font-mono text-xs flex items-center justify-center shrink-0">N3</span>
+              <div>
+                <span class="font-mono text-[11px] text-mist uppercase">Guardrail Node</span>
+                <h4 id="node-3" class="font-display font-bold text-white text-base mt-0.5">Lead Scoring &amp; Policy Verification</h4>
+              </div>
+            </div>
+            <div class="p-6 rounded-[28px] bg-obsidian border border-lime/40 flex items-start gap-4">
+              <span class="w-10 h-10 rounded-full bg-lime text-obsidian font-mono font-bold text-xs flex items-center justify-center shrink-0">N4</span>
+              <div>
+                <span class="font-mono text-[11px] text-lime uppercase">Autonomous Output</span>
+                <h4 id="node-4" class="font-display font-bold text-white text-base mt-0.5">CRM Sync &amp; Calendar Booking</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="space-y-2">
+            <span class="font-mono text-xs text-lime uppercase tracking-wider block">BUILT FOR YOUR EXISTING STACK (ZERO VENDOR LOCK-IN)</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3.5 py-1.5 rounded-full bg-obsidian border border-white/10 font-mono text-xs text-mist">OpenAI · Anthropic · Llama</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-obsidian border border-white/10 font-mono text-xs text-mist">LangGraph · Private Vector RAG</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-obsidian border border-white/10 font-mono text-xs text-mist">Salesforce · HubSpot · Zoho · SAP · Tally</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-obsidian border border-white/10 font-mono text-xs text-mist">Next.js · Python FastAPI · WebGL</span>
+            </div>
+          </div>
+          <a href="#diagnostic" class="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-lime text-obsidian font-semibold text-sm self-start lg:self-auto shrink-0 hover:scale-105 transition-transform">
+            <span>Map Your AI Workflow</span><span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 06. ASTRO-BRANDING (WITH GENERATED OPTICAL ASTROLABE VISUAL)          -->
+  <!-- ===================================================================== -->
+  <section id="astro-branding" class="py-24 px-6 md:px-12 relative overflow-hidden">
+    <div class="ambient-orb w-[450px] h-[450px] bg-solar/10 absolute top-12 right-12"></div>
+
+    <div class="max-w-7xl mx-auto space-y-12 relative z-10 reveal-up">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+        <div class="lg:col-span-7 space-y-6">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-solar/15 text-solar font-mono text-xs">
+            06 / DISTINCTIVE ADVISORY · NEER × REVA ASTRO
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+            Classical Light for Commercial Decisions.
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            Every venture is born into a specific moment in time and carried by the temperament of its founders. While empirical market research maps the external terrain, classical wisdom illuminates the internal architecture of leadership and timing.
+          </p>
+          <p class="text-mist text-base leading-relaxed">
+            Powered by our sister practice <a href="https://revaastro.com/" target="_blank" rel="noopener" class="text-solar underline hover:text-lime">Reva Astro</a>—founded by <strong class="text-white">Neeraj Rai</strong>, published commentator on the <em>Shrimad Bhagavad Gita</em> and author of <em>Bhairav Kaivalyam</em>—NEER offers <strong class="text-white">Astro-Branding</strong>: an executive advisory discipline that bridges classical Vedic <em>Jyotisha</em> with modern brand strategy.
+          </p>
+          <p class="text-mist text-base leading-relaxed">
+            In the classical tradition, <em>Jyotisha</em> means the science of light—a mirror for clarity, never a cage of superstition. History proves that no numerological tweak can rescue a business with broken unit economics. Instead, we read directly from the <em>Brihat Parashara Hora Shastra</em> to evaluate founder temperament (<em>Lagna</em>), planetary strength (<em>Shadbala</em>), and temporal cycles (<em>Dasha</em> and <em>Muhurta</em>) out loud in plain language. NEER’s strategists and designers then translate those insights into contemporary commercial assets.
+          </p>
+        </div>
+
+        <!-- Right 5 Cols: Generated Circular Optical Astrolabe Image + Rotating Orbital Ring -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-80 h-80 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] rounded-full bg-charcoal/80 border border-solar/35 p-3 flex items-center justify-center relative shadow-2xl float-slow">
+            <div class="absolute inset-2 rounded-full border border-dashed border-solar/40 spin-slow pointer-events-none z-20"></div>
+            <img
+              src="images/watermarked_img_947063668010237173.jpg"
+              alt="NEER x Reva Astro Circular Optical Astrolabe"
+              class="w-full h-full object-cover rounded-full relative z-10"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_947063668010237173.jpg.png';}"
+            />
+            <div class="absolute bottom-5 z-30 px-4 py-1.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-solar/40 font-mono text-[11px] text-solar tracking-wider">
+              ✦ JYOTISHA · SCIENCE OF LIGHT
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Detached Soft-Rounded Astro-Branding Pillars -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="neer-card p-7 space-y-3 border-solar/20">
+          <span class="w-10 h-10 rounded-full bg-solar/15 text-solar font-mono text-xs flex items-center justify-center">01</span>
+          <h3 class="font-display font-bold text-lg text-white">Lagna &amp; Venture Alignment</h3>
+          <p class="text-sm text-mist leading-relaxed">Aligning brand archetype, positioning, and co-founder governance with leadership temperament.</p>
+        </div>
+        <div class="neer-card p-7 space-y-3 border-solar/20">
+          <span class="w-10 h-10 rounded-full bg-solar/15 text-solar font-mono text-xs flex items-center justify-center">02</span>
+          <h3 class="font-display font-bold text-lg text-white">Namakarana Naming</h3>
+          <p class="text-sm text-mist leading-relaxed">Synthesizing classical phonetic syllables with linguistic testing, .com availability, and trademark clearance.</p>
+        </div>
+        <div class="neer-card p-7 space-y-3 border-solar/20">
+          <span class="w-10 h-10 rounded-full bg-solar/15 text-solar font-mono text-xs flex items-center justify-center">03</span>
+          <h3 class="font-display font-bold text-lg text-white">Swarupa &amp; Vastu Proportion</h3>
+          <p class="text-sm text-mist leading-relaxed">Translating elemental and directional principles into WCAG-compliant color systems, geometric grids, and workspace architecture.</p>
+        </div>
+        <div class="neer-card p-7 space-y-3 border-solar/20">
+          <span class="w-10 h-10 rounded-full bg-solar/15 text-solar font-mono text-xs flex items-center justify-center">04</span>
+          <h3 class="font-display font-bold text-lg text-white">Muhurta Launch Architecture</h3>
+          <p class="text-sm text-mist leading-relaxed">Synchronizing 90-day Go-To-Market, PR, and campaign rollouts around high-harmony astronomical windows.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="#diagnostic" class="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-solar text-obsidian font-semibold text-sm hover:scale-105 transition-transform">
+          <span>Explore Astro-Branding</span><span>→</span>
+        </a>
+        <a href="https://revaastro.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-charcoal text-white border border-white/15 hover:border-solar text-sm font-medium transition-all">
+          <span>Visit Reva Astro</span><span>↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 07. THE DASHAVATARA — EVOLUTION NARRATIVE (WITH 5-SPHERE VISUAL)      -->
+  <!-- ===================================================================== -->
+  <section id="evolution" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto reveal-up">
+      <div class="neer-card p-8 sm:p-14 lg:p-16 space-y-10">
+        <div class="max-w-3xl space-y-4">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/10 text-lime font-mono text-xs">
+            07 / THE LAW OF EVOLUTION
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+            Survival Belongs to the System That Changes Form.
+          </h2>
+        </div>
+
+        <!-- Generated 5-Sphere Morphogenesis Visual Banner -->
+        <div class="relative rounded-[28px] overflow-hidden border border-white/10 bg-obsidian">
+          <img
+            src="images/watermarked_img_7092434348086662237.jpg"
+            alt="Five Progressive Circular States of Enterprise Evolution"
+            class="w-full h-64 sm:h-80 object-cover"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_7092434348086662237.jpg.png';}"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-7 space-y-5 text-mist text-base sm:text-lg leading-relaxed">
+            <p>
+              Long before modern systems theory, classical Indian philosophy contemplated progressive manifestation through the <em class="text-white">Dashavatara</em>—ten successive forms emerging across changing epochs. Rather than presenting a rigid monument, it offered a profound observation about the nature of intelligence: to endure, essence must continuously outgrow its vessel.
+            </p>
+            <p>
+              Life begins in the undifferentiated waters as pure survival and signal extraction. To rise onto land, it must develop an amphibious spine—a load-bearing foundation capable of withstanding pressure. As the terrain grows more complex, raw strength gives way to the mastery of precision tools that clear obsolete overgrowth, then to institutional governance and rule of law, and ultimately to multidimensional strategic orchestration—before the cycle completes and renews the paradigm once more.
+            </p>
+            <p class="text-white font-medium">
+              Every ambitious enterprise walks this exact continuum.
+            </p>
+            <p>
+              The scrappy instinct that keeps a startup alive in year one becomes the bottleneck that chokes it in year five. The static identity that won your first hundred clients will not command your next market. NEER exists for the moments when your business reaches a threshold between forms—helping you shed what you have outgrown and architect the vessel your next era demands.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col gap-3.5">
+            <div class="p-4 rounded-full bg-obsidian border border-lime/40 flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full bg-lime text-obsidian font-mono font-bold text-xs flex items-center justify-center shrink-0">I</span>
+              <div>
+                <h4 class="font-display font-bold text-sm text-white">Aqueous Origin &amp; Signal Extraction</h4>
+                <p class="text-xs text-mist">Distilling founder truth amidst market noise</p>
+              </div>
+            </div>
+            <div class="p-4 rounded-full bg-obsidian border border-white/10 flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full bg-white/10 text-white font-mono text-xs flex items-center justify-center shrink-0">II</span>
+              <div>
+                <h4 class="font-display font-bold text-sm text-white">Amphibious Spine &amp; Foundation</h4>
+                <p class="text-xs text-mist">Positioning, naming &amp; load-bearing identity</p>
+              </div>
+            </div>
+            <div class="p-4 rounded-full bg-obsidian border border-white/10 flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full bg-white/10 text-white font-mono text-xs flex items-center justify-center shrink-0">III</span>
+              <div>
+                <h4 class="font-display font-bold text-sm text-white">Precision Tool Mastery</h4>
+                <p class="text-xs text-mist">Severing legacy drag with automated systems</p>
+              </div>
+            </div>
+            <div class="p-4 rounded-full bg-obsidian border border-white/10 flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full bg-white/10 text-white font-mono text-xs flex items-center justify-center shrink-0">IV</span>
+              <div>
+                <h4 class="font-display font-bold text-sm text-white">Institutional Governance</h4>
+                <p class="text-xs text-mist">Design tokens, RAG knowledge cores &amp; order</p>
+              </div>
+            </div>
+            <div class="p-4 rounded-full bg-obsidian border border-white/10 flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full bg-white/10 text-white font-mono text-xs flex items-center justify-center shrink-0">V</span>
+              <div>
+                <h4 class="font-display font-bold text-sm text-white">Autonomous Horizon Renewal</h4>
+                <p class="text-xs text-mist">Multi-agent orchestration &amp; paradigm shift</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 08. TESTIMONIALS (VIDEO DISPATCHES & WRITTEN LEDGER)                  -->
+  <!-- ===================================================================== -->
+  <section id="testimonials" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-12 reveal-up">
+      <div class="max-w-2xl space-y-4">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/10 text-lime font-mono text-xs">
+          08 / EXECUTIVE VOICES
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+          Measured by What Endures.
+        </h2>
+        <p class="text-mist text-base sm:text-lg">
+          Real transformation is judged months after launch—in clearer market authority, faster digital conversion, and operations that run without friction.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5 neer-card p-8 flex flex-col justify-between gap-6">
+          <div class="relative h-72 rounded-[24px] bg-obsidian overflow-hidden border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+            <img
+              src="images/watermarked_img_15093798613234770069.jpg"
+              alt="Founder Dispatch Reel Backdrop"
+              class="absolute inset-0 w-full h-full object-cover opacity-35"
+              onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/watermarked_img_15093798613234770069.jpg.png';}"
+            />
+            <button id="video-reel-trigger" class="relative z-10 w-16 h-16 rounded-full bg-lime text-obsidian flex items-center justify-center text-xl font-bold hover:scale-110 transition-transform shadow-lg shadow-lime/20 mb-4">
+              ▶
+            </button>
+            <span class="relative z-10 font-display font-bold text-white text-lg">Founder &amp; Executive Video Dispatches</span>
+            <span id="video-status-text" class="relative z-10 font-mono text-xs text-mist mt-1">[Verified Client Video Slot · Click to Preview]</span>
+          </div>
+          <p class="text-xs text-mist font-mono leading-relaxed">
+            Reserved for monochrome founder video interviews detailing the commercial challenge brought to NEER and the measurable shift after deployment.
+          </p>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col gap-6 justify-between">
+          <div class="neer-card p-8 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-lime">ENTERPRISE IDENTITY &amp; SYSTEM</span>
+              <span class="text-lime text-lg">★★★★★</span>
+            </div>
+            <p class="text-white/90 text-base sm:text-lg italic leading-relaxed">
+              "[Verified Client Quotation Slot 01 — Insert signed executive endorsement from AXIS Solution / YourDSA leadership detailing how the new identity and digital platform reshaped market perception.]"
+            </p>
+            <div class="flex items-center gap-3 pt-2">
+              <div class="w-10 h-10 rounded-full bg-lime/20 text-lime font-display font-bold flex items-center justify-center text-sm">AX</div>
+              <div>
+                <div class="font-display font-bold text-sm text-white">Verified Executive Partner</div>
+                <div class="font-mono text-xs text-mist">Enterprise Client · Ahmedabad / Global</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="neer-card p-8 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3.5 py-1 rounded-full bg-solar/15 font-mono text-xs text-solar">ASTRO-BRANDING &amp; LAUNCH ARCHITECTURE</span>
+              <span class="text-solar text-lg">★★★★★</span>
+            </div>
+            <p class="text-white/90 text-base sm:text-lg italic leading-relaxed">
+              "[Verified Client Quotation Slot 02 — Insert signed founder endorsement highlighting the clarity gained from combining Reva Astro's classical consultation with NEER's naming and packaging execution.]"
+            </p>
+            <div class="flex items-center gap-3 pt-2">
+              <div class="w-10 h-10 rounded-full bg-solar/20 text-solar font-display font-bold flex items-center justify-center text-sm">SS</div>
+              <div>
+                <div class="font-display font-bold text-sm text-white">Verified Founder &amp; Managing Director</div>
+                <div class="font-mono text-xs text-mist">Consumer &amp; Retail Venture</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 09. PERSPECTIVES (JOURNAL)                                            -->
+  <!-- ===================================================================== -->
+  <section id="perspectives" class="py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-12 reveal-up">
+      <div class="space-y-4 max-w-2xl">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/10 text-lime font-mono text-xs">
+          09 / PERSPECTIVES
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+          Field Notes on Brand, Intelligence, and Time.
+        </h2>
+        <p class="text-mist text-base sm:text-lg">
+          Research, technical blueprints, and strategic essays from our creative directors, AI architects, and classical scholars.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <article class="neer-card p-8 flex flex-col justify-between gap-8">
+          <div class="space-y-4">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-lime">[ BRAND SYSTEMS ] · 6 MIN</span>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white leading-snug">
+              Why Static Brand Manuals Fail in an Era of Living Digital Products
+            </h3>
+            <p class="text-sm text-mist leading-relaxed">
+              How tokenized design systems allow an identity to flex across interfaces without fracturing.
+            </p>
+          </div>
+          <a href="#diagnostic" class="inline-flex items-center gap-2 text-sm font-semibold text-lime hover:underline">
+            <span>Read Essay</span><span>→</span>
+          </a>
+        </article>
+
+        <article class="neer-card p-8 flex flex-col justify-between gap-8">
+          <div class="space-y-4">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-white/5 font-mono text-xs text-lime">[ ENGINEERED AI ] · 8 MIN</span>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white leading-snug">
+              Unsticking Enterprise AI: Moving from Chatbots to Deterministic Workflow Architecture
+            </h3>
+            <p class="text-sm text-mist leading-relaxed">
+              An engineering blueprint for wiring multi-agent reasoning and private RAG cores into legacy ERPs.
+            </p>
+          </div>
+          <a href="#diagnostic" class="inline-flex items-center gap-2 text-sm font-semibold text-lime hover:underline">
+            <span>Read Blueprint</span><span>→</span>
+          </a>
+        </article>
+
+        <article class="neer-card p-8 flex flex-col justify-between gap-8">
+          <div class="space-y-4">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-solar/15 font-mono text-xs text-solar">[ TEMPORAL STRATEGY ] · 7 MIN</span>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white leading-snug">
+              The Architecture of Timing: Separating Myth from Methodology in Venture Launches
+            </h3>
+            <p class="text-sm text-mist leading-relaxed">
+              Why structured temporal reflection and empirical Go-To-Market planning belong at the same table.
+            </p>
+          </div>
+          <a href="#diagnostic" class="inline-flex items-center gap-2 text-sm font-semibold text-solar hover:underline">
+            <span>Read Perspective</span><span>→</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 10. DIAGNOSTIC CONVERSION (INTERACTIVE 3-STEP CONFIGURATOR)           -->
+  <!-- ===================================================================== -->
+  <section id="diagnostic" class="py-24 px-6 md:px-12">
+    <div class="max-w-5xl mx-auto reveal-up">
+      <div class="neer-card p-8 sm:p-14 border border-lime/40 space-y-10">
+
+        <div class="space-y-4 max-w-2xl">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime/15 text-lime font-mono text-xs">
+            10 / INITIATE TRANSFORMATION
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white leading-tight">
+            Do Not Build a Monument. <span class="text-lime">Architect a Current.</span>
+          </h2>
+          <p class="text-mist text-base sm:text-lg leading-relaxed">
+            Tell us which threshold your organization is navigating. In sixty seconds, map your priority disciplines to receive a tailored transformation pathway and connect directly with our strategy and engineering leads.
+          </p>
+        </div>
+
+        <form id="diagnostic-form" class="space-y-8">
+          <div class="space-y-3">
+            <label class="block font-display font-bold text-lg text-white">1. Where is your business in its evolution?</label>
+            <div class="flex flex-wrap gap-3" id="stage-pills">
+              <button type="button" data-stage="Genesis & New Venture Launch" class="stage-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-lime text-obsidian transition-all">Genesis &amp; New Venture Launch</button>
+              <button type="button" data-stage="Brand & Digital Repositioning" class="stage-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all">Brand &amp; Digital Repositioning</button>
+              <button type="button" data-stage="Operational AI & Workflow Scaling" class="stage-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all">Operational AI &amp; Workflow Scaling</button>
+              <button type="button" data-stage="Full 360° Enterprise Transformation" class="stage-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all">Full 360° Enterprise Transformation</button>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <label class="block font-display font-bold text-lg text-white">2. Which capabilities does this moment require?</label>
+            <div class="flex flex-wrap gap-3" id="cap-pills">
+              <button type="button" data-cap="Astro-Branding (× Reva Astro)" class="cap-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-lime text-obsidian transition-all">✦ Astro-Branding (× Reva Astro)</button>
+              <button type="button" data-cap="Engineered AI & Automation" class="cap-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-lime text-obsidian transition-all">● Engineered AI &amp; Automation</button>
+              <button type="button" data-cap="Brand Strategy & Identity" class="cap-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all">Brand Strategy &amp; Identity</button>
+              <button type="button" data-cap="Flagship Web & E-Commerce" class="cap-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all">Flagship Web &amp; E-Commerce</button>
+              <button type="button" data-cap="Commercial Film & CGI" class="cap-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all">Commercial Film &amp; CGI</button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <label class="block font-display font-bold text-lg text-white">3. Where should we send your pathway &amp; schedule options?</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input type="text" id="diag-name" required placeholder="Full Name *" class="w-full px-6 py-4 rounded-full bg-obsidian border border-white/15 text-white placeholder-mist text-sm focus:border-lime focus:outline-none" />
+              <input type="email" id="diag-email" required placeholder="Work Email *" class="w-full px-6 py-4 rounded-full bg-obsidian border border-white/15 text-white placeholder-mist text-sm focus:border-lime focus:outline-none" />
+              <input type="text" id="diag-company" placeholder="Company &amp; URL" class="w-full px-6 py-4 rounded-full bg-obsidian border border-white/15 text-white placeholder-mist text-sm focus:border-lime focus:outline-none" />
+              <input type="tel" id="diag-phone" required placeholder="Direct Phone / WhatsApp *" class="w-full px-6 py-4 rounded-full bg-obsidian border border-white/15 text-white placeholder-mist text-sm focus:border-lime focus:outline-none" />
+            </div>
+            <input type="text" id="diag-notes" placeholder="Brief Context on Your Objective (Optional)" class="w-full px-6 py-4 rounded-full bg-obsidian border border-white/15 text-white placeholder-mist text-sm focus:border-lime focus:outline-none" />
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+            <button type="submit" class="inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full bg-lime text-obsidian font-display font-bold text-base hover:scale-105 transition-transform shadow-xl shadow-lime/20">
+              <span>Generate Pathway &amp; Book Discovery</span>
+              <span class="w-7 h-7 rounded-full bg-obsidian text-lime flex items-center justify-center text-sm">→</span>
+            </button>
+            <p class="text-xs text-mist">
+              Prefer an immediate executive conversation? WhatsApp <a href="https://wa.me/919998499944" target="_blank" rel="noopener" class="text-lime underline">+91 999 84 999 44</a> or write to <a href="mailto:connect@neermedia.com" class="text-white underline">connect@neermedia.com</a>.
+            </p>
+          </div>
+        </form>
+
+        <div id="pathway-output" class="hidden p-7 rounded-[28px] bg-obsidian border border-lime space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-3.5 py-1 rounded-full bg-lime/20 text-lime font-mono text-xs">✓ PATHWAY ARCHITECTED</span>
+            <span class="font-mono text-xs text-mist">ESTIMATED SPRINT: 6–10 WEEKS</span>
+          </div>
+          <h4 id="pathway-heading" class="font-display font-bold text-xl text-white"></h4>
+          <p id="pathway-summary" class="text-sm text-mist leading-relaxed"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 11. FOOTER                                                            -->
+  <!-- ===================================================================== -->
+  <footer class="pt-16 pb-12 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-10">
+      <div class="neer-card p-8 sm:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center gap-3">
+            <img src="https://neermedia.com/wp-content/uploads/2024/10/neer-icon-light.png" alt="NEER" class="w-6 h-6 object-contain" onerror="this.style.display='none'" />
+            <span class="w-3 h-3 rounded-full bg-lime"></span>
+            <span class="font-display font-extrabold text-2xl text-white">NEER</span>
+          </div>
+          <p class="font-display font-semibold text-lime text-sm">Fluid Intelligence. Living Brands.</p>
+          <p class="text-xs text-mist leading-relaxed">
+            A 360° Brand Strategy, Digital Experience, Engineered AI, and Astro-Branding Consultancy. Founded in 2011.
+          </p>
+        </div>
+
+        <div class="lg:col-span-3 space-y-2.5">
+          <span class="font-mono text-xs text-white uppercase tracking-wider block mb-3">Practices</span>
+          <a href="#astro-branding" class="block text-xs text-mist hover:text-lime transition-colors">✦ Astro-Branding (× Reva Astro)</a>
+          <a href="#ai-systems" class="block text-xs text-mist hover:text-lime transition-colors">● Engineered AI Systems</a>
+          <a href="#trinity" class="block text-xs text-mist hover:text-lime transition-colors">Brand Strategy &amp; Identity</a>
+          <a href="#trinity" class="block text-xs text-mist hover:text-lime transition-colors">Flagship Web &amp; Commerce</a>
+          <a href="#work" class="block text-xs text-mist hover:text-lime transition-colors">Commercial Film &amp; VFX</a>
+        </div>
+
+        <div class="lg:col-span-2 space-y-2.5">
+          <span class="font-mono text-xs text-white uppercase tracking-wider block mb-3">Index</span>
+          <a href="#work" class="block text-xs text-mist hover:text-white transition-colors">Selected Work</a>
+          <a href="#water-thesis" class="block text-xs text-mist hover:text-white transition-colors">Philosophy</a>
+          <a href="#perspectives" class="block text-xs text-mist hover:text-white transition-colors">Perspectives</a>
+          <a href="https://neermedia.com/career/" target="_blank" rel="noopener" class="block text-xs text-mist hover:text-white transition-colors">Careers</a>
+          <a href="#diagnostic" class="block text-xs text-lime hover:underline">Initiate Diagnostic</a>
+        </div>
+
+        <div class="lg:col-span-3 space-y-3">
+          <span class="font-mono text-xs text-white uppercase tracking-wider block mb-2">Ahmedabad Studios</span>
+          <p class="text-xs text-mist leading-relaxed">
+            <strong class="text-white">Strategy &amp; Client Studio:</strong><br />
+            704, 7th Floor, Colonnade, Iskon Cross Road, Ahmedabad – 380015
+          </p>
+          <p class="text-xs text-mist leading-relaxed">
+            <strong class="text-white">Production &amp; Research Lab:</strong><br />
+            D-310, Sumel Business Park 7, NH8, Rakhial, Ahmedabad – 380023
+          </p>
+          <p class="text-xs text-lime font-mono pt-1">+91 999 84 999 44 · connect@neermedia.com</p>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 text-xs text-mist font-mono">
+        <span>© 2026 NEER Media. All rights reserved.</span>
+        <span>Sister Practice: <a href="https://revaastro.com/" target="_blank" rel="noopener" class="text-solar hover:underline">Reva Astro (revaastro.com)</a></span>
+        <a href="#top" class="px-4 py-2 rounded-full bg-charcoal text-white hover:bg-lime hover:text-obsidian transition-colors">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE JAVASCRIPT ENGINE                                         -->
+  <!-- ===================================================================== -->
+  <script>
+    // 1. Custom Circular Cursor Follower
+    const cursorRing = document.getElementById('cursor-ring');
+    const cursorDot = document.getElementById('cursor-dot');
+    window.addEventListener('mousemove', (e) => {
+      cursorDot.style.left = e.clientX + 'px';
+      cursorDot.style.top = e.clientY + 'px';
+      cursorRing.animate(
+        { left: e.clientX + 'px', top: e.clientY + 'px' },
+        { duration: 260, fill: 'forwards' }
+      );
+    });
+
+    // 2. Smart Header: Hide on Downward Vertical Scroll, Reveal on Reverse (Upward) Scroll
+    const smartHeader = document.getElementById('smart-header');
+    let lastScrollY = window.scrollY;
+    let menuOpen = false;
+
+    window.addEventListener('scroll', () => {
+      if (menuOpen) return;
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 70) {
+        smartHeader.classList.remove('nav-visible');
+        smartHeader.classList.add('nav-hidden');
+      } else if (currentScrollY < lastScrollY) {
+        smartHeader.classList.remove('nav-hidden');
+        smartHeader.classList.add('nav-visible');
+      }
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    // 3. Scroll-Reveal Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
+
+    // 4. Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuOverlay = document.getElementById('hamburger-overlay');
+    const menuLabel = document.getElementById('menu-label');
+    const bar1 = document.getElementById('bar-1');
+    const bar2 = document.getElementById('bar-2');
+
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        menuOverlay.classList.add('opacity-100', 'pointer-events-auto');
+        menuLabel.textContent = 'Close';
+        bar1.style.transform = 'translateY(3px) rotate(45deg)';
+        bar2.style.transform = 'translateY(-3px) rotate(-45deg)';
+      } else {
+        menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+        menuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+        menuLabel.textContent = 'Menu';
+        bar1.style.transform = 'none';
+        bar2.style.transform = 'none';
+      }
+    }
+    menuToggle.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', () => { if (menuOpen) toggleMenu(); });
+    });
+
+    // 5. Interactive Caustic Wave Rings Over Hero Sphere
+    const canvas = document.getElementById('hydro-canvas');
+    const ctx = canvas.getContext('2d');
+    let phase = 0;
+    let mouseOffset = { x: 0, y: 0 };
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseOffset.x = ((e.clientX - rect.left) / rect.width - 0.5) * 36;
+      mouseOffset.y = ((e.clientY - rect.top) / rect.height - 0.5) * 36;
+    });
+
+    function drawCaustics() {
+      ctx.clearRect(0, 0, 420, 420);
+      const cx = 210 + mouseOffset.x * 0.45;
+      const cy = 210 + mouseOffset.y * 0.45;
+
+      for (let r = 0; r < 4; r++) {
+        ctx.beginPath();
+        const baseRadius = 68 + r * 28;
+        for (let a = 0; a <= Math.PI * 2; a += 0.08) {
+          const wave = Math.sin(a * (3 + r) + phase + r) * 7 + Math.cos(a * 2 - phase) * 5;
+          const rad = baseRadius + wave;
+          const x = cx + Math.cos(a) * rad;
+          const y = cy + Math.sin(a) * rad;
+          if (a === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = r % 2 === 0 ? 'rgba(204, 255, 0, 0.42)' : 'rgba(255, 255, 255, 0.18)';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+      }
+      phase += 0.025;
+      requestAnimationFrame(drawCaustics);
+    }
+    drawCaustics();
+
+    // 6. Engineered AI Blueprint Switcher
+    const aiData = [
+      {
+        badge: 'BLUEPRINT 01 · REVENUE & SPEED',
+        title: 'Autonomous Revenue & Lead Triage',
+        friction: 'High-intent leads from ads and WhatsApp wait hours for a human reply, decaying before sales ever makes contact.',
+        system: 'A multilingual AI concierge (English, Hindi, Gujarati) wired into your verified product catalog and CRM—qualifying intent in under 10 seconds, answering technical queries, scoring the account, and booking the discovery call automatically.',
+        nodes: ['WhatsApp & Web Webhook', 'Multilingual Intent & Catalog RAG', 'Lead Scoring & Policy Verification', 'CRM Sync & Calendar Booking']
+      },
+      {
+        badge: 'BLUEPRINT 02 · INSTITUTIONAL MEMORY',
+        title: 'Private Enterprise Knowledge Core',
+        friction: 'Institutional intelligence—SOPs, pricing logic, engineering specs, and past contracts—is locked inside scattered PDFs and senior employees’ memory.',
+        system: 'A role-permissioned Retrieval-Augmented Generation (RAG) engine connected to your internal drives and databases. Teams query the core in plain language and receive instant, citation-verified answers with zero public data leakage.',
+        nodes: ['Drive, ERP & SQL Ingestion', 'Encrypted Vector Indexing', 'Role-Based Access Guardrail', 'Citation-Verified Internal Copilot']
+      },
+      {
+        badge: 'BLUEPRINT 03 · ZERO-FRICTION BACK OFFICE',
+        title: 'Cross-System Process Orchestration',
+        friction: 'Skilled operators spend their mornings reconciling invoices, purchase orders, and vendor updates across disconnected ERPs and accounting tools.',
+        system: 'Deterministic webhook pipelines paired with extraction agents that read incoming documents, validate rules against your ledger, route exceptions for human sign-off, and sync every dashboard in real time.',
+        nodes: ['Document & Email Trigger', 'Vision OCR & Rule Extraction', 'Human-in-the-Loop Exception Check', 'Automated ERP & Ledger Sync']
+      }
+    ];
+
+    document.querySelectorAll('.ai-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-ai-tab'), 10);
+        const d = aiData[idx];
+        document.querySelectorAll('.ai-tab-btn').forEach(b => {
+          b.className = 'ai-tab-btn px-6 py-3.5 rounded-full font-medium text-sm bg-charcoal text-white border border-white/10 hover:border-lime/40 transition-all';
+        });
+        btn.className = 'ai-tab-btn px-6 py-3.5 rounded-full font-medium text-sm bg-lime text-obsidian transition-all';
+
+        document.getElementById('ai-badge').textContent = d.badge;
+        document.getElementById('ai-title').textContent = d.title;
+        document.getElementById('ai-friction').textContent = d.friction;
+        document.getElementById('ai-system').textContent = d.system;
+        document.getElementById('node-1').textContent = d.nodes[0];
+        document.getElementById('node-2').textContent = d.nodes[1];
+        document.getElementById('node-3').textContent = d.nodes[2];
+        document.getElementById('node-4').textContent = d.nodes[3];
+      });
+    });
+
+    // 7. Video Reel Preview Feedback
+    document.getElementById('video-reel-trigger').addEventListener('click', () => {
+      const status = document.getElementById('video-status-text');
+      status.textContent = '▶ Playing Monochrome Founder Dispatch Reel (Preview Mode)';
+      status.classList.replace('text-mist', 'text-lime');
+    });
+
+    // 8. Interactive 3-Step Diagnostic Configurator
+    let selectedStage = 'Genesis & New Venture Launch';
+    document.querySelectorAll('.stage-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        selectedStage = pill.getAttribute('data-stage');
+        document.querySelectorAll('.stage-pill').forEach(p => {
+          p.className = 'stage-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-obsidian text-white border border-white/15 hover:border-lime transition-all';
+        });
+        pill.className = 'stage-pill px-5 py-3 rounded-full text-xs sm:text-sm font-medium bg-lime text-obsidian transition-all';
+      });
+    });
+
+    document.querySelectorAll('.cap-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        pill.classList.toggle('bg-lime');
+        pill.classList.toggle('text-obsidian');
+        pill.classList.toggle('bg-obsidian');
+        pill.classList.toggle('text-white');
+        pill.classList.toggle('border');
+        pill.classList.toggle('border-white/15');
+      });
+    });
+
+    document.getElementById('diagnostic-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('diag-name').value;
+      const activeCaps = Array.from(document.querySelectorAll('.cap-pill.bg-lime')).map(el => el.getAttribute('data-cap'));
+      const outBox = document.getElementById('pathway-output');
+      document.getElementById('pathway-heading').textContent =
+        `Recommended Pathway for ${name}: ${selectedStage}`;
+      document.getElementById('pathway-summary').textContent =
+        `Priority Disciplines Locked: ${activeCaps.length ? activeCaps.join(' · ') : 'Full 360° Advisory'}. Our strategy and engineering leads in Ahmedabad have logged your brief and will reach out on WhatsApp/Email within 4 business hours.`;
+      outBox.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
